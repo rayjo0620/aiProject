@@ -96,7 +96,7 @@ public interface CommonMapper {
 	public int cm_user_del(UserVo vo) throws Exception;
 	
 	//CODE
-	public List<Map<String, String>> cm_code_mfbiz_list(MfbizVo vo) throws Exception;
+	public List<Map<String, Object>> cm_code_mfbiz_list() throws Exception;
 	public int cm_mfbiz_insert(MfbizVo vo) throws Exception;
 	public int cm_mfbiz_modify(MfbizVo vo) throws Exception;
 	public int cm_mfbiz_delete(MfbizVo vo) throws Exception;

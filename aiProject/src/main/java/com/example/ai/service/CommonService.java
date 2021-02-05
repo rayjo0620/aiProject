@@ -77,7 +77,7 @@ public interface CommonService {
 	public String cm_user_del(UserVo vo) throws Exception;
 	
 	//code
-	public List<Map<String, String>> cm_code_mfbiz_list(MfbizVo vo) throws Exception;
+	public List<Map<String, Object>> cm_code_mfbiz_list() throws Exception;
 	
 	public String cm_mfbiz_insert(MfbizVo vo) throws Exception;
 	public String cm_mfbiz_modify(MfbizVo vo) throws Exception;

@@ -213,9 +213,9 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	public List<Map<String, String>> cm_code_mfbiz_list(MfbizVo vo) throws Exception {
+	public List<Map<String, Object>> cm_code_mfbiz_list() throws Exception {
 		// TODO Auto-generated method stub
-		return commonMapper.cm_code_mfbiz_list(vo);
+		return commonMapper.cm_code_mfbiz_list();
 	}
 
 	@Override
