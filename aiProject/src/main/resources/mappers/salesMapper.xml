@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.ai.mapper.SalesMapper">
+
+	<resultMap type="HashMap" id="br_list">
+		<id column="BR_CD" property="BR_CD"/>
+		<id column="BR_NM" property="BR_NM"/>
+	</resultMap>
+	
+	<resultMap type="HashMap" id="dash_cal">
+		<id column="DLAMT" property="title"/>	
+		<id column="DELNG_DATE" property="start"/>		
+	</resultMap>
+	 <select id="brList" parameterType="String" resultMap="br_list">
+	 	SELECT
+		    BR_NM, BR_CD
+		FROM
+		    BR_INFO
+		WHERE
+		 <choose>			
+			    <when test="USER_ENO != null and USER_ENO.equals('admin')">
+			
+			    USER_ENO like '%'
+			
+			    </when>
+			
+			    <otherwise>
+			
+			     USER_ENO=#{USER_ENO}
+			
+			    </otherwise>
+			
+			</choose>    
+	 </select>
+
+	<select id="sm_daily_tot" parameterType="SalesVo" resultType="String">
+	 	SELECT
+    		SUM(DLAMT)
+		FROM 
+		    sales_info
+		WHERE
+		   <choose>
+			
+			    <when test="BR_CD != null and BR_CD.equals('all')">
+			
+			     TO_CHAR(DELNG_DATE)=#{DELNG_DATE} AND USER_ENO=#{USER_ENO}
+			
+			    </when>
+			
+			    <when test="USER_ENO != null and USER_ENO.equals('admin')">
+			
+			        TO_CHAR(DELNG_DATE,'YY/MM/DD')=#{DELNG_DATE}
+			
+			    </when>
+			
+			    <otherwise>
+			
+			      BR_CD=#{BR_CD} AND TO_CHAR(DELNG_DATE,'YY/MM/DD')=#{DELNG_DATE} AND USER_ENO=#{USER_ENO}
+			
+			    </otherwise>
+			
+			</choose>
+	 </select>
+	 
+	 <select id="sm_period_tot" parameterType="SalesVo" resultType="String">
+	 	SELECT
+    		SUM(DLAMT)
+		FROM 
+		    sales_info
+		WHERE
+		   <choose>
+			
+			    <when test="BR_CD != null and BR_CD.equals('all')">
+			
+			     TO_CHAR(DELNG_DATE) &gt;=#{DELNG_DATE} AND TO_CHAR(DELNG_DATE) &lt;= #{DELNG_DATE2} AND USER_ENO=#{USER_ENO}
+			
+			    </when>
+			
+			    <when test="USER_ENO != null and USER_ENO.equals('admin')">
+			
+			         TO_CHAR(DELNG_DATE) &gt;=#{DELNG_DATE} AND TO_CHAR(DELNG_DATE) &lt;= #{DELNG_DATE2} AND USER_ENO=#{USER_ENO}
+			
+			    </when>
+			
+			    <otherwise>
+			
+			      BR_CD=#{BR_CD} AND USER_ENO=#{USER_ENO} AND  TO_CHAR(DELNG_DATE) &gt;=#{DELNG_DATE} AND TO_CHAR(DELNG_DATE) &lt;= #{DELNG_DATE2} AND USER_ENO=#{USER_ENO}
+			
+			    </otherwise>
+			
+			</choose>
+	 </select>
+	 
+	 <select id="sm_daily_grid" parameterType="SalesVo" resultType="SalesVo">
+	 
+	 	SELECT
+	 		to_char(DELNG_DATE) as DELNG_DATE,
+			USER_ENO,
+			BR_CD,
+			DEVC_UNO,
+			GOODS_CD,
+			DELNG_SEQ,
+			DELNG_TM,
+			DLAMT,
+			DLNT,
+			
+			<choose>
+			    <when test="USER_ENO != null and USER_ENO.equals('admin')">
+			
+			        (
+		            	SELECT 
+		            		BR_NM 
+		            	FROM 
+		            		BR_INFO 
+		            	WHERE  
+		            		br_info.br_cd = sales_info.br_cd AND BR_INFO.USER_ENO = SALES_INFO.USER_ENO
+		            ) AS BR_NM ,
+		            
+		            (
+		            	SELECT 
+		            		GOODS_CDNM 
+		            	FROM 
+		            		goods_cd_info 
+		            	WHERE 
+		            		SALES_INFO.GOODS_CD = GOODS_CD_INFO.GOODS_CD and SALES_INFO.GOODS_TYPE = GOODS_CD_INFO.GOODS_TYPE 
+		            ) AS GOODS_NM
+			
+			    </when>
+			
+			    <otherwise>
+			
+			      (
+		            SELECT 
+		            	BR_NM 
+		            FROM
+		            	BR_INFO 
+		            WHERE 
+		            	sales_info.br_cd = br_info.br_cd AND BR_INFO.USER_ENO = #{USER_ENO}
+		          ) AS BR_NM ,
+		          
+		          (
+		            SELECT 
+		            	GOODS_CDNM 
+		            FROM 
+		            	goods_cd_info 
+		            WHERE 
+		            	SALES_INFO.GOODS_CD = GOODS_CD_INFO.GOODS_CD and SALES_INFO.GOODS_TYPE = GOODS_CD_INFO.GOODS_TYPE 
+		          ) AS GOODS_NM
+			
+			    </otherwise>
+			
+			</choose>
+		FROM
+			SALES_INFO
+	 	WHERE
+	 	
+			<choose>
+			
+			    <when test="BR_CD != null and BR_CD.equals('all')">
+			
+			     TO_CHAR(DELNG_DATE,'YY/MM/DD') =#{DELNG_DATE} AND USER_ENO=#{USER_ENO}
+			
+			    </when>
+			
+			    <when test="USER_ENO != null and USER_ENO.equals('admin')">
+			
+			        TO_CHAR(DELNG_DATE,'YY/MM/DD') =#{DELNG_DATE} 
+			
+			    </when>
+			
+			    <otherwise>
+			
+			      BR_CD=#{BR_CD} AND USER_ENO=#{USER_ENO} AND TO_CHAR(DELNG_DATE) =#{DELNG_DATE}
+			
+			    </otherwise>
+			
+			</choose>
+	 </select>
+	 
+	 <select id="sm_period_grid" parameterType="SalesVo" resultType="SalesVo">
+	 
+	 	SELECT
+	 		to_char(DELNG_DATE) as DELNG_DATE,
+			USER_ENO,
+			BR_CD,
+			DEVC_UNO,
+			GOODS_CD,
+			DELNG_SEQ,
+			DELNG_TM,
+			DLAMT,
+			DLNT,
+			
+			<choose>
+			    <when test="USER_ENO != null and USER_ENO.equals('admin')">
+			
+			        (
+		            	SELECT 
+		            		BR_NM 
+		            	FROM 
+		            		BR_INFO 
+		            	WHERE  
+		            		br_info.br_cd = sales_info.br_cd AND BR_INFO.USER_ENO = SALES_INFO.USER_ENO
+		            ) AS BR_NM ,
+		            
+		            (
+		            	SELECT 
+		            		GOODS_CDNM 
+		            	FROM 
+		            		goods_cd_info 
+		            	WHERE SALES_INFO.GOODS_CD = GOODS_CD_INFO.GOODS_CD and SALES_INFO.GOODS_TYPE = GOODS_CD_INFO.GOODS_TYPE 
+		            ) AS GOODS_NM
+			
+			    </when>
+			
+			    <otherwise>
+			
+			      (
+		            SELECT 
+		            	BR_NM 
+		            FROM
+		            	BR_INFO 
+		            WHERE 
+		            	sales_info.br_cd = br_info.br_cd AND BR_INFO.USER_ENO = #{USER_ENO}
+		          ) AS BR_NM ,
+		          
+		          (
+		            SELECT 
+		            	GOODS_CDNM 
+		            FROM 
+		            	goods_cd_info 
+		            WHERE 
+		            	SALES_INFO.GOODS_CD = GOODS_CD_INFO.GOODS_CD and SALES_INFO.GOODS_TYPE = GOODS_CD_INFO.GOODS_TYPE 
+		          ) AS GOODS_NM
+			
+			    </otherwise>
+			
+			</choose>
+		FROM
+			SALES_INFO
+	 	WHERE
+	 	
+			<choose>
+			
+			    <when test="BR_CD != null and BR_CD.equals('all')">
+			
+			     TO_CHAR(DELNG_DATE) &gt;=#{DELNG_DATE} AND TO_CHAR(DELNG_DATE) &lt;= #{DELNG_DATE2} AND USER_ENO=#{USER_ENO}
+			
+			    </when>
+			
+			    <when test="USER_ENO != null and USER_ENO.equals('admin')">
+			
+			        TO_CHAR(DELNG_DATE) &gt;=#{DELNG_DATE} AND TO_CHAR(DELNG_DATE) &lt;= #{DELNG_DATE2}
+			
+			    </when>
+			
+			    <otherwise>
+			
+			      BR_CD=#{BR_CD} AND USER_ENO=#{USER_ENO} AND TO_CHAR(DELNG_DATE) &gt;=#{DELNG_DATE} AND TO_CHAR(DELNG_DATE) &lt;= #{DELNG_DATE2}
+			
+			    </otherwise>
+			
+			</choose>
+	 </select>
+	 
+	  <select id="sm_stk_grid" parameterType="SalesVo" resultType="StkVo">
+	  SELECT
+	     USER_ENO,
+         BR_CD,
+         DEVC_UNO,
+         GOODS_CD,
+         GOODS_QY,
+         GOODS_TYPE,
+			<choose>
+			    <when test="USER_ENO != null and USER_ENO.equals('admin')">
+			
+			        (
+		            	SELECT 
+		            		BR_NM 
+		            	FROM 
+		            		BR_INFO
+		            	
+		            	WHERE  
+		            		br_info.br_cd = invntry_info.br_cd AND BR_INFO.USER_ENO = invntry_info.USER_ENO
+		            ) AS BR_NM ,
+		            
+		            (
+		            	SELECT 
+		            		GOODS_CDNM 
+		            	FROM 
+		            		goods_cd_info 
+		            	WHERE 
+		            		invntry_info.GOODS_CD = GOODS_CD_INFO.GOODS_CD
+		            	AND
+                        	invntry_info.GOODS_TYPE = GOODS_CD_INFO.GOODS_TYPE 
+		            ) AS GOODS_NM ,
+		            (
+		            	SELECT
+		            		GOODS_TYPENM
+		            	FROM
+		            		GOODS_TYPE_INFO
+		            	WHERE
+		            		invntry_info.GOODS_TYPE = GOODS_TYPE_INFO.GOODS_TYPE
+		            )AS GOODS_TYPENM
+		            
+			
+			    </when>
+			
+			    <otherwise>
+			
+			      (
+		            SELECT 
+		            	BR_NM 
+		            FROM
+		            	BR_INFO 
+		            WHERE 
+		            	invntry_info.br_cd = br_info.br_cd AND BR_INFO.USER_ENO = #{USER_ENO}
+		          ) AS BR_NM ,
+		          
+		          (
+		            SELECT 
+		            	GOODS_CDNM 
+		            FROM 
+		            	goods_cd_info 
+		            WHERE 
+		            	invntry_info.GOODS_CD = GOODS_CD_INFO.GOODS_CD
+		             AND
+                        invntry_info.GOODS_TYPE = GOODS_CD_INFO.GOODS_TYPE 
+		          ) AS GOODS_NM ,
+		          
+		            (
+		            	SELECT
+		            		GOODS_TYPENM
+		            	FROM
+		            		GOODS_TYPE_INFO
+		            	WHERE
+		            		invntry_info.GOODS_TYPE = GOODS_TYPE_INFO.GOODS_TYPE
+		            )AS GOODS_TYPENM
+			
+			    </otherwise>
+			
+			</choose>
+		FROM
+			invntry_info
+	 
+	 	
+			<choose>
+			
+			    <when test="BR_CD != null and BR_CD.equals('all')">
+				WHERE
+			     USER_ENO=#{USER_ENO}
+			
+			    </when>
+
+			    <otherwise>
+				WHERE
+			      BR_CD=#{BR_CD} AND USER_ENO=#{USER_ENO}
+			
+			    </otherwise>
+			
+			</choose>
+	 </select>
+	 
+	 <delete id="sm_stkManage_del" parameterType="StkVo">
+	 	DELETE 
+	 	FROM 
+	 		INVNTRY_INFO
+	 	WHERE
+	 		BR_CD=#{BR_CD} AND DEVC_UNO = #{DEVC_UNO} AND GOODS_CD=#{GOODS_CD}  AND USER_ENO=#{USER_ENO} AND GOODS_TYPE = #{GOODS_TYPE}
+	 </delete>
+	 
+	 <!-- modal -->
+	 <select id="modal_devc" parameterType="StkVo" resultType="StkVo">
+	 	SELECT
+		 	 devc_uno,
+	       	(SELECT BR_NM FROM BR_INFO WHERE br_info.br_cd = BR_DEVC_MAPP.br_cd AND BR_INFO.USER_ENO = BR_DEVC_MAPP.USER_ENO) AS BR_NM  
+		FROM
+			BR_DEVC_MAPP
+		WHERE 
+			BR_CD=#{BR_CD} AND USER_ENO=#{USER_ENO}
+	 </select>
+	 
+	 <!-- modal -->
+	 
+	 <select id="modal_gt" resultType="StkVo">
+	 	SELECT
+	 		GOODS_TYPE,
+	 		GOODS_TYPENM
+	 	FROM
+	 		GOODS_TYPE_INFO
+	 	WHERE 
+	 		USE_YN='Y'
+	 	
+	 </select>
+	 
+	 <select id="modal_gnm" parameterType="StkVo" resultType="StkVo">
+	 SELECT
+        GOODS_CD,
+        GOODS_CDNM as GOODS_NM
+    FROM 
+        GOODS_CD_INFO
+    WHERE GOODS_TYPE =#{GOODS_TYPE}
+    </select>
+    
+    <insert id="modal_insert" parameterType="StkVo" >
+    	INSERT INTO INVNTRY_INFO(USER_ENO, BR_CD, DEVC_UNO, GOODS_TYPE, GOODS_CD, GOODS_QY, REG_DT)
+    VALUES (#{USER_ENO}, #{BR_CD}, #{DEVC_UNO}, #{GOODS_TYPE}, #{GOODS_CD}, #{GOODS_QY}, #{REG_DT})
+						
+    </insert>
+    
+    <update id="modal_update" parameterType="StkVo">
+    	UPDATE 
+    		INVNTRY_INFO
+		SET 
+			GOODS_QY = #{GOODS_QY}, MDFCN_DT =#{REG_DT}
+		WHERE 
+			USER_ENO=#{USER_ENO} AND BR_CD=#{BR_CD} AND DEVC_UNO=#{DEVC_UNO} AND GOODS_TYPE=#{GOODS_TYPE} AND GOODS_CD=#{GOODS_CD}
+    </update>
+    
+    <select id="dash_cal" parameterType="SalesVo" resultMap="dash_cal">
+    	select 
+		    to_char(DELNG_DATE,'YYYY-MM-DD') as DELNG_DATE
+		    ,to_char(sum(DLAMT),'999,999,999,999,999')AS DLAMT
+		from 
+			SALES_INFO
+		where 
+			USER_ENO = #{USER_ENO} 
+		and 
+			to_char(DELNG_DATE,'MM') = #{DELNG_DATE}
+		group by 
+			DELNG_DATE
+    </select>
+	
+</mapper>

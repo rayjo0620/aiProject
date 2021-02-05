@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.ai.mapper.MainMapper">
+
+	<resultMap type="HashMap" id="chart_list">
+		<id column="DEVC_TOT" property="DEVC_TOT"/>
+		<id column="OB_TOT" property="OB_TOT"/>
+	</resultMap>
+	
+	<select id="main_chart_tot" resultMap="chart_list">
+		 select a.DEVC_TOT , b.OB_TOT
+		 
+		<choose>
+			<when test="USER_ENO != null and USER_ENO == 'admin'">
+			 from
+            (SELECT COUNT(*) devc_tot FROM DEVC_INFO ) a
+            ,(SELECT COUNT(*) ob_tot FROM OB_STAT ) b
+			</when>
+			
+			<otherwise>
+			from
+            (SELECT COUNT(*) devc_tot FROM DEVC_INFO WHERE USER_ENO=#{USER_ENO}) a
+            ,(SELECT COUNT(*) ob_tot FROM OB_STAT WHERE USER_ENO=#{USER_ENO}) b
+			</otherwise>
+		</choose>
+		
+	</select>
+	
+</mapper>
