@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.example.ai.vo.IncidentVo;
 
 /**
- * SalesDao.java
+ * SalesMapper.java
  * @author 씽크2
  * @Date 2021. 1. 8.
  */

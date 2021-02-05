@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.example.ai.vo.MemberVo;
 
 /**
- * MemberDao.java
+ * MemberMapper.java
  * @author 씽크2
  * @Date 2021. 1. 7.
  */

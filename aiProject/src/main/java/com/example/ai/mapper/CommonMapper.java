@@ -17,7 +17,7 @@ import com.example.ai.vo.ModelVo;
 import com.example.ai.vo.UserVo;
 
 /**
- * SalesDao.java
+ * SalesMapper.java
  * @author 씽크2
  * @Date 2021. 1. 8.
  */

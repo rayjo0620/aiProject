@@ -9,7 +9,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * MainDao.java
+ * MainMapper.java
  * @author 씽크2
  * @Date 2021. 2. 4.
  */
