@@ -101,12 +101,12 @@ public interface CommonMapper {
 	public int cm_mfbiz_modify(MfbizVo vo) throws Exception;
 	public int cm_mfbiz_delete(MfbizVo vo) throws Exception;
 	
-	public List<Map<String, Object>> cm_code_model_list(ModelVo vo) throws Exception;
+	public List<Map<String, Object>> cm_code_model_list() throws Exception;
 	public int cm_model_insert(ModelVo vo) throws Exception;
 	public int cm_model_modify(ModelVo vo) throws Exception;
 	public int cm_model_delete(ModelVo vo) throws Exception;
 	
-	public List<Map<String, Object>> cm_code_code_list(CodeVo vo) throws Exception;
+	public List<Map<String, Object>> cm_code_code_list() throws Exception;
 	public int cm_code_insert(CodeVo vo) throws Exception;
 	public int cm_code_modify(CodeVo vo) throws Exception;
 	public int cm_code_delete(CodeVo vo) throws Exception;

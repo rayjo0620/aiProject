@@ -303,10 +303,10 @@ public class CommonController {
 	}
 	
 	@RequestMapping("/common/code_model_list")
-	public String codeModelList(ModelVo vo)throws Exception{
+	public String codeModelList()throws Exception{
 		Gson gson = new Gson();
 		
-		List<Map<String, Object>> list = csi.cm_code_model_list(vo);
+		List<Map<String, Object>> list = csi.cm_code_model_list();
 		
 		String result = gson.toJson(list); 
 		
@@ -328,17 +328,6 @@ public class CommonController {
 	@RequestMapping("/common/model_del")
 	public String ModelDelete(ModelVo vo) throws Exception{
 		String result = csi.cm_model_delete(vo);
-		return result;
-	}
-	
-	@RequestMapping("/common/code_code_list")
-	public String codeModelList(CodeVo vo)throws Exception{
-		Gson gson = new Gson();
-		
-		List<Map<String, Object>> list = csi.cm_code_code_list(vo);
-		
-		String result = gson.toJson(list); 
-		
 		return result;
 	}
 	

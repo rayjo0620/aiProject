@@ -237,9 +237,9 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	public List<Map<String, Object>> cm_code_model_list(ModelVo vo) throws Exception {
+	public List<Map<String, Object>> cm_code_model_list() throws Exception {
 		// TODO Auto-generated method stub
-		return commonMapper.cm_code_model_list(vo);
+		return commonMapper.cm_code_model_list();
 	}
 
 	@Override
@@ -261,9 +261,9 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	public List<Map<String, Object>> cm_code_code_list(CodeVo vo) throws Exception {
+	public List<Map<String, Object>> cm_code_code_list() throws Exception {
 		// TODO Auto-generated method stub
-		return commonMapper.cm_code_code_list(vo);
+		return commonMapper.cm_code_code_list();
 	}
 
 	@Override
