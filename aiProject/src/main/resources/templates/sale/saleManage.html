@@ -17,7 +17,7 @@
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
             <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+                    <div class="sidebar-brand-icon"><i class="fas fa-store"></i></div>
                     <div class="sidebar-brand-text mx-3"><span>Brand</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
@@ -29,27 +29,9 @@
         </nav>
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
-                               <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" style="padding-bottom: 0px;">
-                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
-                        <div class="collapse navbar-collapse" id="navcol-2" style="width: 100%;height: 80%;">
-                            <ul class="nav navbar-nav ml-auto" style="width: 100%;height: 100%;">
-                                <li class="nav-item" style="width: 30%;height: 100%;">
-                                    <div class="nav-item dropdown no-arrow" style="width: 90%;height: 90%;"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="/sm_daily">&lt;판매관리&gt;</a>
-                                        <div class="dropdown-menu"><a class="dropdown-item" href="/sm_daily">당일 판매 정보</a><a class="dropdown-item" href="/sm_period">기간별 판매 정보</a><a class="dropdown-item" href="/sm_stk">재고 정보</a><a class="dropdown-item" href="/sm_stkManage">재고 관리</a></div>
-                                    </div>
-                                </li>
-                                <li class="nav-item" style="width: 30%;height: 100%;">
-                                    <div class="nav-item dropdown no-arrow" style="width: 90%;height: 90%;"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">&lt;장애관리&gt;</a>
-                                        <div class="dropdown-menu"><a class="dropdown-item" href="/im_info_user">장애 상태</a><a class="dropdown-item" href="/im_dash">종합 장애 현황</a></div>
-                                    </div>
-                                </li>
-                                <li class="nav-item" style="width: 30%;height: 100%;">
-                                    <div class="nav-item dropdown no-arrow" style="width: 90%;height: 90%;"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">&lt;공통정보&gt;</a>
-                                        <div class="dropdown-menu"><a class="dropdown-item" href="/cm_goods">상품 관리</a><a class="dropdown-item" href="/cm_br">영업점 관리</a><a class="dropdown-item" href="/cm_devc">영업점 관리</a><a class="dropdown-item" href="/cm_user">유저 관리</a><a class="dropdown-item" href="/cm_code">코드 관리</a></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" style="padding-bottom: 0px;">
+                    <div class="container-fluid" style="width : 100%; text-align:center;" th:insert="/topnav">
+                    	<button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                     </div>
                 </nav>
                 <div class="container-fluid">
