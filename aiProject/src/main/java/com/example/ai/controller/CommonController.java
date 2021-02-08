@@ -51,7 +51,7 @@ public class CommonController {
 	@RequestMapping("/common/goods_grid")
 	public String GoodsGrid() throws Exception{
 		Gson gson = new Gson();
-		List<Map<String, String>> list = csi.cm_goods_grid();
+		List<Map<String, Object>> list = csi.cm_goods_grid();
 		
 		String result = gson.toJson(list);
 		
@@ -69,7 +69,7 @@ public class CommonController {
 	@RequestMapping("common/goods_read_type")
 	public String ReadType() throws Exception{
 		Gson gson = new Gson();
-		List<Map<String, String>> list = csi.goods_read_type();
+		List<Map<String, Object>> list = csi.goods_read_type();
 		
 		String result = gson.toJson(list);
 		
@@ -96,7 +96,7 @@ public class CommonController {
 	@RequestMapping("/common/br_loc_grid")
 	public String br_loc_grid(BrVo vo) throws Exception{
 		Gson gson = new Gson();
-		List<Map<String, String>> list = csi.cm_br_loc_grid(vo);
+		List<Map<String, Object>> list = csi.cm_br_loc_grid(vo);
 		
 		String result = gson.toJson(list);
 		
@@ -129,9 +129,9 @@ public class CommonController {
 	public String br_map_grid(String USER_ENO) throws Exception{
 		
 		Gson gson = new Gson();
-		HashMap<String, String> map = new HashMap<String, String>();
-		List<Map<String, String>> list1 = csi.cm_br_map_grid_br(USER_ENO);
-		List<Map<String, String>> list2 = csi.cm_br_map_grid_devc(USER_ENO);
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Map<String, Object>> list1 = csi.cm_br_map_grid_br(USER_ENO);
+		List<Map<String, Object>> list2 = csi.cm_br_map_grid_devc(USER_ENO);
 		
 		String br_list = gson.toJson(list1);
 		String devc_list = gson.toJson(list2);
@@ -159,7 +159,7 @@ public class CommonController {
 	public String devc_mfbiz_list()throws Exception{
 		Gson gson = new Gson();
 		
-		List<Map<String, String>> list = csi.cm_mfbiz();
+		List<Map<String, Object>> list = csi.cm_mfbiz();
 		
 		String result = gson.toJson(list);
 		
@@ -172,7 +172,7 @@ public class CommonController {
 		
 		Gson gson = new Gson();
 		
-		List<Map<String, String>> list = csi.cm_devc_list(vo);
+		List<Map<String, Object>> list = csi.cm_devc_list(vo);
 		
 		String result = gson.toJson(list); 
 		return result;
@@ -212,7 +212,7 @@ public class CommonController {
 	public String DevcStatList(DevcVo vo) throws Exception{
 		Gson gson = new Gson();
 		
-		List<Map<String, String>> list = csi.cm_devc_stat_list(vo);
+		List<Map<String, Object>> list = csi.cm_devc_stat_list(vo);
 		
 		String result = gson.toJson(list); 
 		return result;
@@ -223,7 +223,7 @@ public class CommonController {
 	public String devc_swhw(DevcVo vo)throws Exception{
 		Gson gson = new Gson();
 		
-		List<Map<String, String>> list = csi.cm_devc_hwsw(vo);
+		List<Map<String, Object>> list = csi.cm_devc_hwsw(vo);
 		
 		String result = gson.toJson(list); 
 		return result;
@@ -233,7 +233,7 @@ public class CommonController {
 	public String UserInfo(UserVo vo) throws Exception{
 		Gson gson = new Gson();
 		
-		List<Map<String, String>> list = csi.cm_user_my(vo);
+		List<Map<String, Object>> list = csi.cm_user_my(vo);
 		
 		String result = gson.toJson(list); 
 		return result;
@@ -249,7 +249,7 @@ public class CommonController {
 	public String Userlist() throws Exception{
 		Gson gson = new Gson();
 		
-		List<Map<String, String>> list = csi.cm_user_list();
+		List<Map<String, Object>> list = csi.cm_user_list();
 		
 		String result = gson.toJson(list); 
 		return result;
@@ -306,7 +306,7 @@ public class CommonController {
 	public String codeModelList(ModelVo vo)throws Exception{
 		Gson gson = new Gson();
 		
-		List<Map<String, String>> list = csi.cm_code_model_list(vo);
+		List<Map<String, Object>> list = csi.cm_code_model_list(vo);
 		
 		String result = gson.toJson(list); 
 		
@@ -335,7 +335,7 @@ public class CommonController {
 	public String codeModelList(CodeVo vo)throws Exception{
 		Gson gson = new Gson();
 		
-		List<Map<String, String>> list = csi.cm_code_code_list(vo);
+		List<Map<String, Object>> list = csi.cm_code_code_list(vo);
 		
 		String result = gson.toJson(list); 
 		
