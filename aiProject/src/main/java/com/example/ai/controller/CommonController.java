@@ -4,10 +4,25 @@
 package com.example.ai.controller;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.DataFormat;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -259,10 +274,10 @@ public class CommonController {
 	}
 	
 	@RequestMapping("/common/code_mfbiz_list")
-	public String codeBizList(MfbizVo vo)throws Exception{
+	public String codeBizList()throws Exception{
 		Gson gson = new Gson();
 		
-		List<Map<String, String>> list = csi.cm_code_mfbiz_list(vo);
+		List<Map<String, Object>> list = csi.cm_code_mfbiz_list();
 		
 		String result = gson.toJson(list); 
 		
@@ -343,5 +358,101 @@ public class CommonController {
 	public String CodeDelete(CodeVo vo) throws Exception{
 		String result = csi.cm_code_delete(vo);
 		return result;
+	}
+	
+	/**
+	 * USER_INFO 목록을 엑셀파일로 다운로드한다. (pageing)
+	 * 
+	 * @param searchVO
+	 *            - 조회할 정보가 담긴 UserInfoDefaultVO
+	 * @exception Exception
+	 */
+	@GetMapping("/mfbizInfoExcelDown.do")
+	public void mfbizInfoExcelDown(HttpServletResponse response)
+			throws Exception {
+		// 유저리스트 목록 조회
+		List<Map<String, Object>> list = csi.cm_code_mfbiz_list();
+		// 워크북 생성
+		Workbook wb = new XSSFWorkbook();
+		Sheet sheet = wb.createSheet("유저리스트");
+		Row row = null;
+		Cell cell = null;
+		int rowNo = 1;
+		
+		/** 테이블 헤더용 스타일**/
+		CellStyle headStyle = wb.createCellStyle();		
+		
+		// 가는 경계선
+		headStyle.setBorderTop(BorderStyle.THIN);
+	    headStyle.setBorderBottom(BorderStyle.THIN);
+	    headStyle.setBorderLeft(BorderStyle.THIN);
+	    headStyle.setBorderRight(BorderStyle.THIN);
+	    
+	    // 배경색 노란색
+	    headStyle.setFillForegroundColor(HSSFColorPredefined.YELLOW.getIndex());
+	    headStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+	    
+	    // 가운데 정렬
+	    headStyle.setAlignment(HorizontalAlignment.CENTER);
+	    
+	    /** 테이블 데이터용 스타일*/
+	    // 데이터용 경계 스타일 테두리만 지정
+	    CellStyle bodyStyle = wb.createCellStyle();
+	    bodyStyle.setBorderTop(BorderStyle.THIN);
+	    bodyStyle.setBorderBottom(BorderStyle.THIN);
+	    bodyStyle.setBorderLeft(BorderStyle.THIN);
+	    bodyStyle.setBorderRight(BorderStyle.THIN);
+	    DataFormat format = wb.createDataFormat();
+	    bodyStyle.setDataFormat(format.getFormat("#,##0"));
+		
+	    // 헤더 생성
+	    row = sheet.createRow(rowNo++);
+	    cell = row.createCell(0);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("업체번호");
+	    cell = row.createCell(1);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("업체명");
+	    cell = row.createCell(2);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("업체 연락처");
+	    cell = row.createCell(3);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("사용여부");
+	    cell = row.createCell(4);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("등록일");
+	    cell = row.createCell(5);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("수정일");
+	    
+	    // 데이터 부분 생성
+	    for(Map<String, Object> map : list) {
+	        row = sheet.createRow(rowNo++);
+	        
+	        Iterator<String> keys = map.keySet().iterator();
+	        
+	        int cellNum = 0;
+	        while (keys.hasNext()) {
+				String key = keys.next();
+				
+	        	cell = row.createCell(cellNum++);
+		        cell.setCellStyle(bodyStyle);
+		        cell.setCellValue(map.get(key).toString());	  
+			}
+	    }
+	    
+		for(int i = 0; i < list.get(0).size(); i++) {
+			sheet.autoSizeColumn(i);
+			sheet.setColumnWidth(i, sheet.getColumnWidth(i) + 1000);
+		}
+
+	    // 컨텐츠 타입과 파일명 지정
+	    response.setContentType("ms-vnd/excel");
+	    response.setHeader("Content-Disposition", "attachment;filename=userInfo.xlsx");
+
+	    // 엑셀 출력
+	    wb.write(response.getOutputStream());
+	    wb.close();
 	}
 }
