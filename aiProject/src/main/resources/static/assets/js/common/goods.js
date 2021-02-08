@@ -1,5 +1,10 @@
 (function($) {
 	
+	var eno = $('#sessionId').val();
+	var auth= $("#sessionAuthor").val();
+	
+	console.log("SESSION :: "+eno+"//"+auth);
+	
 	var today = moment().format('YY/MM/DD');
 		
 	var table;

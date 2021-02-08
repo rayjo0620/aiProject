@@ -17,6 +17,11 @@
 	var modal_ocrn;
 	var modal_strt;
 	
+	var eno = $('#sessionId').val();
+	var auth= $("#sessionAuthor").val();
+	
+	console.log("SESSION :: "+eno+"//"+auth);
+	
 	$.ajax({
 			url : "/incident/br_list",
 			type : "Post",

@@ -10,6 +10,11 @@
 	var html_03;
 	var html_04;
 	var html_05;
+	
+	var eno = $('#sessionId').val();
+	var auth= $("#sessionAuthor").val();
+	
+	console.log("SESSION :: "+eno+"//"+auth);
 		
 	$.ajax({
 			url : "/incident/br_list",

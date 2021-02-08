@@ -4,6 +4,11 @@
 	
 	var param_br = {USER_ENO : USER_ENO};
 	
+	var eno = $('#sessionId').val();
+	var auth= $("#sessionAuthor").val();
+	
+	console.log("SESSION :: "+eno+"//"+auth);
+	
 ////////////////////////////////////////////////////////////////////////////////////////////
 	var select_br = "all";
 	var table;

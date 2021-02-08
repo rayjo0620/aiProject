@@ -10,6 +10,11 @@
 	var modal_br;
 	var modal_devc;
 	var modal_obty;
+	
+	var eno = $('#sessionId').val();
+	var auth= $("#sessionAuthor").val();
+	
+	console.log("SESSION :: "+eno+"//"+auth);
 
 	read();
 	

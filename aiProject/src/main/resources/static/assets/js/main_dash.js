@@ -2,6 +2,16 @@
 	
 	var USER_ENO = '001';	//유저번호 현재는 테스트를 위해 고정값임
 	
+	var eno = $('#sessionId').val();
+	var auth= $("#sessionAuthor").val();
+	
+	console.log("SESSION :: "+eno+"//"+auth);
+	
+	if(eno==""){
+		alert("로그인 정보가 만료되었습니다. 다시 로그인해주세요.");
+		location.href="/";
+	}
+	
 	 //타임리프를 통해 얻어오는 세션값. 
 	var eno = $('#sessionId').val();
 	var auth= $("#sessionAuthor").val();
