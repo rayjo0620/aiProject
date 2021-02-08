@@ -19,7 +19,7 @@ import com.example.ai.vo.StkVo;
 
 @Mapper
 public interface SalesMapper {
-	public List<Map<String, String>> brList(String USER_ENO) throws Exception;
+	public List<Map<String, Object>> brList(String USER_ENO) throws Exception;
 	
 	public String sm_daily_tot(SalesVo vo)throws Exception;
 	
@@ -33,15 +33,15 @@ public interface SalesMapper {
 	
 	public int sm_stkManage_del(StkVo vo) throws Exception;
 	
-	public List<Map<String, String>> modal_devc(StkVo vo) throws Exception;
+	public List<Map<String, Object>> modal_devc(StkVo vo) throws Exception;
 	
-	public List<Map<String, String>> modal_gt() throws Exception;
+	public List<Map<String, Object>> modal_gt() throws Exception;
 	
-	public List<Map<String, String>> modal_gnm(StkVo vo) throws Exception;
+	public List<Map<String, Object>> modal_gnm(StkVo vo) throws Exception;
 	
 	public int modal_insert(StkVo vo) throws Exception;
 	
 	public int modal_update(StkVo vo) throws Exception;
 	
-	public List<Map<String, String>> dash_cal(SalesVo vo) throws Exception;
+	public List<Map<String, Object>> dash_cal(SalesVo vo) throws Exception;
 }

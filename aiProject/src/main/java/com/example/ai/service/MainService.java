@@ -14,6 +14,6 @@ import java.util.Map;
  */
 public interface MainService {
 	
-	public List<Map<String, String>> main_chart_tot(String USER_ENO) throws Exception;
+	public List<Map<String, Object>> main_chart_tot(String USER_ENO) throws Exception;
 
 }

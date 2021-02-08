@@ -26,7 +26,7 @@ public class MainController {
 	@RequestMapping("/main/chart_list")
 	public String getChartList(String USER_ENO) throws Exception {
 		Gson gson = new Gson();
-		List<Map<String, String>> brList = msi.main_chart_tot(USER_ENO);
+		List<Map<String, Object>> brList = msi.main_chart_tot(USER_ENO);
 		String json = gson.toJson(brList);
 		return json;
 		
