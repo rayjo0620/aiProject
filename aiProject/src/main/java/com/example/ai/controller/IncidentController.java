@@ -30,7 +30,7 @@ public class IncidentController {
 	@RequestMapping("/incident/br_list")
 	public String getBrList(String USER_ENO, Model model) throws Exception {
 		Gson gson = new GsonBuilder().serializeNulls().create();
-		List<Map<String, String>> brList = isi.br_list(USER_ENO);
+		List<Map<String, Object>> brList = isi.br_list(USER_ENO);
 		model.addAttribute(brList);
 		String json = gson.toJson(brList);
 		return json;
