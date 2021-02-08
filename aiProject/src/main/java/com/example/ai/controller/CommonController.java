@@ -331,6 +331,17 @@ public class CommonController {
 		return result;
 	}
 	
+	@RequestMapping("/common/code_code_list")
+	public String codeCodeList()throws Exception{
+		Gson gson = new Gson();
+		
+		List<Map<String, Object>> list = csi.cm_code_code_list();
+		
+		String result = gson.toJson(list); 
+		
+		return result;
+	}
+	
 	@RequestMapping("/common/code_insert")
 	public String CodeInsert(CodeVo vo) throws Exception{
 		String result = csi.cm_code_insert(vo);
