@@ -4,6 +4,7 @@
 package com.example.ai.controller;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -426,19 +427,32 @@ public class CommonController {
 	    cell.setCellValue("수정일");
 	    
 	    // 데이터 부분 생성
-	    int colNum = 0;
 	    for(Map<String, Object> map : list) {
+	    	
 	        row = sheet.createRow(rowNo++);
 	        
-	        for(int i = 0; i < map.size(); i++) {
-	        	cell = row.createCell(i);
-		        cell.setCellStyle(bodyStyle);
-		        cell.setCellValue(map.get(i).toString());
-	        }
+	        System.out.println("mapsize :::: "+map.size());
+	        System.out.println("mapget :::: "+map.get("USE_YN"));
 	        
-	        /** 시트 스타일*/
-	        sheet.autoSizeColumn(colNum++);
+	        Iterator<String > keys = map.keySet().iterator();
+	        
+	        int i =0;
+	        while (keys.hasNext()) {
+	        	
+				String key = keys.next();
+				
+	        	cell = row.createCell(i++);
+		        cell.setCellStyle(bodyStyle);
+		        cell.setCellValue(map.get(key).toString());	        
+		        
+			}
+	        
 	    }
+		/*
+		 * for(int i = 0; i<6; i++ ) { sheet.autoSizeColumn(i); }
+		 */
+	    
+	    sheet.autoSizeColumn(5);
 
 	    // 컨텐츠 타입과 파일명 지정
 	    response.setContentType("ms-vnd/excel");

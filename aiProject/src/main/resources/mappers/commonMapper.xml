@@ -284,7 +284,7 @@
 			USER_INFO
 	 </select>
 
-	 <select id="cm_code_mfbiz_list" resultType="MfbizVo">
+	 <select id="cm_code_mfbiz_list" resultType="HashMap">
 	 	SELECT 
 	 	MFBIZ_ID,
 		MFBIZ_NM,
