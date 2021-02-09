@@ -14,20 +14,20 @@
 	</resultMap>
 	 <select id="brList" parameterType="String" resultMap="br_list">
 	 	SELECT
-		    BR_NM, BR_CD
+		    br_nm, br_cd
 		FROM
-		    BR_INFO
+		    br_info
 		WHERE
 		 <choose>			
 			    <when test="USER_ENO != null and USER_ENO.equals('admin')">
 			
-			    USER_ENO like '%'
+			    user_eno like '%'
 			
 			    </when>
 			
 			    <otherwise>
 			
-			     USER_ENO=#{USER_ENO}
+			     user_eno=#{USER_ENO}
 			
 			    </otherwise>
 			
@@ -36,7 +36,7 @@
 
 	<select id="sm_daily_tot" parameterType="SalesVo" resultType="String">
 	 	SELECT
-    		SUM(DLAMT)
+    		SUM(dlamt)
 		FROM 
 		    sales_info
 		WHERE
@@ -44,19 +44,19 @@
 			
 			    <when test="BR_CD != null and BR_CD.equals('all')">
 			
-			     TO_CHAR(DELNG_DATE)=#{DELNG_DATE} AND USER_ENO=#{USER_ENO}
+			     TO_CHAR(delng_date)=#{DELNG_DATE} AND user_eno=#{USER_ENO}
 			
 			    </when>
 			
 			    <when test="USER_ENO != null and USER_ENO.equals('admin')">
 			
-			        TO_CHAR(DELNG_DATE,'YY/MM/DD')=#{DELNG_DATE}
+			        TO_CHAR(delng_date,'YY/MM/DD')=#{DELNG_DATE}
 			
 			    </when>
 			
 			    <otherwise>
 			
-			      BR_CD=#{BR_CD} AND TO_CHAR(DELNG_DATE,'YY/MM/DD')=#{DELNG_DATE} AND USER_ENO=#{USER_ENO}
+			      br_cd=#{BR_CD} AND TO_CHAR(delng_date,'YY/MM/DD')=#{DELNG_DATE} AND user_eno=#{USER_ENO}
 			
 			    </otherwise>
 			
@@ -65,7 +65,7 @@
 	 
 	 <select id="sm_period_tot" parameterType="SalesVo" resultType="String">
 	 	SELECT
-    		SUM(DLAMT)
+    		SUM(dlamt)
 		FROM 
 		    sales_info
 		WHERE
@@ -73,19 +73,19 @@
 			
 			    <when test="BR_CD != null and BR_CD.equals('all')">
 			
-			     TO_CHAR(DELNG_DATE) &gt;=#{DELNG_DATE} AND TO_CHAR(DELNG_DATE) &lt;= #{DELNG_DATE2} AND USER_ENO=#{USER_ENO}
+			     TO_CHAR(delng_date) &gt;=#{DELNG_DATE} AND TO_CHAR(delng_date) &lt;= #{DELNG_DATE2} AND user_eno=#{USER_ENO}
 			
 			    </when>
 			
 			    <when test="USER_ENO != null and USER_ENO.equals('admin')">
 			
-			         TO_CHAR(DELNG_DATE) &gt;=#{DELNG_DATE} AND TO_CHAR(DELNG_DATE) &lt;= #{DELNG_DATE2} AND USER_ENO=#{USER_ENO}
+			         TO_CHAR(delng_date) &gt;=#{DELNG_DATE} AND TO_CHAR(delng_date) &lt;= #{DELNG_DATE2} AND user_eno=#{USER_ENO}
 			
 			    </when>
 			
 			    <otherwise>
 			
-			      BR_CD=#{BR_CD} AND USER_ENO=#{USER_ENO} AND  TO_CHAR(DELNG_DATE) &gt;=#{DELNG_DATE} AND TO_CHAR(DELNG_DATE) &lt;= #{DELNG_DATE2} AND USER_ENO=#{USER_ENO}
+			      br_cd=#{BR_CD} AND user_eno=#{USER_ENO} AND  TO_CHAR(delng_date) &gt;=#{DELNG_DATE} AND TO_CHAR(delng_date) &lt;= #{DELNG_DATE2} AND user_eno=#{USER_ENO}
 			
 			    </otherwise>
 			
@@ -95,36 +95,36 @@
 	 <select id="sm_daily_grid" parameterType="SalesVo" resultType="SalesVo">
 	 
 	 	SELECT
-	 		to_char(DELNG_DATE) as DELNG_DATE,
-			USER_ENO,
-			BR_CD,
-			DEVC_UNO,
-			GOODS_CD,
-			DELNG_SEQ,
-			DELNG_TM,
-			DLAMT,
-			DLNT,
+	 		TO_CHAR(delng_date) AS delng_date,
+			user_eno,
+			br_cd,
+			devc_uno,
+			goods_cd,
+			delng_seq,
+			delng_tm,
+			dlamt,
+			dlnt,
 			
 			<choose>
 			    <when test="USER_ENO != null and USER_ENO.equals('admin')">
 			
 			        (
 		            	SELECT 
-		            		BR_NM 
+		            		br_nm 
 		            	FROM 
-		            		BR_INFO 
+		            		br_info 
 		            	WHERE  
-		            		br_info.br_cd = sales_info.br_cd AND BR_INFO.USER_ENO = SALES_INFO.USER_ENO
-		            ) AS BR_NM ,
+		            		br_info.br_cd = sales_info.br_cd AND br_info.user_eno = sales_info.user_eno
+		            ) AS br_nm ,
 		            
 		            (
 		            	SELECT 
-		            		GOODS_CDNM 
+		            		goods_cdnm 
 		            	FROM 
 		            		goods_cd_info 
 		            	WHERE 
-		            		SALES_INFO.GOODS_CD = GOODS_CD_INFO.GOODS_CD and SALES_INFO.GOODS_TYPE = GOODS_CD_INFO.GOODS_TYPE 
-		            ) AS GOODS_NM
+		            		sales_info.goods_cd = goods_cd_info.goods_cd and sales_info.goods_type = goods_cd_info.goods_type 
+		            ) AS goods_nm
 			
 			    </when>
 			
@@ -132,46 +132,46 @@
 			
 			      (
 		            SELECT 
-		            	BR_NM 
+		            	br_nm 
 		            FROM
-		            	BR_INFO 
+		            	br_info 
 		            WHERE 
-		            	sales_info.br_cd = br_info.br_cd AND BR_INFO.USER_ENO = #{USER_ENO}
-		          ) AS BR_NM ,
+		            	sales_info.br_cd = br_info.br_cd AND br_info.user_eno = #{USER_ENO}
+		          ) AS br_nm ,
 		          
 		          (
 		            SELECT 
-		            	GOODS_CDNM 
+		            	goods_cdnm 
 		            FROM 
 		            	goods_cd_info 
 		            WHERE 
-		            	SALES_INFO.GOODS_CD = GOODS_CD_INFO.GOODS_CD and SALES_INFO.GOODS_TYPE = GOODS_CD_INFO.GOODS_TYPE 
-		          ) AS GOODS_NM
+		            	sales_info.goods_cd = goods_cd_info.goods_cd AND sales_info.goods_type = goods_cd_info.goods_type 
+		          ) AS goods_nm
 			
 			    </otherwise>
 			
 			</choose>
 		FROM
-			SALES_INFO
+			sales_info
 	 	WHERE
 	 	
 			<choose>
 			
 			    <when test="BR_CD != null and BR_CD.equals('all')">
 			
-			     TO_CHAR(DELNG_DATE,'YY/MM/DD') =#{DELNG_DATE} AND USER_ENO=#{USER_ENO}
+			     TO_CHAR(delng_date,'YY/MM/DD') =#{DELNG_DATE} AND user_eno=#{USER_ENO}
 			
 			    </when>
 			
 			    <when test="USER_ENO != null and USER_ENO.equals('admin')">
 			
-			        TO_CHAR(DELNG_DATE,'YY/MM/DD') =#{DELNG_DATE} 
+			        TO_CHAR(delng_date,'YY/MM/DD') =#{DELNG_DATE} 
 			
 			    </when>
 			
 			    <otherwise>
 			
-			      BR_CD=#{BR_CD} AND USER_ENO=#{USER_ENO} AND TO_CHAR(DELNG_DATE) =#{DELNG_DATE}
+			      br_cd=#{BR_CD} AND user_eno=#{USER_ENO} AND TO_CHAR(delng_date) =#{DELNG_DATE}
 			
 			    </otherwise>
 			
@@ -181,35 +181,35 @@
 	 <select id="sm_period_grid" parameterType="SalesVo" resultType="SalesVo">
 	 
 	 	SELECT
-	 		to_char(DELNG_DATE) as DELNG_DATE,
-			USER_ENO,
-			BR_CD,
-			DEVC_UNO,
-			GOODS_CD,
-			DELNG_SEQ,
-			DELNG_TM,
-			DLAMT,
-			DLNT,
+	 		TO_CHAR(delng_date) AS delng_date,
+			user_eno,
+			br_cd,
+			devc_uno,
+			goods_cd,
+			delng_seq,
+			delng_tm,
+			dlamt,
+			dlnt,
 			
 			<choose>
 			    <when test="USER_ENO != null and USER_ENO.equals('admin')">
 			
 			        (
 		            	SELECT 
-		            		BR_NM 
+		            		br_nm 
 		            	FROM 
-		            		BR_INFO 
+		            		br_info 
 		            	WHERE  
-		            		br_info.br_cd = sales_info.br_cd AND BR_INFO.USER_ENO = SALES_INFO.USER_ENO
-		            ) AS BR_NM ,
+		            		br_info.br_cd = sales_info.br_cd AND br_info.user_eno = sales_info.user_eno
+		            ) AS br_nm ,
 		            
 		            (
 		            	SELECT 
-		            		GOODS_CDNM 
+		            		goods_cdnm 
 		            	FROM 
 		            		goods_cd_info 
-		            	WHERE SALES_INFO.GOODS_CD = GOODS_CD_INFO.GOODS_CD and SALES_INFO.GOODS_TYPE = GOODS_CD_INFO.GOODS_TYPE 
-		            ) AS GOODS_NM
+		            	WHERE sales_info.goods_cd = goods_cd_info.goods_cd AND sales_info.goods_type = goods_cd_info.goods_type 
+		            ) AS goods_nm
 			
 			    </when>
 			
@@ -217,46 +217,46 @@
 			
 			      (
 		            SELECT 
-		            	BR_NM 
+		            	br_nm 
 		            FROM
-		            	BR_INFO 
+		            	br_info 
 		            WHERE 
-		            	sales_info.br_cd = br_info.br_cd AND BR_INFO.USER_ENO = #{USER_ENO}
-		          ) AS BR_NM ,
+		            	sales_info.br_cd = br_info.br_cd AND br_info.user_eno = #{USER_ENO}
+		          ) AS br_nm ,
 		          
 		          (
 		            SELECT 
-		            	GOODS_CDNM 
+		            	goods_cdnm 
 		            FROM 
 		            	goods_cd_info 
 		            WHERE 
-		            	SALES_INFO.GOODS_CD = GOODS_CD_INFO.GOODS_CD and SALES_INFO.GOODS_TYPE = GOODS_CD_INFO.GOODS_TYPE 
-		          ) AS GOODS_NM
+		            	sales_info.goods_cd = goods_cd_info.goods_cd AND sales_info.goods_type = goods_cd_info.goods_type 
+		          ) AS goods_nm
 			
 			    </otherwise>
 			
 			</choose>
 		FROM
-			SALES_INFO
+			sales_info
 	 	WHERE
 	 	
 			<choose>
 			
 			    <when test="BR_CD != null and BR_CD.equals('all')">
 			
-			     TO_CHAR(DELNG_DATE) &gt;=#{DELNG_DATE} AND TO_CHAR(DELNG_DATE) &lt;= #{DELNG_DATE2} AND USER_ENO=#{USER_ENO}
+			     TO_CHAR(delng_date) &gt;=#{DELNG_DATE} AND TO_CHAR(delng_date) &lt;= #{DELNG_DATE2} AND user_eno=#{USER_ENO}
 			
 			    </when>
 			
 			    <when test="USER_ENO != null and USER_ENO.equals('admin')">
 			
-			        TO_CHAR(DELNG_DATE) &gt;=#{DELNG_DATE} AND TO_CHAR(DELNG_DATE) &lt;= #{DELNG_DATE2}
+			        TO_CHAR(delng_date) &gt;=#{DELNG_DATE} AND TO_CHAR(delng_date) &lt;= #{DELNG_DATE2}
 			
 			    </when>
 			
 			    <otherwise>
 			
-			      BR_CD=#{BR_CD} AND USER_ENO=#{USER_ENO} AND TO_CHAR(DELNG_DATE) &gt;=#{DELNG_DATE} AND TO_CHAR(DELNG_DATE) &lt;= #{DELNG_DATE2}
+			      br_cd=#{BR_CD} AND user_eno=#{USER_ENO} AND TO_CHAR(delng_date) &gt;=#{DELNG_DATE} AND TO_CHAR(delng_date) &lt;= #{DELNG_DATE2}
 			
 			    </otherwise>
 			
@@ -265,43 +265,43 @@
 	 
 	  <select id="sm_stk_grid" parameterType="SalesVo" resultType="StkVo">
 	  SELECT
-	     USER_ENO,
-         BR_CD,
-         DEVC_UNO,
-         GOODS_CD,
-         GOODS_QY,
-         GOODS_TYPE,
+	     user_eno,
+         br_cd,
+         devc_uno,
+         goods_cd,
+         goods_qy,
+         goods_type,
 			<choose>
 			    <when test="USER_ENO != null and USER_ENO.equals('admin')">
 			
 			        (
 		            	SELECT 
-		            		BR_NM 
+		            		br_nm 
 		            	FROM 
-		            		BR_INFO
+		            		br_info
 		            	
 		            	WHERE  
-		            		br_info.br_cd = invntry_info.br_cd AND BR_INFO.USER_ENO = invntry_info.USER_ENO
-		            ) AS BR_NM ,
+		            		br_info.br_cd = invntry_info.br_cd AND br_info.user_eno = invntry_info.user_eno
+		            ) AS br_nm ,
 		            
 		            (
 		            	SELECT 
-		            		GOODS_CDNM 
+		            		goods_cdnm 
 		            	FROM 
 		            		goods_cd_info 
 		            	WHERE 
-		            		invntry_info.GOODS_CD = GOODS_CD_INFO.GOODS_CD
+		            		invntry_info.goods_cd = goods_cd_info.goods_cd
 		            	AND
-                        	invntry_info.GOODS_TYPE = GOODS_CD_INFO.GOODS_TYPE 
-		            ) AS GOODS_NM ,
+                        	invntry_info.goods_type = goods_cd_info.goods_type 
+		            ) AS goods_nm ,
 		            (
 		            	SELECT
-		            		GOODS_TYPENM
+		            		goods_typenm
 		            	FROM
-		            		GOODS_TYPE_INFO
+		            		goods_type_info
 		            	WHERE
-		            		invntry_info.GOODS_TYPE = GOODS_TYPE_INFO.GOODS_TYPE
-		            )AS GOODS_TYPENM
+		            		invntry_info.goods_type = goods_type_info.goods_type
+		            )AS goods_typenm
 		            
 			
 			    </when>
@@ -310,32 +310,32 @@
 			
 			      (
 		            SELECT 
-		            	BR_NM 
+		            	br_nm 
 		            FROM
-		            	BR_INFO 
+		            	br_info 
 		            WHERE 
-		            	invntry_info.br_cd = br_info.br_cd AND BR_INFO.USER_ENO = #{USER_ENO}
-		          ) AS BR_NM ,
+		            	invntry_info.br_cd = br_info.br_cd AND br_info.user_eno = #{USER_ENO}
+		          ) AS br_nm ,
 		          
 		          (
 		            SELECT 
-		            	GOODS_CDNM 
+		            	goods_cdnm 
 		            FROM 
 		            	goods_cd_info 
 		            WHERE 
-		            	invntry_info.GOODS_CD = GOODS_CD_INFO.GOODS_CD
+		            	invntry_info.goods_cd = goods_cd_info.goods_cd
 		             AND
-                        invntry_info.GOODS_TYPE = GOODS_CD_INFO.GOODS_TYPE 
-		          ) AS GOODS_NM ,
+                        invntry_info.goods_type = goods_cd_info.goods_type 
+		          ) AS goods_nm ,
 		          
 		            (
 		            	SELECT
-		            		GOODS_TYPENM
+		            		goods_typenm
 		            	FROM
-		            		GOODS_TYPE_INFO
+		            		goods_type_info
 		            	WHERE
-		            		invntry_info.GOODS_TYPE = GOODS_TYPE_INFO.GOODS_TYPE
-		            )AS GOODS_TYPENM
+		            		invntry_info.goods_type = goods_type_info.goods_type
+		            )AS goods_typenm
 			
 			    </otherwise>
 			
@@ -348,13 +348,13 @@
 			
 			    <when test="BR_CD != null and BR_CD.equals('all')">
 				WHERE
-			     USER_ENO=#{USER_ENO}
+			     user_eno=#{USER_ENO}
 			
 			    </when>
 
 			    <otherwise>
 				WHERE
-			      BR_CD=#{BR_CD} AND USER_ENO=#{USER_ENO}
+			      br_cd=#{BR_CD} AND user_eno=#{USER_ENO}
 			
 			    </otherwise>
 			
@@ -364,71 +364,71 @@
 	 <delete id="sm_stkManage_del" parameterType="StkVo">
 	 	DELETE 
 	 	FROM 
-	 		INVNTRY_INFO
+	 		invntry_info
 	 	WHERE
-	 		BR_CD=#{BR_CD} AND DEVC_UNO = #{DEVC_UNO} AND GOODS_CD=#{GOODS_CD}  AND USER_ENO=#{USER_ENO} AND GOODS_TYPE = #{GOODS_TYPE}
+	 		br_cd=#{BR_CD} AND devc_uno = #{DEVC_UNO} AND goods_cd=#{GOODS_CD}  AND user_eno=#{USER_ENO} AND goods_type = #{GOODS_TYPE}
 	 </delete>
 	 
 	 <!-- modal -->
 	 <select id="modal_devc" parameterType="StkVo" resultType="StkVo">
 	 	SELECT
 		 	 devc_uno,
-	       	(SELECT BR_NM FROM BR_INFO WHERE br_info.br_cd = BR_DEVC_MAPP.br_cd AND BR_INFO.USER_ENO = BR_DEVC_MAPP.USER_ENO) AS BR_NM  
+	       	(SELECT br_nm FROM br_info WHERE br_info.br_cd = br_devc_mapp.br_cd AND br_info.user_eno = br_devc_mapp.user_eno) AS br_nm  
 		FROM
-			BR_DEVC_MAPP
+			br_devc_mapp
 		WHERE 
-			BR_CD=#{BR_CD} AND USER_ENO=#{USER_ENO}
+			br_cd=#{BR_CD} AND user_eno=#{USER_ENO}
 	 </select>
 	 
 	 <!-- modal -->
 	 
 	 <select id="modal_gt" resultType="StkVo">
 	 	SELECT
-	 		GOODS_TYPE,
-	 		GOODS_TYPENM
+	 		goods_type,
+	 		goods_typenm
 	 	FROM
-	 		GOODS_TYPE_INFO
+	 		goods_type_info
 	 	WHERE 
-	 		USE_YN='Y'
+	 		use_yn='Y'
 	 	
 	 </select>
 	 
 	 <select id="modal_gnm" parameterType="StkVo" resultType="StkVo">
 	 SELECT
-        GOODS_CD,
-        GOODS_CDNM as GOODS_NM
+        goods_cd,
+        goods_cdnm AS goods_nm
     FROM 
-        GOODS_CD_INFO
-    WHERE GOODS_TYPE =#{GOODS_TYPE}
+        goods_cd_info
+    WHERE goods_type =#{GOODS_TYPE}
     </select>
     
     <insert id="modal_insert" parameterType="StkVo" >
-    	INSERT INTO INVNTRY_INFO(USER_ENO, BR_CD, DEVC_UNO, GOODS_TYPE, GOODS_CD, GOODS_QY, REG_DT)
+    	INSERT INTO invntry_info(user_eno, br_cd, devc_uno, goods_type, goods_cd, goods_qy, reg_dt)
     VALUES (#{USER_ENO}, #{BR_CD}, #{DEVC_UNO}, #{GOODS_TYPE}, #{GOODS_CD}, #{GOODS_QY}, #{REG_DT})
 						
     </insert>
     
     <update id="modal_update" parameterType="StkVo">
     	UPDATE 
-    		INVNTRY_INFO
+    		invntry_info
 		SET 
-			GOODS_QY = #{GOODS_QY}, MDFCN_DT =#{REG_DT}
+			goods_qy = #{GOODS_QY}, mdfcn_dt =#{REG_DT}
 		WHERE 
-			USER_ENO=#{USER_ENO} AND BR_CD=#{BR_CD} AND DEVC_UNO=#{DEVC_UNO} AND GOODS_TYPE=#{GOODS_TYPE} AND GOODS_CD=#{GOODS_CD}
+			user_eno=#{USER_ENO} AND br_cd=#{BR_CD} AND devc_uno=#{DEVC_UNO} AND goods_type=#{GOODS_TYPE} AND goods_cd=#{GOODS_CD}
     </update>
     
     <select id="dash_cal" parameterType="SalesVo" resultMap="dash_cal">
-    	select 
-		    to_char(DELNG_DATE,'YYYY-MM-DD') as DELNG_DATE
-		    ,to_char(sum(DLAMT),'999,999,999,999,999')AS DLAMT
-		from 
-			SALES_INFO
-		where 
-			USER_ENO = #{USER_ENO} 
-		and 
-			to_char(DELNG_DATE,'MM') = #{DELNG_DATE}
-		group by 
-			DELNG_DATE
+    	SELECT 
+		    TO_CHAR(delng_date,'YYYY-MM-DD') AS delng_date
+		    ,TO_CHAR(SUM(dlamt),'999,999,999,999,999')AS dlamt
+		FROM 
+			sales_info
+		WHERE 
+			user_eno = #{USER_ENO} 
+		AND 
+			TO_CHAR(delng_date,'MM') = #{DELNG_DATE}
+		GROUP BY 
+			delng_date
     </select>
 	
 </mapper>
