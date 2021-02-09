@@ -9,19 +9,19 @@
 	 	SELECT
 	 		*
 	 	FROM
-	 		USER_INFO
+	 		user_info
 	 	WHERE
-	 		CNTRL_USER_ID = #{CNTRL_USER_ID}
+	 		cntrl_user_id = #{CNTRL_USER_ID}
 	 	AND
-	 		USER_PW = #{USER_PW}
+	 		user_pw = #{USER_PW}
 	 </select>
 	
 	<select id="join" parameterType="MemberVo" >
 		
-		INSERT INTO USER_INFO 
-			(CNTRL_USER_ID, USER_ENO, USER_PW, USER_NM, USER_HP, USER_EMAIL, CNTRL_AUTHOR, REG_DT)
+		INSERT INTO user_info 
+			(cntrl_user_id, user_eno, user_pw, user_nm, user_hp, user_email, cntrl_author, reg_dt)
 		VALUES 
-			(#{CNTRL_USER_ID}, (SELECT NVL(MAX(user_eno),0)+1 FROM USER_INFO) , #{USER_PW}, #{USER_NM}, #{USER_HP}, #{USER_EMAIL}, '01', TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS'))
+			(#{CNTRL_USER_ID}, (SELECT NVL(MAX(user_eno),0)+1 FROM user_info) , #{USER_PW}, #{USER_NM}, #{USER_HP}, #{USER_EMAIL}, '01', TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS'))
 	
 	</select>
 	
