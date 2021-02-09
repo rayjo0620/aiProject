@@ -357,7 +357,6 @@ public class CommonController {
 	/**
 	 * USER_INFO 목록을 엑셀파일로 다운로드한다. (pageing)
 	 * 
-	 * @param searchVO - 조회할 정보가 담긴 UserInfoDefaultVO
 	 * @exception Exception
 	 */
 	@GetMapping("/mfbizInfoExcelDown.do")
@@ -461,7 +460,6 @@ public class CommonController {
 	/**
 	 * MODEL_INFO 목록을 엑셀파일로 다운로드한다. (pageing)
 	 * 
-	 * @param searchVO - 조회할 정보가 담긴 UserInfoDefaultVO
 	 * @exception Exception
 	 */
 	@GetMapping("/modelInfoExcelDown.do")
@@ -565,7 +563,6 @@ public class CommonController {
 	/**
 	 * CODE_INFO 목록을 엑셀파일로 다운로드한다. (pageing)
 	 * 
-	 * @param searchVO - 조회할 정보가 담긴 UserInfoDefaultVO
 	 * @exception Exception
 	 */
 	@GetMapping("/codeInfoExcelDown.do")
@@ -650,7 +647,6 @@ public class CommonController {
 				cell = row.createCell(cellNum++);
 				cell.setCellStyle(bodyStyle);
 				cell.setCellValue(String.valueOf(data.get(key)));
-				
 			}
 		}
 
