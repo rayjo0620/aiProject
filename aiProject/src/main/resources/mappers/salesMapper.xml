@@ -32,7 +32,8 @@
 			
 			    </otherwise>
 			
-			</choose>    
+		</choose>
+		    
 	 </select>
 
 	<select id="sm_daily_tot" parameterType="SalesVo" resultType="String">
