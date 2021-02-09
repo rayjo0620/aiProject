@@ -18,7 +18,8 @@
 
 	<select id="brList" parameterType="String" resultMap="br_list">
 		SELECT
-			br_nm, br_cd
+			br_nm
+			, br_cd
 		FROM
 			br_info
 		WHERE
@@ -27,7 +28,7 @@
 					user_eno like '%'
 				</when>
 				<otherwise>
-					user_eno=#{USER_ENO}
+					user_eno = #{USER_ENO}
 				</otherwise>
 			</choose>
 	</select>
@@ -63,15 +64,20 @@
 
 	<select id="cm_br_loc_grid" parameterType="BrVo" resultType="java.util.HashMap">
 		SELECT
-			user_eno, br_cd, br_nm, br_adr, br_adr2, TO_CHAR(cls_dt) AS cls_dt,
-			CONCAT(CONCAT(br_adr, ', '), br_adr2) AS BR_ADR3
+			user_eno
+			, br_cd
+			, br_nm
+			, br_adr
+			, br_adr2
+			, TO_CHAR(cls_dt) AS cls_dt
+			, CONCAT(CONCAT(br_adr, ', '), br_adr2) AS BR_ADR3
 		FROM
 			br_info
 		WHERE
 			<choose>
 				<when test="USER_ENO != null AND USER_ENO.equals('admin')">
 					user_eno LIKE '%'
-					AND br_cd =#{BR_CD}
+					AND br_cd = #{BR_CD}
 				</when>
 				<when test="BR_CD != null AND BR_CD.equals('all')">
 					user_eno = #{USER_ENO}
@@ -80,7 +86,7 @@
 					user_eno LIKE '%' AND br_cd LIKE '%'
 				</when>
 				<otherwise>
-					user_eno=#{USER_ENO} AND br_cd =#{BR_CD}
+					user_eno = #{USER_ENO} AND br_cd = #{BR_CD}
 				</otherwise>
 			</choose>
 	</select>
@@ -109,10 +115,14 @@
 					user_eno = #{USER_ENO}
 				</when>
 				<otherwise>
-					devc_uno  NOT IN (SELECT devc_uno FROM br_devc_mapp)
+					devc_uno  NOT IN (
+						SELECT
+							devc_uno
+						FROM
+							br_devc_mapp
+					)
 				</otherwise>
 			</choose>
-
 		AND devc_uno  NOT IN (SELECT devc_uno FROM br_devc_mapp)
 	</select>
 
@@ -190,7 +200,8 @@
 				</when>
 
 				<otherwise>
-					mfbiz_id = #{MFBIZ_ID} AND user_eno = #{USER_ENO}
+					mfbiz_id = #{MFBIZ_ID}
+					AND user_eno = #{USER_ENO}
 				</otherwise>
 			</choose>
 	</select>
@@ -252,7 +263,7 @@
 					mfbiz_id = (
 						SELECT
 							mfbiz_id
-						from
+						FROM
 							devc_info di
 						WHERE
 							di.user_eno = #{USER_ENO}
@@ -304,9 +315,9 @@
 			cntrl_user_id
 			, user_hp
 			, user_email
-			,	user_eno
-			,	cntrl_author
-			,	user_pw
+			, user_eno
+			, cntrl_author
+			, user_pw
 		FROM
 			user_info
 	</select>
@@ -314,11 +325,11 @@
 	<select id="cm_code_mfbiz_list" resultType="java.util.HashMap">
 		SELECT
 			mfbiz_id
-			,	mfbiz_nm
-			,	mntmng_tel
-			,	use_yn
-			,	TO_CHAR(reg_dt) AS reg_dt
-			,	TO_CHAR(mdfcn_dt) AS mdfcn_dt
+			, mfbiz_nm
+			, mntmng_tel
+			, use_yn
+			, TO_CHAR(reg_dt) AS reg_dt
+			, TO_CHAR(mdfcn_dt) AS mdfcn_dt
 		FROM
 			mfbiz_info
 	</select>
@@ -326,11 +337,11 @@
 	<select id="cm_code_model_list" resultType="java.util.HashMap">
 		SELECT
 			mfbiz_id
-			,	model_id
-			,	model_nm
-			,	use_yn
-			,	TO_CHAR(reg_dt) AS reg_dt
-			,	TO_CHAR(mdfcn_dt) AS mdfcn_dt
+			, model_id
+			, model_nm
+			, use_yn
+			, TO_CHAR(reg_dt) AS reg_dt
+			, TO_CHAR(mdfcn_dt) AS mdfcn_dt
 		FROM
 			model_info
 	</select>
@@ -338,12 +349,12 @@
 	<select id="cm_code_code_list" resultType="java.util.HashMap">
 		SELECT
 			grp_cdid
-			,	dtl_cdid
-			,	grp_cdnm
-			,	dtl_cdnm
-			,	use_yn
-			,	TO_CHAR(reg_dt) AS reg_dt
-			,	TO_CHAR(mdfcn_dt) AS mdfcn_dt
+			, dtl_cdid
+			, grp_cdnm
+			, dtl_cdnm
+			, use_yn
+			, TO_CHAR(reg_dt) AS reg_dt
+			, TO_CHAR(mdfcn_dt) AS mdfcn_dt
 		FROM
 			code_info
 	</select>
@@ -486,7 +497,7 @@
 	</insert>
 
 	<insert id="cm_devc_modify_hist" parameterType="DevcVo">
-		INSERT into
+		INSERT INTO
 			DEVC_INFO_HIST
 			(
 				user_eno
@@ -675,25 +686,25 @@
 	</insert>
 
 	<insert id="cm_code_insert" parameterType="CodeVo">
-	INSERT INTO
-		code_info
-		(
-			grp_cdid
-			, dtl_cdid
-			, grp_cdnm
-			, dtl_cdnm
-			, use_yn
-			, reg_dt
-		)
-		VALUES
-		(
-			#{GRP_CDID}
-			, #{DTL_CDID}
-			, #{GRP_CDNM}
-			, #{DTL_CDNM}
-			, #{USE_YN}
-			, #{REG_DT}
-		)
+		INSERT INTO
+			code_info
+			(
+				grp_cdid
+				, dtl_cdid
+				, grp_cdnm
+				, dtl_cdnm
+				, use_yn
+				, reg_dt
+			)
+			VALUES
+			(
+				#{GRP_CDID}
+				, #{DTL_CDID}
+				, #{GRP_CDNM}
+				, #{DTL_CDNM}
+				, #{USE_YN}
+				, #{REG_DT}
+			)
 	</insert>
 
 	<update id="cm_goods_modify" parameterType="GoodsVo">
