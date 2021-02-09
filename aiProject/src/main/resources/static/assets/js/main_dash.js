@@ -61,10 +61,11 @@
 			      },
 			      locale: 'ko',
 			      buttonIcons: false, // show the prev/next text
-			      navLinks: true, // can click day/week names to navigate views
+			      //navLinks: true, // can click day/week names to navigate views
 			      editable: true,
 			      dayMaxEvents: true, // allow "more" link when too many events
 			      events: grid
+				  ,height : 600
 			    });
 			        calendar.render();
 												

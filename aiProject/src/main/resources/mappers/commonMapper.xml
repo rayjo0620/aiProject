@@ -253,7 +253,8 @@
 				,DEVC_STAT
 				,STRT_DATE
 				,STRT_TM
-				,(SELECT COUNT(STRT_DATE) FROM DEVC_STAT_HIST WHERE  USER_ENO = #{USER_ENO} and DEVC_STAT_HIST.DEVC_UNO = D.DEVC_UNO) STRT_CNT 
+				,(SELECT COUNT(STRT_DATE) FROM DEVC_STAT_HIST WHERE  USER_ENO = #{USER_ENO} and DEVC_STAT_HIST.DEVC_UNO = D.DEVC_UNO) STRT_CNT
+				,(select br_nm from br_info where br_info.br_cd=(select br_cd from br_devc_mapp where br_devc_mapp.devc_uno=D.devc_uno)) br_nm
 			FROM
 				DEVC_STAT D
 			WHERE 

@@ -97,7 +97,15 @@
 									            { "data" : "DEVC_UNO" },
 									            { "data" : "REG_YN" },
 									            { "data" : "OCRN_DATE" },
-												{ "data" : "OB_TYPE" },
+												{ "data" : "OB_TYPE",
+													render : function(data){
+														if(data=='01'){
+															return '기기정지';
+														}else{
+															return '접속불량';
+														}
+													}
+												 },
 												{ "data" : "AC_DTS" },
 												{ "data" : "REQRE_TM" },
 												{ "data" : null, defaultContent: "<button>상세</button>"}												

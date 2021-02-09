@@ -352,7 +352,7 @@
 		    B.OB_TYPE,
 		    B.OB_STRT_TM,
 		    B.OB_END_TM,
-		    B.AC_CD,
+		    '01',
 		    B.AC_DTS,
 		    B.REQRE_TM,
 		    B.REG_DT,

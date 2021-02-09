@@ -54,6 +54,8 @@
 				success : function(data) {
 						
 						var grid = JSON.parse(data);
+						
+						console.log(grid[0]);
 							
 						$('#id').val(grid[0].CNTRL_USER_ID);
 						$('#email').val(grid[0].USER_EMAIL);
