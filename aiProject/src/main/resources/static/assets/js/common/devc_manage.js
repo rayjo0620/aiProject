@@ -1,10 +1,15 @@
 (function($) {
 	
+	var eno = $('#sessionId').val();
+	var auth= $("#sessionAuthor").val();
+	
+	console.log("SESSION :: "+eno+"//"+auth);
+	
 	var today = moment().format('YY/MM/DD');
 	var SELECT_MFBIZ = 'ALL';
 	var table;
 	var table_cnt = 0;
-	var USER_ENO = '001';
+	var USER_ENO = eno;
 	var today = moment().format('YY/MM/DD');
 	var pick_date;
 	

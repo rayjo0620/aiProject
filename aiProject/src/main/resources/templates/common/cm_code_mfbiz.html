@@ -38,7 +38,7 @@
                     		</a>
 	                    	<hr style="text-align: left;" />
                     		<a class="nav-link" href="../cm_devc">
-                    			<i class="fas fa-tachometer-alt" style="color: var(--warning);"></i>
+                    			<i class="fas fa-tachometer-alt" style="color: var(--light);"></i>
                     			<span style="color: var(--light);">기기관리</span>
                     		</a>
                     		
@@ -52,6 +52,7 @@
                     			<span style="color: var(--warning);">정보관리</span>
                     		</a>
                     		<a style="color: var(--warning);" href="../cm_code_mfbiz"><font size="1">-업체관리-</font></a>
+                    		<p>
                     		<p>
                     		<a style="color:  var(--light);" href="../cm_code_model"><font size="1">-모델관리-</font></a>
                     		<p>
@@ -110,6 +111,8 @@
             <footer class="bg-white sticky-footer" style="height: 70px;">
                 <div class="container my-auto">
                     <div class="text-center my-auto copyright"><span>Copyright © Brand 2021</span></div>
+                     <input type="hidden" id="sessionId" th:value=" ${session.USER_ENO} " value="기본">
+                    <input type="hidden" id="sessionAuthor" th:value=" ${session.CNTRL_AUTHOR} " value="기본">
                 </div>
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>

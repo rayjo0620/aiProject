@@ -1,5 +1,10 @@
 (function($) {
 	
+	var eno = $('#sessionId').val();
+	var auth= $("#sessionAuthor").val();
+	
+	console.log("SESSION :: "+eno+"//"+auth);
+	
 	var today = moment().format('YY/MM/DD');
 		
 	var table;
@@ -14,6 +19,7 @@
 	var modal_cdnm_modify;
 	var cls_dt;
 	
+	var USER_ENO = eno;
 	
 	read();
 	read_type();
