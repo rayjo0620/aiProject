@@ -32,7 +32,7 @@ public class CommonServiceImpl implements CommonService {
 	//goods
 	
 	@Override
-	public List<Map<String, String>> cm_goods_grid() throws Exception {
+	public List<Map<String, Object>> cm_goods_grid() throws Exception {
 		// TODO Auto-generated method stub
 		return commonMapper.cm_goods_grid();
 	}
@@ -44,7 +44,7 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	public List<Map<String, String>> goods_read_type() throws Exception {
+	public List<Map<String, Object>> goods_read_type() throws Exception {
 		// TODO Auto-generated method stub
 		return commonMapper.goods_read_type();
 	}
@@ -64,7 +64,7 @@ public class CommonServiceImpl implements CommonService {
 	//br
 	
 	@Override
-	public List<Map<String, String>> cm_br_loc_grid(BrVo vo) throws Exception {
+	public List<Map<String, Object>> cm_br_loc_grid(BrVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		return commonMapper.cm_br_loc_grid(vo);
 	}
@@ -88,13 +88,13 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	public List<Map<String, String>> cm_br_map_grid_br(String USER_ENO) throws Exception {
+	public List<Map<String, Object>> cm_br_map_grid_br(String USER_ENO) throws Exception {
 		// TODO Auto-generated method stub
 		return commonMapper.cm_br_map_grid_br(USER_ENO);
 	}
 
 	@Override
-	public List<Map<String, String>> cm_br_map_grid_devc(String USER_ENO) throws Exception {
+	public List<Map<String, Object>> cm_br_map_grid_devc(String USER_ENO) throws Exception {
 		// TODO Auto-generated method stub
 		return commonMapper.cm_br_map_grid_devc(USER_ENO);
 	}
@@ -108,25 +108,25 @@ public class CommonServiceImpl implements CommonService {
 	//devc
 	
 	@Override
-	public List<Map<String, String>> cm_mfbiz() throws Exception {
+	public List<Map<String, Object>> cm_mfbiz() throws Exception {
 		// TODO Auto-generated method stub
 		return commonMapper.cm_mfbiz();
 	}
 
 	@Override
-	public List<Map<String, String>> cm_devc_list(DevcVo vo) throws Exception {
+	public List<Map<String, Object>> cm_devc_list(DevcVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		return commonMapper.cm_devc_list(vo);
 	}
 
 	@Override
-	public List<Map<String, String>> cm_devc_hwsw(DevcVo vo) throws Exception {
+	public List<Map<String, Object>> cm_devc_hwsw(DevcVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		return commonMapper.cm_devc_hwsw(vo);
 	}
 
 	@Override
-	public List<Map<String, String>> cm_user_my(UserVo vo) throws Exception {
+	public List<Map<String, Object>> cm_user_my(UserVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		return commonMapper.cm_user_my(vo);
 	}
@@ -179,7 +179,7 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	public List<Map<String, String>> cm_user_list() throws Exception {
+	public List<Map<String, Object>> cm_user_list() throws Exception {
 		// TODO Auto-generated method stub
 		return commonMapper.cm_user_list();
 	}
@@ -213,9 +213,9 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	public List<Map<String, String>> cm_code_mfbiz_list(MfbizVo vo) throws Exception {
+	public List<Map<String, Object>> cm_code_mfbiz_list() throws Exception {
 		// TODO Auto-generated method stub
-		return commonMapper.cm_code_mfbiz_list(vo);
+		return commonMapper.cm_code_mfbiz_list();
 	}
 
 	@Override
@@ -237,9 +237,9 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	public List<Map<String, String>> cm_code_model_list(ModelVo vo) throws Exception {
+	public List<Map<String, Object>> cm_code_model_list() throws Exception {
 		// TODO Auto-generated method stub
-		return commonMapper.cm_code_model_list(vo);
+		return commonMapper.cm_code_model_list();
 	}
 
 	@Override
@@ -261,9 +261,9 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	public List<Map<String, String>> cm_code_code_list(CodeVo vo) throws Exception {
+	public List<Map<String, Object>> cm_code_code_list() throws Exception {
 		// TODO Auto-generated method stub
-		return commonMapper.cm_code_code_list(vo);
+		return commonMapper.cm_code_code_list();
 	}
 
 	@Override
@@ -288,7 +288,7 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	public List<Map<String, String>> cm_devc_stat_list(DevcVo vo) throws Exception {
+	public List<Map<String, Object>> cm_devc_stat_list(DevcVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		return commonMapper.cm_devc_stat_list(vo);
 	}

@@ -18,7 +18,7 @@ import com.example.ai.vo.IncidentVo;
 
 @Mapper
 public interface IncidentMapper {
-	public List<Map<String, String>> brList(String USER_ENO) throws Exception;
+	public List<Map<String, Object>> brList(String USER_ENO) throws Exception;
 	
 	public List<IncidentVo> im_user_grid(IncidentVo vo) throws Exception;
 	

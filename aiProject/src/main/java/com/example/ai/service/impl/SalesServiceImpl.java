@@ -24,7 +24,7 @@ public class SalesServiceImpl implements SalesService{
 	@Autowired SalesMapper salesMapper;
 
 	@Override
-	public List<Map<String, String>> br_list(String USER_ENO) throws Exception {
+	public List<Map<String, Object>> br_list(String USER_ENO) throws Exception {
 		// TODO Auto-generated method stub
 		return salesMapper.brList(USER_ENO);
 	}
@@ -70,19 +70,19 @@ public class SalesServiceImpl implements SalesService{
 	}
 
 	@Override
-	public List<Map<String, String>> modal_devc(StkVo vo) throws Exception {
+	public List<Map<String, Object>> modal_devc(StkVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		return salesMapper.modal_devc(vo);
 	}
 	
 	@Override
-	public List<Map<String, String>> modal_gt() throws Exception {
+	public List<Map<String, Object>> modal_gt() throws Exception {
 		// TODO Auto-generated method stub
 		return salesMapper.modal_gt();
 	}
 	
 	@Override
-	public List<Map<String, String>> modal_gnm(StkVo vo) throws Exception {
+	public List<Map<String, Object>> modal_gnm(StkVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		return salesMapper.modal_gnm(vo);
 	}
@@ -104,7 +104,7 @@ public class SalesServiceImpl implements SalesService{
 	}
 
 	@Override
-	public List<Map<String, String>> dash_cal(SalesVo vo) throws Exception {
+	public List<Map<String, Object>> dash_cal(SalesVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		return salesMapper.dash_cal(vo);
 	}

@@ -21,7 +21,7 @@
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
             <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+                    <div class="sidebar-brand-icon"><i class="fas fa-store"></i></div>
                     <div class="sidebar-brand-text mx-3"><span>Brand</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
@@ -38,7 +38,7 @@
                     		</a>
 	                    	<hr style="text-align: left;" />
                     		<a class="nav-link" href="../cm_devc">
-                    			<i class="fas fa-tachometer-alt" style="color: var(--warning);"></i>
+                    			<i class="fas fa-tachometer-alt" style="color: var(--light);"></i>
                     			<span style="color: var(--light);">기기관리</span>
                     		</a>
                     		
@@ -53,7 +53,9 @@
                     		</a>
                     		<a style="color: var(--light);" href="../cm_code_mfbiz"><font size="1">-업체관리-</font></a>
                     		<p>
+                    		<p>
                     		<a style="color:  var(--warning);" href="../cm_code_model"><font size="1">-모델관리-</font></a>
+                    		<p>
                     		<p>
                     		<a style="color: var(--light);" href="../cm_code_code"><font size="1">-코드관리-</font></a>
                     	</li>
@@ -64,26 +66,8 @@
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" style="padding-bottom: 0px;">
-                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
-                        <div class="collapse navbar-collapse" id="navcol-2" style="width: 100%;height: 80%;">
-                            <ul class="nav navbar-nav ml-auto" style="width: 100%;height: 100%;">
-                                <li class="nav-item" style="width: 30%;height: 100%;">
-                                    <div class="nav-item dropdown no-arrow" style="width: 90%;height: 90%;"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="/sm_daily">&lt;판매관리&gt;</a>
-                                        <div class="dropdown-menu"><a class="dropdown-item" href="/sm_daily">당일 판매 정보</a><a class="dropdown-item" href="/sm_period">기간별 판매 정보</a><a class="dropdown-item" href="/sm_stk">재고 정보</a><a class="dropdown-item" href="/sm_stkManage">재고 관리</a></div>
-                                    </div>
-                                </li>
-                                <li class="nav-item" style="width: 30%;height: 100%;">
-                                    <div class="nav-item dropdown no-arrow" style="width: 90%;height: 90%;"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">&lt;장애관리&gt;</a>
-                                        <div class="dropdown-menu"><a class="dropdown-item" href="/im_info_user">장애 상태</a><a class="dropdown-item" href="/im_dash">종합 장애 현황</a></div>
-                                    </div>
-                                </li>
-                                <li class="nav-item" style="width: 30%;height: 100%;">
-                                    <div class="nav-item dropdown no-arrow" style="width: 90%;height: 90%;"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">&lt;공통정보&gt;</a>
-                                        <div class="dropdown-menu"><a class="dropdown-item" href="/cm_goods">상품 관리</a><a class="dropdown-item" href="/cm_br">영업점 관리</a><a class="dropdown-item" href="/cm_devc">영업점 관리</a><a class="dropdown-item" href="/cm_user">유저 관리</a><a class="dropdown-item" href="/cm_code">코드 관리</a></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="container-fluid" style="width : 100%; text-align:center;" th:insert="/topnav">
+                    	<button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                     </div>
                 </nav>
                <div class="container-fluid">
@@ -102,7 +86,7 @@
 				        		<button class="btn btn-primary" type="button" id="cm_insert">등록</button>
 				        		<button class="btn btn-primary" type="button" id="cm_modify">수정</button>
 				        		<button class="btn btn-primary" type="button" id="cm_delete">삭제</button>
-				        		<button class="btn btn-primary" type="button" id="cm_excel">엑셀저장</button>
+				        		<button class="btn btn-primary" type="button" id="cm_excel" onClick="location.href='/modelInfoExcelDown.do'">엑셀저장</button>
 				        	</div>
 				        </div>				        
 				    </div>
@@ -126,6 +110,8 @@
             <footer class="bg-white sticky-footer" style="height: 70px;">
                 <div class="container my-auto">
                     <div class="text-center my-auto copyright"><span>Copyright © Brand 2021</span></div>
+                     <input type="hidden" id="sessionId" th:value=" ${session.USER_ENO} " value="기본">
+                    <input type="hidden" id="sessionAuthor" th:value=" ${session.CNTRL_AUTHOR} " value="기본">
                 </div>
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>

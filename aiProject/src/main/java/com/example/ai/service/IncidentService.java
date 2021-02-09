@@ -14,7 +14,7 @@ import com.example.ai.vo.IncidentVo;
  * @Date 2021. 1. 18.
  */
 public interface IncidentService {
-	public List<Map<String, String>> br_list(String USER_ENO) throws Exception;
+	public List<Map<String, Object>> br_list(String USER_ENO) throws Exception;
 	public List<IncidentVo> im_user_grid(IncidentVo vo) throws Exception;
 	
 	public String im_user_insert(IncidentVo vo)throws Exception;

@@ -23,7 +23,7 @@ public class IncidentServiceImpl implements IncidentService{
 	@Autowired IncidentMapper incidentMapper;
 
 	@Override
-	public List<Map<String, String>> br_list(String USER_ENO) throws Exception {
+	public List<Map<String, Object>> br_list(String USER_ENO) throws Exception {
 		// TODO Auto-generated method stub
 		return incidentMapper.brList(USER_ENO);
 	}

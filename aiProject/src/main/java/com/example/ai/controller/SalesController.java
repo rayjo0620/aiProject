@@ -32,7 +32,7 @@ public class SalesController {
 	@RequestMapping("/sales/br_list")
 	public String getBrList(String USER_ENO, Model model) throws Exception {
 		Gson gson = new Gson();
-		List<Map<String, String>> brList = ssi.br_list(USER_ENO);
+		List<Map<String, Object>> brList = ssi.br_list(USER_ENO);
 		model.addAttribute(brList);
 		String json = gson.toJson(brList);
 		return json;
@@ -42,7 +42,7 @@ public class SalesController {
 	@RequestMapping("/sales/dailyDo")
 	public String dailyDo(SalesVo vo, HttpServletRequest request) throws Exception {
 		Gson gson = new Gson();
-		HashMap<String, String> map = new HashMap<String, String>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		List<SalesVo> list = new ArrayList<SalesVo>();
 		
@@ -66,7 +66,7 @@ public class SalesController {
 	@RequestMapping("/sales/periodDo")
 	public String periodDo(SalesVo vo, HttpServletRequest request) throws Exception {
 		Gson gson = new Gson();
-		HashMap<String, String> map = new HashMap<String, String>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		List<SalesVo> list = new ArrayList<SalesVo>();
 		
@@ -106,7 +106,7 @@ public class SalesController {
 	@RequestMapping("/sales/modal_devc")
 	public String modal_devc(StkVo vo, Model model) throws Exception {
 		Gson gson = new Gson();
-		List<Map<String, String>> modalList = ssi.modal_devc(vo);
+		List<Map<String, Object>> modalList = ssi.modal_devc(vo);
 		
 		String json = gson.toJson(modalList);
 		return json;
@@ -116,7 +116,7 @@ public class SalesController {
 	@RequestMapping("/sales/modal_gt")
 	public String modal_gt() throws Exception {
 		Gson gson = new Gson();
-		List<Map<String, String>> modalList = ssi.modal_gt();
+		List<Map<String, Object>> modalList = ssi.modal_gt();
 		
 		String json = gson.toJson(modalList);
 		return json;
@@ -126,7 +126,7 @@ public class SalesController {
 	@RequestMapping("/sales/modal_gnm")
 	public String modal_gnm(StkVo vo, Model model) throws Exception {
 		Gson gson = new Gson();
-		List<Map<String, String>> modalList = ssi.modal_gnm(vo);
+		List<Map<String, Object>> modalList = ssi.modal_gnm(vo);
 		
 		String json = gson.toJson(modalList);
 		return json;
@@ -152,7 +152,7 @@ public class SalesController {
 	@RequestMapping("/dash/cal")
 	public String dashCal(SalesVo vo) throws Exception{
 		Gson gson = new Gson();
-		List<Map<String, String>> modalList = ssi.dash_cal(vo);
+		List<Map<String, Object>> modalList = ssi.dash_cal(vo);
 		
 		String json = gson.toJson(modalList);
 		return json;

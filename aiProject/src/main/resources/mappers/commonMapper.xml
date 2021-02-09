@@ -49,7 +49,7 @@
             GOODS_CD_INFO C
 	 </select>
 	 
-	 <select id="goods_read_type" resultType="GoodsVo">
+	 <select id="goods_read_type" resultType="java.util.HashMap">
 	 	SELECT
 	 		GOODS_TYPE, GOODS_TYPENM
 	 	FROM
@@ -58,7 +58,7 @@
 	 		USE_YN = 'Y'
 	 </select>
 	 
-	 <select id="cm_br_loc_grid" parameterType="BrVo" resultType="BrVo">
+	 <select id="cm_br_loc_grid" parameterType="BrVo" resultType="java.util.HashMap">
 	 	SELECT
 	 		USER_ENO, BR_CD, BR_NM, BR_ADR, BR_ADR2, to_char(CLS_DT) as CLS_DT, CONCAT(CONCAT(BR_ADR, ', '), BR_ADR2) as BR_ADR3
 	 	FROM
@@ -82,7 +82,7 @@
 	 </select>
 	 
 	 <!-- 영업점별 기기연결 부분 -->
-	 <select id="cm_br_map_grid_br" parameterType="BrVo" resultType="BrVo">
+	 <select id="cm_br_map_grid_br" parameterType="String" resultType="java.util.HashMap">
 	 	SELECT
 	 		BR_CD, BR_NM
 	 	FROM 
@@ -91,7 +91,7 @@
 	 		USER_ENO = #{USER_ENO}	 	
 	 </select>
 	 
-	 <select id="cm_br_map_grid_devc"  parameterType="BrVo" resultType="BrVo">
+	 <select id="cm_br_map_grid_devc"  parameterType="String" resultType="java.util.HashMap">
 	 	SELECT
 	 		MFBIZ_ID, MODEL_ID, DEVC_UNO
 	 	FROM 
@@ -112,13 +112,13 @@
 	 </select>
 	 
 	 <!-- devc -->
-	 <select id="cm_mfbiz" resultType="DevcVo">
+	 <select id="cm_mfbiz" resultType="java.util.HashMap">
 	 	SELECT MFBIZ_ID, MFBIZ_NM
 	 	FROM MFBIZ_INFO
 	 	WHERE USE_YN = 'Y'
 	 </select>
 	
-	 <select id="cm_devc_list" parameterType="DevcVo" resultType="DevcVo">
+	 <select id="cm_devc_list" parameterType="DevcVo" resultType="java.util.HashMap">
 	 	SELECT 
 	 		MFBIZ_ID,
 	 		(
@@ -197,7 +197,7 @@
 	 		DEVC_UNO = #{DEVC_UNO}
 	 </select>
 
-	 <select id="cm_devc_hwsw" parameterType="DevcVo" resultType="DevcVo">
+	 <select id="cm_devc_hwsw" parameterType="DevcVo" resultType="java.util.HashMap">
 	 	SELECT	 		
 	 		(
 	 		SELECT
@@ -238,7 +238,7 @@
 	 		
 	 </select>
 
-	 <select id="cm_devc_stat_list" parameterType="DevcVo" resultType="DevcVo">
+	 <select id="cm_devc_stat_list" parameterType="DevcVo" resultType="java.util.HashMap">
 	 	select 
 				(
 				    select
@@ -260,7 +260,7 @@
    				 USER_ENO = #{USER_ENO}
 	 </select>
 
-	 <select id="cm_user_my" parameterType="UserVo" resultType="UserVo">
+	 <select id="cm_user_my" parameterType="UserVo" resultType="java.util.HashMap">
 	 	SELECT
 	 		CNTRL_USER_ID,
 			USER_HP,
@@ -272,7 +272,7 @@
 			USER_ENO=#{USER_ENO}
 	 </select>
 
-	 <select id="cm_user_list" resultType="UserVo">
+	 <select id="cm_user_list" resultType="java.util.HashMap">
 	 	SELECT
 	 		CNTRL_USER_ID,
 			USER_HP,
@@ -284,7 +284,7 @@
 			USER_INFO
 	 </select>
 
-	 <select id="cm_code_mfbiz_list" resultType="MfbizVo">
+	 <select id="cm_code_mfbiz_list" resultType="java.util.HashMap">
 	 	SELECT 
 	 	MFBIZ_ID,
 		MFBIZ_NM,
@@ -297,7 +297,7 @@
 	 	
 	 </select>
 
-	 <select id="cm_code_model_list" resultType="ModelVo">
+	 <select id="cm_code_model_list" resultType="java.util.HashMap">
 	 	SELECT 
 	 	MFBIZ_ID,
 	 	MODEL_ID,
@@ -310,7 +310,7 @@
 	 	
 	 </select>
 
-	 <select id="cm_code_code_list" resultType="CodeVo">
+	 <select id="cm_code_code_list" resultType="java.util.HashMap">
 	 	SELECT 
 	 	GRP_CDID,
 		DTL_CDID,
@@ -554,7 +554,7 @@
 	 		
 	 </insert>
 
-	 <insert id="cm_mfbiz_insert">
+	 <insert id="cm_mfbiz_insert" parameterType="MfbizVo">
 	 	INSERT INTO
 	 	MFBIZ_INFO
 	 	(
@@ -576,7 +576,7 @@
 	 	
 	 </insert>
 
-	 <insert id="cm_model_insert">
+	 <insert id="cm_model_insert" parameterType="ModelVo">
 	 	INSERT INTO
 	 	MODEL_INFO
 	 	(	
@@ -598,7 +598,7 @@
 	 	
 	 </insert>
 
-	 <insert id="cm_code_insert">
+	 <insert id="cm_code_insert" parameterType="CodeVo">
 	 	INSERT INTO
 	 	CODE_INFO
 	 	(	
@@ -679,7 +679,7 @@
 	 		DEVC_UNO=#{DEVC_UNO} 
 	 </update>
 	 
-	 <update id="cm_devc_stat_modify">
+	 <update id="cm_devc_stat_modify" parameterType="DevcVo">
 	 	UPDATE
 	 		DEVC_STAT
 	 	SET
@@ -760,7 +760,7 @@
 			DTL_CDID = #{DTL_CDID}
 	 </update>
 	 
-	 <delete id="cm_goods_del">
+	 <delete id="cm_goods_del" parameterType="GoodsVo">
 	 
 	 	DELETE
 	 	FROM
@@ -780,15 +780,15 @@
 	 		CNTRL_USER_ID = #{CNTRL_USER_ID}
 	 </delete>
 
-	 <delete id="cm_mfbiz_delete">
+	 <delete id="cm_mfbiz_delete" parameterType="MfbizVo">
 	 	DELETE FROM MFBIZ_INFO WHERE MFBIZ_ID = #{MFBIZ_ID}
 	 </delete>
 
-	 <delete id="cm_model_delete">
+	 <delete id="cm_model_delete" parameterType="ModelVo">
 	 	DELETE FROM MODEL_INFO WHERE MFBIZ_ID = #{MFBIZ_ID} AND MODEL_ID = #{MODEL_ID}
 	 </delete>
 
-	 <delete id="cm_code_delete">
+	 <delete id="cm_code_delete" parameterType="CodeVo">
 	 	DELETE FROM CODE_INFO 
 	 	WHERE 
 	 		GRP_CDID = #{GRP_CDID}
