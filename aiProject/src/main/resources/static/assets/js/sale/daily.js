@@ -1,10 +1,10 @@
 (function($) {
 	
-	var USER_ENO = '001';
+	//var USER_ENO = '001';
 	
 	var eno = $('#sessionId').val();
 	var auth= $("#sessionAuthor").val();
-	
+	var USER_ENO = eno;
 	console.log("SESSION :: "+eno+"//"+auth);
 	
 	var param_br = {USER_ENO : USER_ENO};
@@ -22,7 +22,7 @@
     
   	var date = [year,'년',mm,'월',dd,'일'].join(" "); 
  	var today = moment().format('YY/MM/DD');
-	today = "21/01/11";
+	//today = "21/01/11";
     
 	
 	

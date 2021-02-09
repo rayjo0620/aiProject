@@ -1,6 +1,6 @@
 (function($) {
 	
-	var USER_ENO = '001';	//유저번호 현재는 테스트를 위해 고정값임
+	//var USER_ENO = '001';	//유저번호 현재는 테스트를 위해 고정값임
 	
 	var eno = $('#sessionId').val();
 	var auth= $("#sessionAuthor").val();
@@ -12,9 +12,7 @@
 		location.href="/";
 	}
 	
-	 //타임리프를 통해 얻어오는 세션값. 
-	var eno = $('#sessionId').val();
-	var auth= $("#sessionAuthor").val();
+	var USER_ENO = eno;
 	
 	//유저번호 파라미터
 	var param ={ USER_ENO : USER_ENO};

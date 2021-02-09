@@ -5,11 +5,12 @@
 	
 	console.log("SESSION :: "+eno+"//"+auth);
 	
+	var USER_ENO = eno;
+	
 	var today = moment().format('YY/MM/DD');
 	var SELECT_MFBIZ = 'ALL';
 	var table;
 	var table_cnt = 0;
-	var USER_ENO = '001';
 	
 
 	

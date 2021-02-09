@@ -1,6 +1,12 @@
 (function($) {
 	
-	var USER_ENO = 'admin';
+	var eno = $('#sessionId').val();
+	var auth= $("#sessionAuthor").val();
+	
+	console.log("SESSION :: "+eno+"//"+auth);
+	
+	var USER_ENO = eno;
+	
 	var select_br = "all";
 	var today = moment().format('YY/MM/DD');
 	var table;

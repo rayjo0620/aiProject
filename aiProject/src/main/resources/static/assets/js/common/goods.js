@@ -19,6 +19,7 @@
 	var modal_cdnm_modify;
 	var cls_dt;
 	
+	var USER_ENO = eno;
 	
 	read();
 	read_type();

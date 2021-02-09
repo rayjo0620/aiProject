@@ -9,7 +9,7 @@
 	var SELECT_MFBIZ = 'ALL';
 	var table;
 	var table_cnt = 0;
-	var USER_ENO = '001';
+	var USER_ENO = eno;
 	
 
 	

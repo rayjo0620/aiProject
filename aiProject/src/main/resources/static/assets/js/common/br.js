@@ -1,10 +1,10 @@
 (function($) {
-	var USER_ENO = '001';
-	
 	var eno = $('#sessionId').val();
 	var auth= $("#sessionAuthor").val();
 	
 	console.log("SESSION :: "+eno+"//"+auth);
+	
+	var USER_ENO = eno;
 	
 	var param_br = {USER_ENO : USER_ENO};
 	var select_br = "all";
