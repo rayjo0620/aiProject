@@ -9,7 +9,7 @@
 	</resultMap>
 	
 	
-	 <select id="brList" parameterType="String" resultMap="br_list">
+	 <select id="brList" parameterType="String" resultType="java.util.HashMap">
 	 	SELECT
 		    BR_NM, BR_CD
 		FROM
@@ -148,7 +148,135 @@
 						  
 	</select> 
 	
-
+	<select id="im_admin_grid" parameterType="IncidentVo" resultType="IncidentVo">
+		 select 
+				OCRN_DATE,
+		        BR_CD,
+		        DEVC_UNO,
+		        USER_ENO,
+		        OB_TYPE,
+		        OB_STRT_TM,
+		        AC_CD,
+		        NVL2(AC_CD, '접수','접수 대기중') as REG_YN ,
+		        NVL(AC_DTS, '접수 대기중') AS AC_DTS,
+		        NVL(REQRE_TM, '접수 대기중') AS REQRE_TM,
+		        REG_DT,
+		        MDFCN_DT,
+		        OB_END_TM,
+			      (
+		            SELECT 
+		            	BR_NM 
+		            FROM
+		            	BR_INFO 
+		            WHERE 
+		            	 br_info.br_cd = O.BR_CD AND BR_INFO.USER_ENO = O.USER_ENO
+		          ) AS BR_NM
+                  ,(
+                    SELECT MFBIZ_NM 
+                    FROM MFBIZ_INFO 
+                    WHERE MFBIZ_ID =(
+                        SELECT MFBIZ_ID 
+                        FROM DEVC_INFO 
+                        WHERE DEVC_UNO=O.DEVC_UNO 
+                        AND USER_ENO=O.USER_ENO
+                        )
+                    ) AS MFBIZ_NM
+                    ,(
+                    SELECT MNTMNG_TEL
+                    FROM MFBIZ_INFO 
+                    WHERE MFBIZ_ID =(
+                        SELECT MFBIZ_ID 
+                        FROM DEVC_INFO 
+                        WHERE DEVC_UNO=O.DEVC_UNO 
+                        AND USER_ENO=O.USER_ENO
+                        )
+                    ) AS MNTMNG_TEL
+                FROM 
+                    OB_STAT O
+                WHERE 	
+                <choose>
+                	<when test="BR_CD != null and BR_CD.equals('all')">
+                		USER_ENO like '%' and BR_CD like '%'
+                	</when>
+                	<otherwise>
+                		USER_ENO like '%' and BR_CD = #{BR_CD}
+                	</otherwise>
+                </choose>		 
+						
+	</select>
+	
+	<select id="im_dash_grid" parameterType="IncidentVo" resultType="IncidentVo">
+		select 
+			BR_CD,
+			DEVC_UNO,
+			AC_CD,
+			
+		<choose>
+				<when test="BR_CD != null and BR_CD.equals('all')">
+					(
+					     SELECT 
+					        BR_NM 
+					     FROM
+					        BR_INFO 
+					     WHERE 
+					        O.BR_CD = br_info.br_cd AND BR_INFO.USER_ENO = #{USER_ENO}
+					     ) AS BR_NM
+					from
+						OB_STAT O
+					where
+						 USER_ENO=#{USER_ENO} and AC_CD != '06'
+				</when>
+				
+				<when test="USER_ENO != null and USER_ENO.equals('admin')">
+					(
+					     SELECT 
+					        BR_NM 
+					     FROM
+					        BR_INFO 
+					     WHERE 
+					        O.BR_CD = br_info.br_cd AND BR_INFO.USER_ENO = O.USER_ENO
+					     ) AS BR_NM
+					from
+						OB_STAT O
+					where
+						BR_CD = #{BR_CD} and AC_CD != '06'
+				</when>
+				
+				<when test="BR_CD != null and BR_CD.equals('all') and USER_ENO != null and USER_ENO.equals('admin')">
+					(
+					     SELECT 
+					        BR_NM 
+					     FROM
+					        BR_INFO 
+					     WHERE 
+					        O.BR_CD = br_info.br_cd AND BR_INFO.USER_ENO = O.USER_ENO
+					     ) AS BR_NM
+					from
+						OB_STAT O
+					where
+						AC_CD != '06'
+				</when>
+		
+		
+				<otherwise>
+					(
+					     SELECT 
+					        BR_NM 
+					     FROM
+					        BR_INFO 
+					     WHERE 
+					        O.BR_CD = br_info.br_cd AND BR_INFO.USER_ENO = #{USER_ENO}
+					     ) AS BR_NM
+					from
+						OB_STAT O
+					where
+						BR_CD = #{BR_CD} and USER_ENO=#{USER_ENO} and AC_CD != '06'
+				</otherwise>
+		</choose>
+			
+	</select>	
+	
+	
 	<update id="im_merge" parameterType="IncidentVo" >
 	
 		MERGE INTO 
@@ -253,64 +381,7 @@
 			)
 			
 	</insert>
-	
-	<select id="im_admin_grid" parameterType="IncidentVo" resultType="IncidentVo">
-		 select 
-				OCRN_DATE,
-		        BR_CD,
-		        DEVC_UNO,
-		        USER_ENO,
-		        OB_TYPE,
-		        OB_STRT_TM,
-		        AC_CD,
-		        NVL2(AC_CD, '접수','접수 대기중') as REG_YN ,
-		        NVL(AC_DTS, '접수 대기중') AS AC_DTS,
-		        NVL(REQRE_TM, '접수 대기중') AS REQRE_TM,
-		        REG_DT,
-		        MDFCN_DT,
-		        OB_END_TM,
-			      (
-		            SELECT 
-		            	BR_NM 
-		            FROM
-		            	BR_INFO 
-		            WHERE 
-		            	 br_info.br_cd = O.BR_CD AND BR_INFO.USER_ENO = O.USER_ENO
-		          ) AS BR_NM
-                  ,(
-                    SELECT MFBIZ_NM 
-                    FROM MFBIZ_INFO 
-                    WHERE MFBIZ_ID =(
-                        SELECT MFBIZ_ID 
-                        FROM DEVC_INFO 
-                        WHERE DEVC_UNO=O.DEVC_UNO 
-                        AND USER_ENO=O.USER_ENO
-                        )
-                    ) AS MFBIZ_NM
-                    ,(
-                    SELECT MNTMNG_TEL
-                    FROM MFBIZ_INFO 
-                    WHERE MFBIZ_ID =(
-                        SELECT MFBIZ_ID 
-                        FROM DEVC_INFO 
-                        WHERE DEVC_UNO=O.DEVC_UNO 
-                        AND USER_ENO=O.USER_ENO
-                        )
-                    ) AS MNTMNG_TEL
-                FROM 
-                    OB_STAT O
-                WHERE 	
-                <choose>
-                	<when test="BR_CD != null and BR_CD.equals('all')">
-                		USER_ENO like '%' and BR_CD like '%'
-                	</when>
-                	<otherwise>
-                		USER_ENO like '%' and BR_CD = #{BR_CD}
-                	</otherwise>
-                </choose>		 
-						
-	</select>
-	
+
 	<insert id="im_admin_modify" parameterType="IncidentVo">
 		
 		INSERT into 
@@ -330,75 +401,6 @@
 		
 	</insert>
 	
-	<select id="im_dash_grid" parameterType="IncidentVo" resultType="IncidentVo">
-		select 
-			BR_CD,
-			DEVC_UNO,
-			AC_CD,
-			
-		<choose>
-				<when test="BR_CD != null and BR_CD.equals('all')">
-					(
-					     SELECT 
-					        BR_NM 
-					     FROM
-					        BR_INFO 
-					     WHERE 
-					        O.BR_CD = br_info.br_cd AND BR_INFO.USER_ENO = #{USER_ENO}
-					     ) AS BR_NM
-					from
-						OB_STAT O
-					where
-						 USER_ENO=#{USER_ENO} and AC_CD != '06'
-				</when>
-				
-				<when test="USER_ENO != null and USER_ENO.equals('admin')">
-					(
-					     SELECT 
-					        BR_NM 
-					     FROM
-					        BR_INFO 
-					     WHERE 
-					        O.BR_CD = br_info.br_cd AND BR_INFO.USER_ENO = O.USER_ENO
-					     ) AS BR_NM
-					from
-						OB_STAT O
-					where
-						BR_CD = #{BR_CD} and AC_CD != '06'
-				</when>
-				
-				<when test="BR_CD != null and BR_CD.equals('all') and USER_ENO != null and USER_ENO.equals('admin')">
-					(
-					     SELECT 
-					        BR_NM 
-					     FROM
-					        BR_INFO 
-					     WHERE 
-					        O.BR_CD = br_info.br_cd AND BR_INFO.USER_ENO = O.USER_ENO
-					     ) AS BR_NM
-					from
-						OB_STAT O
-					where
-						AC_CD != '06'
-				</when>
-		
-		
-				<otherwise>
-					(
-					     SELECT 
-					        BR_NM 
-					     FROM
-					        BR_INFO 
-					     WHERE 
-					        O.BR_CD = br_info.br_cd AND BR_INFO.USER_ENO = #{USER_ENO}
-					     ) AS BR_NM
-					from
-						OB_STAT O
-					where
-						BR_CD = #{BR_CD} and USER_ENO=#{USER_ENO} and AC_CD != '06'
-				</otherwise>
-		</choose>
-			
-	</select>
+
 	
 </mapper>
