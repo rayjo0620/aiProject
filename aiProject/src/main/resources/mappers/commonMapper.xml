@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.ai.mapper.CommonMapper">
 
@@ -7,794 +8,877 @@
 		<id column="BR_CD" property="BR_CD"/>
 		<id column="BR_NM" property="BR_NM"/>
 	</resultMap>
-	
+
 	<resultMap type="HashMap" id="goods_list">
 		<id column="GOODS_CD" property="GOODS_CD"/>
 		<id column="GOODS_CDNM" property="GOODS_CDNM"/>
 		<id column="GOODS_TYPE" property="GOODS_TYPE"/>
 		<id column="GOODS_TYPENM" property="GOODS_TYPENM"/>
 	</resultMap>
-	
-	 <select id="brList" parameterType="String" resultMap="br_list">
-	 	SELECT
-		    BR_NM, BR_CD
+
+	<select id="brList" parameterType="String" resultMap="br_list">
+		SELECT
+			br_nm
+			, br_cd
 		FROM
-		    BR_INFO
+			br_info
 		WHERE
-		 <choose>			
-			    <when test="USER_ENO != null and USER_ENO.equals('admin')">			
-				    USER_ENO like '%'			
-			    </when>			
-			    <otherwise>			
-				     USER_ENO=#{USER_ENO}			
-			    </otherwise>			
-			</choose>    
-	 </select>
-	 
-	 <!-- goods -->
-	 
-	 <select id="cm_goods_grid" resultMap="goods_list">
-	 	SELECT 
-	        GOODS_CD,
-	        GOODS_TYPE,
-	        GOODS_CDNM,
-	        (SELECT
-	            GOODS_TYPENM
-	        FROM
-	            GOODS_TYPE_INFO T
-	        WHERE
-	            C.GOODS_TYPE = T.GOODS_TYPE
-	            ) AS GOODS_TYPENM
-        FROM
-            GOODS_CD_INFO C
-	 </select>
-	 
-	 <select id="goods_read_type" resultType="java.util.HashMap">
-	 	SELECT
-	 		GOODS_TYPE, GOODS_TYPENM
-	 	FROM
-	 		GOODS_TYPE_INFO
-	 	WHERE
-	 		USE_YN = 'Y'
-	 </select>
-	 
-	 <select id="cm_br_loc_grid" parameterType="BrVo" resultType="java.util.HashMap">
-	 	SELECT
-	 		USER_ENO, BR_CD, BR_NM, BR_ADR, BR_ADR2, to_char(CLS_DT) as CLS_DT, CONCAT(CONCAT(BR_ADR, ', '), BR_ADR2) as BR_ADR3
-	 	FROM
-	 		BR_INFO
-	 	WHERE
-	 	<choose>			
-			<when test="USER_ENO != null and USER_ENO.equals('admin')">			
-				USER_ENO like '%' AND BR_CD =#{BR_CD}			
-			</when>	
-			<when test="BR_CD != null and BR_CD.equals('all')">			
-				USER_ENO = #{USER_ENO}		
-			</when>	
-			<when test="USER_ENO != null and USER_ENO.equals('admin') and BR_CD != null and BR_CD.equals('aLL')">			
-				USER_ENO like '%' AND BR_CD like '%'			
-			</when>			
-			<otherwise>			
-				 USER_ENO=#{USER_ENO} AND BR_CD =#{BR_CD}		
-			</otherwise>			
-		</choose>
-	 	
-	 </select>
-	 
-	 <!-- 영업점별 기기연결 부분 -->
-	 <select id="cm_br_map_grid_br" parameterType="String" resultType="java.util.HashMap">
-	 	SELECT
-	 		BR_CD, BR_NM
-	 	FROM 
-	 		BR_INFO
-	 	WHERE
-	 		USER_ENO = #{USER_ENO}	 	
-	 </select>
-	 
-	 <select id="cm_br_map_grid_devc"  parameterType="String" resultType="java.util.HashMap">
-	 	SELECT
-	 		MFBIZ_ID, MODEL_ID, DEVC_UNO
-	 	FROM 
-	 		DEVC_INFO
-	 	WHERE
-	 	<choose>
-	 		<when test="USER_ENO != null and USER_ENO != 'admin'">
-	 		USER_ENO = #{USER_ENO}
-	 	AND
-	 		</when>
-	 		
-	 		<otherwise>
-	 			DEVC_UNO  NOT IN (SELECT DEVC_UNO FROM BR_DEVC_MAPP)
-	 		</otherwise>
-	 	</choose>
-	 	
-          DEVC_UNO  NOT IN (SELECT DEVC_UNO FROM BR_DEVC_MAPP)
-	 </select>
-	 
-	 <!-- devc -->
-	 <select id="cm_mfbiz" resultType="java.util.HashMap">
-	 	SELECT MFBIZ_ID, MFBIZ_NM
-	 	FROM MFBIZ_INFO
-	 	WHERE USE_YN = 'Y'
-	 </select>
-	
-	 <select id="cm_devc_list" parameterType="DevcVo" resultType="java.util.HashMap">
-	 	SELECT 
-	 		MFBIZ_ID,
-	 		(
-	 		SELECT
-	 			MFBIZ_NM
-	 		FROM
-	 			MFBIZ_INFO
-	 		WHERE
-	 			MFBIZ_INFO.MFBIZ_ID=DEVC_INFO.MFBIZ_ID
-	 		) AS MFBIZ_NM,
-	 		USER_ENO,
-	 		MODEL_ID,
-	 		DEVC_UNO,
-	 		(SELECT 
-	 			DTL_CDNM
-	 		FROM
-	 			CODE_INFO
-	 		WHERE
-	 			GRP_CDID = '2'
-	 		AND
-	 			DTL_CDID = (
-	 		SELECT
-	 			DEVC_STAT
-	 		FROM
-	 			DEVC_STAT
-	 		WHERE
-	 			DEVC_INFO.DEVC_UNO = DEVC_STAT.DEVC_UNO 
-	 			
-	 		)) AS DTL_CDNM
-	 		,(
-	 		SELECT
-	 			DEVC_STAT
-	 		FROM
-	 			DEVC_STAT
-	 		WHERE
-	 			DEVC_INFO.DEVC_UNO = DEVC_STAT.DEVC_UNO 
-	 			
-	 		) AS DEVC_STAT
-	 		,INDC_DATE
-	 		,DSCD_DATE
-	 		,DEVC_IP
-			,OS_INFO
-			,CPU_INFO
-			,SW_VER
-			,DSCD_DATE
-	 		
-	 	FROM
-	 		DEVC_INFO
-	 	WHERE
-	 		<choose>
-	 			<when test="MFBIZ_ID != null and MFBIZ_ID.equals('ALL')">
-	 				MFBIZ_ID LIKE '%' AND USER_ENO = #{USER_ENO}
-	 			</when>
-	 			
-	 			<when test="USER_ENO != null and USER_ENO.equals('admin')">
-	 				MFBIZ_ID = #{MFBIZ_ID}
-	 			</when>
-	 			
-	 			<when test="USER_ENO != null and USER_ENO.equals('admin') and MFBIZ_ID != null and MFBIZ_ID.equals('ALL')">
-	 				MFBIZ_ID LIKE '%' 
-	 			</when>
-	 				
-	 			<otherwise>
-	 				MFBIZ_ID = #{MFBIZ_ID} AND USER_ENO = #{USER_ENO}
-	 			</otherwise>
-	 		</choose>
-	 		
-	 </select>
+			<choose>
+				<when test="USER_ENO != null AND USER_ENO.equals('admin')">
+					user_eno like '%'
+				</when>
+				<otherwise>
+					user_eno = #{USER_ENO}
+				</otherwise>
+			</choose>
+	</select>
 
-	 <select id="cm_devc_insert_chk" parameterType="String" resultType="int">
-	 	SELECT
-	 		COUNT(DEVC_UNO)
-	 	FROM
-	 		DEVC_INFO
-	 	WHERE
-	 		DEVC_UNO = #{DEVC_UNO}
-	 </select>
+	<!-- goods -->
 
-	 <select id="cm_devc_hwsw" parameterType="DevcVo" resultType="java.util.HashMap">
-	 	SELECT	 		
-	 		(
-	 		SELECT
-	 			MFBIZ_NM
-	 		FROM
-	 			MFBIZ_INFO
-	 		WHERE
-	 			MFBIZ_INFO.MFBIZ_ID=DEVC_INFO.MFBIZ_ID
-	 		) AS MFBIZ_NM,
-	 		DEVC_UNO,
-	 		OS_INFO,
-	 		CPU_INFO,
-	 		SW_VER
-	 	FROM
-	 		DEVC_INFO
-	 	WHERE
-	 		<choose>
-	 		
-	 			<when test="USER_ENO != null and USER_ENO.equals('admin')">
-	 				MFBIZ_ID = #{MFBIZ_ID}
-	 			</when>
-	 			
-	 			<when test="MFBIZ_ID != null and MFBIZ_ID.equals('ALL')">
-	 				USER_ENO = #{USER_ENO}
-	 			</when>
-	 			
-	 			<when test="USER_ENO != null and USER_ENO.equals('admin') and MFBIZ_ID != null and MFBIZ_ID.equals('ALL')">
-	 				MFBIZ_ID LIKE '%'
-	 			</when>
-	 			
-	 			<otherwise>
-	 				USER_ENO = #{USER_ENO}
-	 				and
-	 				MFBIZ_ID = #{MFBIZ_ID}
-	 			</otherwise>
-	 			
-	 		</choose> 
-	 		
-	 </select>
-
-	 <select id="cm_devc_stat_list" parameterType="DevcVo" resultType="java.util.HashMap">
-	 	select 
-				(
-				    select
-				        MFBIZ_NM
-				    FROM 
-				        MFBIZ_INFO
-				    WHERE
-				        MFBIZ_ID = (SELECT MFBIZ_ID FROM DEVC_INFO DI WHERE DI.USER_ENO = #{USER_ENO} AND DI.DEVC_UNO=D.DEVC_UNO)
-				) AS MFBIZ_NM
-				,(SELECT MODEL_ID FROM DEVC_INFO I WHERE I.USER_ENO = #{USER_ENO} AND I.DEVC_UNO = D.DEVC_UNO) AS MODEL_ID
-				,DEVC_UNO
-				,DEVC_STAT
-				,STRT_DATE
-				,STRT_TM
-				,(SELECT COUNT(STRT_DATE) FROM DEVC_STAT_HIST WHERE  USER_ENO = #{USER_ENO} and DEVC_STAT_HIST.DEVC_UNO = D.DEVC_UNO) STRT_CNT
-				,(select br_nm from br_info where br_info.br_cd=(select br_cd from br_devc_mapp where br_devc_mapp.devc_uno=D.devc_uno)) br_nm
-			FROM
-				DEVC_STAT D
-			WHERE 
-   				 USER_ENO = #{USER_ENO}
-	 </select>
-
-	 <select id="cm_user_my" parameterType="UserVo" resultType="java.util.HashMap">
-	 	SELECT
-	 		CNTRL_USER_ID,
-			USER_HP,
-			USER_EMAIL,
-			USER_PW
+	<select id="cm_goods_grid" resultMap="goods_list">
+		SELECT
+			goods_cd
+			, goods_type
+			, goods_cdnm
+			, (
+				SELECT
+					goods_typenm
+				FROM
+					goods_type_info t
+				WHERE
+					c.goods_type = t.goods_type
+			) AS goods_typenm
 		FROM
-			USER_INFO
+			goods_cd_info c
+	</select>
+
+	<select id="goods_read_type" resultType="java.util.HashMap">
+		SELECT
+			goods_type
+			, goods_typenm
+		FROM
+			goods_type_info
 		WHERE
-			USER_ENO=#{USER_ENO}
-	 </select>
+			use_yn = 'Y'
+	</select>
 
-	 <select id="cm_user_list" resultType="java.util.HashMap">
-	 	SELECT
-	 		CNTRL_USER_ID,
-			USER_HP,
-			USER_EMAIL,
-			USER_ENO,
-			CNTRL_AUTHOR,
-			USER_PW
+	<select id="cm_br_loc_grid" parameterType="BrVo" resultType="java.util.HashMap">
+		SELECT
+			user_eno
+			, br_cd
+			, br_nm
+			, br_adr
+			, br_adr2
+			, TO_CHAR(cls_dt) AS cls_dt
+			, CONCAT(CONCAT(br_adr, ', '), br_adr2) AS BR_ADR3
 		FROM
-			USER_INFO
-	 </select>
+			br_info
+		WHERE
+			<choose>
+				<when test="USER_ENO != null AND USER_ENO.equals('admin')">
+					user_eno LIKE '%'
+					AND br_cd = #{BR_CD}
+				</when>
+				<when test="BR_CD != null AND BR_CD.equals('all')">
+					user_eno = #{USER_ENO}
+				</when>
+				<when test="USER_ENO != null AND USER_ENO.equals('admin') AND BR_CD != null AND	BR_CD.equals('aLL')">
+					user_eno LIKE '%' AND br_cd LIKE '%'
+				</when>
+				<otherwise>
+					user_eno = #{USER_ENO} AND br_cd = #{BR_CD}
+				</otherwise>
+			</choose>
+	</select>
 
-	 <select id="cm_code_mfbiz_list" resultType="java.util.HashMap">
-	 	SELECT 
-	 	MFBIZ_ID,
-		MFBIZ_NM,
-		MNTMNG_TEL,
-		USE_YN,
-		to_char(REG_DT) as REG_DT,
-		to_char(MDFCN_DT) as MDFCN_DT
-	 	FROM
-	 	MFBIZ_INFO
-	 	
-	 </select>
+	<!-- 영업점별 기기연결 부분 -->
+	<select id="cm_br_map_grid_br" parameterType="String" resultType="java.util.HashMap">
+		SELECT
+			br_cd
+			, br_nm
+		FROM
+			br_info
+		WHERE
+			user_eno = #{USER_ENO}
+	</select>
 
-	 <select id="cm_code_model_list" resultType="java.util.HashMap">
-	 	SELECT 
-	 	MFBIZ_ID,
-	 	MODEL_ID,
-		MODEL_NM,
-		USE_YN,
-		to_char(REG_DT) as REG_DT,
-		to_char(MDFCN_DT) as MDFCN_DT
-	 	FROM
-	 	MODEL_INFO
-	 	
-	 </select>
+	<select id="cm_br_map_grid_devc"  parameterType="String" resultType="java.util.HashMap">
+		SELECT
+			mfbiz_id
+			, model_id
+			, devc_uno
+		FROM
+			devc_info
+		WHERE
+			<choose>
+				<when test="USER_ENO != null AND USER_ENO != 'admin'">
+					user_eno = #{USER_ENO}
+				</when>
+				<otherwise>
+					devc_uno  NOT IN (
+						SELECT
+							devc_uno
+						FROM
+							br_devc_mapp
+					)
+				</otherwise>
+			</choose>
+		AND devc_uno  NOT IN (SELECT devc_uno FROM br_devc_mapp)
+	</select>
 
-	 <select id="cm_code_code_list" resultType="java.util.HashMap">
-	 	SELECT 
-	 	GRP_CDID,
-		DTL_CDID,
-		GRP_CDNM,
-		DTL_CDNM,
-		USE_YN,
-		to_char(REG_DT) as REG_DT,
-		to_char(MDFCN_DT) as MDFCN_DT
-	 	FROM
-	 	CODE_INFO
-	 	
-	 </select>
-	 
-	 <insert id="cm_goods_insert" parameterType="GoodsVo">
-		MERGE INTO GOODS_CD_INFO C
-        USING DUAL
-        ON(C.GOODS_CDNM = #{GOODS_CDNM} AND C.GOODS_TYPE=#{GOODS_TYPE})
-        WHEN NOT MATCHED THEN
-        INSERT(C.GOODS_TYPE, C.GOODS_CD, C.GOODS_CDNM, C.USE_YN, C.REG_DT)
-		VALUES
+	<!-- devc -->
+	<select id="cm_mfbiz" resultType="java.util.HashMap">
+		SELECT
+			mfbiz_id
+			, mfbiz_nm
+		FROM
+			mfbiz_info
+		WHERE
+			use_yn = 'Y'
+	</select>
+
+	<select id="cm_devc_list" parameterType="DevcVo" resultType="java.util.HashMap">
+		SELECT
+			mfbiz_id
+			, (
+				SELECT
+					mfbiz_nm
+				FROM
+					mfbiz_info
+				WHERE
+					mfbiz_info.mfbiz_id = devc_info.mfbiz_id
+			) AS mfbiz_nm
+			, user_eno
+			, model_id
+			, devc_uno
+			, (
+				SELECT
+					dtl_cdnm
+				FROM
+					code_info
+				WHERE
+					grp_cdid = '2'
+				AND dtl_cdid = (
+					SELECT
+						devc_stat
+					FROM
+						devc_stat
+					WHERE
+						devc_info.devc_uno = devc_stat.devc_uno
+				)
+			) AS dtl_cdnm
+			, (
+				SELECT
+					devc_stat
+				FROM
+					devc_stat
+				WHERE
+					devc_info.devc_uno = devc_stat.devc_uno
+			) AS devc_stat
+			, indc_date
+			, dscd_date
+			, devc_ip
+			, os_info
+			, cpu_info
+			, sw_ver
+			, dscd_date
+		FROM
+			devc_info
+		WHERE
+			<choose>
+				<when test="MFBIZ_ID != null AND MFBIZ_ID.equals('ALL')">
+					mfbiz_id LIKE '%'
+					AND user_eno = #{USER_ENO}
+				</when>
+
+				<when test="USER_ENO != null AND USER_ENO.equals('admin')">
+					mfbiz_id = #{MFBIZ_ID}
+				</when>
+
+				<when test="USER_ENO != null AND USER_ENO.equals('admin') AND MFBIZ_ID != null AND MFBIZ_ID.equals('ALL')">
+					mfbiz_id LIKE '%'
+				</when>
+
+				<otherwise>
+					mfbiz_id = #{MFBIZ_ID}
+					AND user_eno = #{USER_ENO}
+				</otherwise>
+			</choose>
+	</select>
+
+	<select id="cm_devc_insert_chk" parameterType="String" resultType="int">
+		SELECT
+			COUNT(devc_uno)
+		FROM
+			devc_info
+		WHERE
+			devc_uno = #{DEVC_UNO}
+	</select>
+
+	<select id="cm_devc_hwsw" parameterType="DevcVo" resultType="java.util.HashMap">
+		SELECT
+			(
+				SELECT
+					mfbiz_nm
+				FROM
+					mfbiz_info
+				WHERE
+					mfbiz_info.mfbiz_id = devc_info.mfbiz_id
+			) AS mfbiz_nm
+			, devc_uno
+			, os_info
+			, cpu_info
+			, sw_ver
+		FROM
+			devc_info
+		WHERE
+			<choose>
+				<when test="USER_ENO != null AND USER_ENO.equals('admin')">
+					mfbiz_id = #{MFBIZ_ID}
+				</when>
+
+				<when test="MFBIZ_ID != null AND MFBIZ_ID.equals('ALL')">
+					user_eno = #{USER_ENO}
+				</when>
+
+				<when test="USER_ENO != null AND USER_ENO.equals('admin') AND MFBIZ_ID != null AND MFBIZ_ID.equals('ALL')">
+					mfbiz_id LIKE '%'
+				</when>
+
+				<otherwise>
+					user_eno = #{USER_ENO}
+					AND	mfbiz_id = #{MFBIZ_ID}
+				</otherwise>
+			</choose>
+	</select>
+
+	<select id="cm_devc_stat_list" parameterType="DevcVo" resultType="java.util.HashMap">
+		SELECT
+			(
+				SELECT
+					mfbiz_nm
+				FROM
+					mfbiz_info
+				WHERE
+					mfbiz_id = (
+						SELECT
+							mfbiz_id
+						FROM
+							devc_info di
+						WHERE
+							di.user_eno = #{USER_ENO}
+						AND di.devc_uno = d.devc_uno
+					)
+			) AS mfbiz_nm
+			, (
+					SELECT
+						model_id
+					FROM
+						devc_info I
+					WHERE
+						i.user_eno = #{USER_ENO}
+					AND i.devc_uno = D.DEVC_UNO
+			) AS model_id
+			, devc_uno
+			, devc_stat
+			, strt_date
+			, strt_tm
+			, (
+				SELECT
+					COUNT(strt_date)
+				FROM
+					devc_stat_hist
+				WHERE
+					user_eno = #{USER_ENO}
+				AND devc_stat_hist.devc_uno = d.devc_uno
+			) strt_cnt
+		FROM
+			devc_stat d
+		WHERE
+			user_eno = #{USER_ENO}
+	</select>
+
+	<select id="cm_user_my" parameterType="UserVo" resultType="java.util.HashMap">
+		SELECT
+			cntrl_user_id
+			, user_hp
+			, user_email
+			, user_pw
+		FROM
+			user_info
+		WHERE
+			user_eno = #{USER_ENO}
+	</select>
+
+	<select id="cm_user_list" resultType="java.util.HashMap">
+		SELECT
+			cntrl_user_id
+			, user_hp
+			, user_email
+			, user_eno
+			, cntrl_author
+			, user_pw
+		FROM
+			user_info
+	</select>
+
+	<select id="cm_code_mfbiz_list" resultType="java.util.HashMap">
+		SELECT
+			mfbiz_id
+			, mfbiz_nm
+			, mntmng_tel
+			, use_yn
+			, TO_CHAR(reg_dt) AS reg_dt
+			, TO_CHAR(mdfcn_dt) AS mdfcn_dt
+		FROM
+			mfbiz_info
+	</select>
+
+	<select id="cm_code_model_list" resultType="java.util.HashMap">
+		SELECT
+			mfbiz_id
+			, model_id
+			, model_nm
+			, use_yn
+			, TO_CHAR(reg_dt) AS reg_dt
+			, TO_CHAR(mdfcn_dt) AS mdfcn_dt
+		FROM
+			model_info
+	</select>
+
+	<select id="cm_code_code_list" resultType="java.util.HashMap">
+		SELECT
+			grp_cdid
+			, dtl_cdid
+			, grp_cdnm
+			, dtl_cdnm
+			, use_yn
+			, TO_CHAR(reg_dt) AS reg_dt
+			, TO_CHAR(mdfcn_dt) AS mdfcn_dt
+		FROM
+			code_info
+	</select>
+
+	<insert id="cm_goods_insert" parameterType="GoodsVo">
+		MERGE INTO
+			goods_cd_info c
+		USING DUAL
+			ON (
+				c.goods_cdnm = #{GOODS_CDNM}
+				AND c.goods_type = #{GOODS_TYPE}
+			)
+		WHEN NOT MATCHED THEN
+			INSERT
+			(
+				c.goods_type
+				, c.goods_cd
+				, c.goods_cdnm
+				, c.use_yn
+				, c.reg_dt
+			)
+			VALUES
 			(
 				#{GOODS_TYPE}
-				,NVL((SELECT MAX(GOODS_CD) FROM GOODS_CD_INFO WHERE GOODS_TYPE=#{GOODS_TYPE})+1,001)
-				,#{GOODS_CDNM}
-				,'Y'
-				,#{REG_DT}
-			)	
-		
-	 </insert>
-	 
-	 <insert id="cm_br_insert" parameterType="BrVo">
-	 	INSERT INTO 
-	 		BR_INFO (USER_ENO, BR_CD, BR_NM, BR_ADR, BR_ADR2, REG_DT)
-	 	VALUES (
-	 			#{USER_ENO}
-	 			,NVL((SELECT MAX(BR_CD) FROM BR_INFO WHERE USER_ENO=#{USER_ENO})+1,1)
-	 			,#{BR_NM}
-	 			,#{BR_ADR}
-	 			,#{BR_ADR2}
-	 			,#{REG_DT}
-	 			)
- 	
-	 </insert>
+				, NVL(
+					(
+						SELECT
+							MAX(goods_cd)
+						FROM
+							goods_cd_info
+						WHERE
+							goods_type = #{GOODS_TYPE})+1, 001)
+				, #{GOODS_CDNM}
+				, 'Y'
+				, #{REG_DT}
+			)
+	</insert>
 
-	 <insert id="cm_br_mapping" parameterType="BrVo">
-	 	INSERT INTO BR_DEVC_MAPP
-	 	VALUES 
-	 	(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
-	 		#{USER_ENO}
-	 		,#{BR_CD}
-	 		,#{MFBIZ_ID}
-	 		,#{MODEL_ID}
-	 		,#{DEVC_UNO}
-	 	)
-	 </insert>
+	<insert id="cm_br_insert" parameterType="BrVo">
+		INSERT INTO
+			br_info
+			(
+				user_eno
+				, br_cd
+				, br_nm
+				, br_adr
+				, br_adr2
+				, reg_dt
+			)
+			VALUES
+			(
+				#{USER_ENO}
+				, NVL(
+					(
+						SELECT
+							MAX(br_cd)
+						FROM
+							br_info
+						WHERE
+							user_eno = #{USER_ENO})+1, 1)
+				, #{BR_NM}
+				, #{BR_ADR}
+				, #{BR_ADR2}
+				, #{REG_DT}
+			)
+	</insert>
 
-	 <insert id="cm_devc_insert" parameterType="DevcVo">
-	 	INSERT
-	 	INTO
-	 		DEVC_INFO
-	 		(
-	 			USER_ENO
-				,MFBIZ_ID
-				,MODEL_ID
-				,DEVC_UNO
-				,INDC_DATE
-				,REG_DT
-				,DEVC_IP
-				,OS_INFO
-				,CPU_INFO
-				,SW_VER
-	 		)
-	 	VALUES
-	 		(
-	 			#{USER_ENO}
-	 			,#{MFBIZ_ID}
-	 			,#{MODEL_ID}
-	 			,#{DEVC_UNO}
-	 			,#{INDC_DATE}
-	 			,#{REG_DT}
-				,#{DEVC_IP}
-				,#{OS_INFO}
-				,#{CPU_INFO}
-				,#{SW_VER}
-	 		)
-	 </insert>
-	 
-	 <insert id="cm_devc_insert_hist" parameterType="DevcVo">
-	 	INSERT
-	 	INTO
-	 		DEVC_INFO_HIST
-	 		(
-	 			USER_ENO
-				,MFBIZ_ID
-				,MODEL_ID
-				,DEVC_UNO
-				,INDC_DATE
-				,REG_DT
-				,DEVC_IP
-				,OS_INFO
-				,CPU_INFO
-				,SW_VER
-				,SEQ
-	 		)
-	 	VALUES
-	 			(
-	 			#{USER_ENO}
-	 			,#{MFBIZ_ID}
-	 			,#{MODEL_ID}
-	 			,#{DEVC_UNO}
-	 			,#{INDC_DATE}
-	 			,#{REG_DT}
-				,#{DEVC_IP}
-				,#{OS_INFO}
-				,#{CPU_INFO}
-				,#{SW_VER}
-	 			,'1'
-	 		)
-	 		
-	 </insert>
+	<insert id="cm_br_mapping" parameterType="BrVo">
+		INSERT INTO
+			br_devc_mapp
+		VALUES (
+			#{USER_ENO}
+			, #{BR_CD}
+			, #{MFBIZ_ID}
+			, #{MODEL_ID}
+			, #{DEVC_UNO}
+		)
+	</insert>
 
-	 <insert id="cm_devc_modify_hist" parameterType="DevcVo">
-	 	INSERT
-		INTO
-		    DEVC_INFO_HIST(
-		        USER_ENO
-		        ,MFBIZ_ID
-		        ,MODEL_ID
-		        ,DEVC_UNO
-		        ,SEQ
-		        ,DEVC_IP
-		        ,OS_INFO
-		        ,CPU_INFO
-		        ,SW_VER
-		        ,INDC_DATE
-		        ,REG_DT
-		        <choose>
-		        	<when test="DSCD_DATE != null">
-		        		,DSCD_DATE
-		        	</when>
-		        </choose>
-		    )
+	<insert id="cm_devc_insert" parameterType="DevcVo">
+		INSERT INTO
+			devc_info
+			(
+				user_eno
+				, mfbiz_id
+				, model_id
+				, devc_uno
+				, indc_date
+				, reg_dt
+				, devc_ip
+				, os_info
+				, cpu_info
+				, sw_ver
+			)
+			VALUES
+			(
+				#{USER_ENO}
+				, #{MFBIZ_ID}
+				, #{MODEL_ID}
+				, #{DEVC_UNO}
+				, #{INDC_DATE}
+				, #{REG_DT}
+				, #{DEVC_IP}
+				, #{OS_INFO}
+				, #{CPU_INFO}
+				, #{SW_VER}
+			)
+	</insert>
+
+	<insert id="cm_devc_insert_hist" parameterType="DevcVo">
+		INSERT INTO
+			devc_info_hist
+			(
+				user_eno
+				, mfbiz_id
+				, model_id
+				, devc_uno
+				, indc_date
+				, reg_dt
+				, devc_ip
+				, os_info
+				, cpu_info
+				, sw_ver
+				, seq
+			)
+			VALUES
+			(
+				#{USER_ENO}
+				, #{MFBIZ_ID}
+				, #{MODEL_ID}
+				, #{DEVC_UNO}
+				, #{INDC_DATE}
+				, #{REG_DT}
+				, #{DEVC_IP}
+				, #{OS_INFO}
+				, #{CPU_INFO}
+				, #{SW_VER}
+				, '1'
+			)
+	</insert>
+
+	<insert id="cm_devc_modify_hist" parameterType="DevcVo">
+		INSERT INTO
+			DEVC_INFO_HIST
+			(
+				user_eno
+				, mfbiz_id
+				, model_id
+				, devc_uno
+				, seq
+				, devc_ip
+				, os_info
+				, cpu_info
+				, sw_ver
+				, indc_date
+				, reg_dt
+				<choose>
+					<when test="DSCD_DATE != null">
+						, dscd_date
+					</when>
+				</choose>
+			)
+			VALUES
+			(
+				#{USER_ENO}
+				, #{MFBIZ_ID}
+				, #{MODEL_ID}
+				, #{DEVC_UNO}
+				, (
+					(
+						SELECT
+							MAX(seq)
+						FROM
+							devc_info_hist
+						WHERE
+							devc_uno = #{DEVC_UNO}
+					) + 1
+				)
+				, #{DEVC_IP}
+				, #{OS_INFO}
+				, #{CPU_INFO}
+				, #{SW_VER}
+				, #{INDC_DATE}
+				, #{REG_DT}
+				<choose>
+					<when test="DSCD_DATE != null">
+						, #{DSCD_DATE}
+					</when>
+				</choose>
+			)
+	</insert>
+
+	<insert id="cm_devc_stat_insert" parameterType="DevcVo">
+		INSERT INTO
+			devc_stat
+			(
+				devc_uno
+				, user_eno
+				, devc_stat
+				, reg_dt
+			)
+			VALUES (
+				#{DEVC_UNO}
+				, #{USER_ENO}
+				, '1'
+				, #{REG_DT}
+			)
+	</insert>
+
+	<insert id="cm_devc_stat_hist_insert" parameterType="DevcVo">
+		INSERT INTO
+			devc_stat_hist
+			(
+				devc_uno
+				, user_eno
+				, devc_stat
+				, reg_dt
+				, seq
+			)
+			VALUES(
+				#{DEVC_UNO}
+				, #{USER_ENO}
+				, '1'
+				, #{REG_DT}
+				, '1'
+			)
+	</insert>
+
+	<insert id="cm_devc_stat_hist_modify" parameterType="DevcVo">
+		INSERT INTO
+			devc_stat_hist
+			(
+				devc_uno
+				, user_eno
+				, devc_stat
+				, reg_dt
+				, seq
+			)
+			VALUES (
+				#{DEVC_UNO}
+				, #{USER_ENO}
+				, #{DEVC_STAT}
+				, #{REG_DT}
+				, (
+					(
+						SELECT
+							MAX(seq)
+						FROM
+							devc_stat_hist
+						WHERE
+							devc_uno = #{DEVC_UNO}
+					) +1
+				)
+			)
+	</insert>
+
+	<insert id="cm_user_insert" parameterType="UserVo">
+	INSERT INTO
+		user_info
+		(
+			cntrl_user_id
+			, user_eno
+			, user_pw
+			, user_nm
+			, user_hp
+			, user_email
+			, cntrl_author
+			, reg_dt
+		)
 		VALUES
-		(	#{USER_ENO}
-		    ,#{MFBIZ_ID}
-		    ,#{MODEL_ID}
-		    ,#{DEVC_UNO}
-		    ,((SELECT MAX(SEQ) FROM DEVC_INFO_HIST WHERE DEVC_UNO = #{DEVC_UNO}) + 1)
-		    ,#{DEVC_IP}
-		    ,#{OS_INFO}
-		    ,#{CPU_INFO}
-		    ,#{SW_VER}
-		    ,#{INDC_DATE}
-		    ,#{REG_DT}
-		    <choose>
-		        <when test="DSCD_DATE != null">
-		        	,#{DSCD_DATE}
-		        </when>
-		    </choose>
+		(
+			#{CNTRL_USER_ID}
+			, NVL(
+				(
+					SELECT
+						MAX(user_eno)
+					FROM
+						user_info
+				) +1, 1
+			)
+			, #{USER_PW}
+			, '-'
+			, #{USER_HP}
+			, #{USER_EMAIL}
+			, '01'
+			, #{REG_DT}
 		)
-	 </insert>
 
-	 <insert id="cm_devc_stat_insert" parameterType="DevcVo">
-	 	INSERT INTO 
-	 		DEVC_STAT(
-	 			DEVC_UNO
-				,USER_ENO
-				,DEVC_STAT
-				,REG_DT
-				
-	 		)
-		VALUES(
-			#{DEVC_UNO}
-			,#{USER_ENO}
-			,'1'
-			,#{REG_DT}
-		)
-	 </insert>
-	 
-	 <insert id="cm_devc_stat_hist_insert" parameterType="DevcVo">
-	 	INSERT INTO 
-	 		DEVC_STAT_HIST(
-	 			DEVC_UNO
-				,USER_ENO
-				,DEVC_STAT
-				,REG_DT
-				,SEQ
-	 		)
-		VALUES(
-			#{DEVC_UNO}
-			,#{USER_ENO}
-			,'1'
-			,#{REG_DT}
-			,'1'
-		)
-	 </insert>
+	</insert>
 
-	 <insert id="cm_devc_stat_hist_modify" parameterType="DevcVo">
-	 	INSERT INTO 
-	 		DEVC_STAT_HIST(
-	 			DEVC_UNO
-				,USER_ENO
-				,DEVC_STAT
-				,REG_DT
-				,SEQ
-	 		)
-		VALUES(
-			#{DEVC_UNO}
-			,#{USER_ENO}
-			,#{DEVC_STAT}
-			,#{REG_DT}
-			,((SELECT MAX(SEQ) FROM DEVC_STAT_HIST WHERE DEVC_UNO = #{DEVC_UNO}) +1)
-		)
-	 </insert>
+	<insert id="cm_mfbiz_insert" parameterType="MfbizVo">
+		INSERT INTO
+			mfbiz_info
+			(
+				mfbiz_id
+				,mfbiz_nm
+				,mntmng_tel
+				,use_yn
+				,reg_dt
+			)
+			VALUES
+			(
+				#{MFBIZ_ID}
+				, #{MFBIZ_NM}
+				, #{MNTMNG_TEL}
+				, #{USE_YN}
+				, #{REG_DT}
+			)
+	</insert>
 
-	 <insert id="cm_user_insert" parameterType="UserVo">
-	 	INSERT
-	 	INTO
-	 		USER_INFO
-	 		(
-	 			CNTRL_USER_ID
-	 			,USER_ENO
-	 			,USER_PW
-	 			,USER_NM
-	 			,USER_HP
-	 			,USER_EMAIL
-	 			,CNTRL_AUTHOR
-	 			,REG_DT
-	 		)
-	 	VALUES
-	 		(
-	 			#{CNTRL_USER_ID}
-	 			,NVL((SELECT MAX(USER_ENO) FROM USER_INFO)+1,1)
-	 			,#{USER_PW}
-	 			,'-'
-	 			,#{USER_HP}
-	 			,#{USER_EMAIL}
-	 			,'01'
-	 			,#{REG_DT}
-	 		)
-	 		
-	 </insert>
+	<insert id="cm_model_insert" parameterType="ModelVo">
+		INSERT INTO
+			model_info
+			(
+				mfbiz_id
+				, model_id
+				, model_nm
+				, use_yn
+				, reg_dt
+			)
+			VALUES
+			(
+				#{MFBIZ_ID}
+				, #{MODEL_ID}
+				, #{MODEL_NM}
+				, #{USE_YN}
+				, #{REG_DT}
+			)
+	</insert>
 
-	 <insert id="cm_mfbiz_insert" parameterType="MfbizVo">
-	 	INSERT INTO
-	 	MFBIZ_INFO
-	 	(
-	 		MFBIZ_ID
-			,MFBIZ_NM
-			,MNTMNG_TEL
-			,USE_YN
-			,REG_DT
-	 	)
-	 	VALUES
-	 	(
-	 		#{MFBIZ_ID}
-			,#{MFBIZ_NM}
-			,#{MNTMNG_TEL}
-			,#{USE_YN}
-			,#{REG_DT}
-	 	)
-	 	
-	 	
-	 </insert>
+	<insert id="cm_code_insert" parameterType="CodeVo">
+		INSERT INTO
+			code_info
+			(
+				grp_cdid
+				, dtl_cdid
+				, grp_cdnm
+				, dtl_cdnm
+				, use_yn
+				, reg_dt
+			)
+			VALUES
+			(
+				#{GRP_CDID}
+				, #{DTL_CDID}
+				, #{GRP_CDNM}
+				, #{DTL_CDNM}
+				, #{USE_YN}
+				, #{REG_DT}
+			)
+	</insert>
 
-	 <insert id="cm_model_insert" parameterType="ModelVo">
-	 	INSERT INTO
-	 	MODEL_INFO
-	 	(	
-	 		MFBIZ_ID
-	 		,MODEL_ID
-			,MODEL_NM
-			,USE_YN
-			,REG_DT
-	 	)
-	 	VALUES
-	 	(
-	 		#{MFBIZ_ID}
-	 		,#{MODEL_ID}
-			,#{MODEL_NM}
-			,#{USE_YN}
-			,#{REG_DT}
-	 	)
-	 	
-	 	
-	 </insert>
-
-	 <insert id="cm_code_insert" parameterType="CodeVo">
-	 	INSERT INTO
-	 	CODE_INFO
-	 	(	
-	 		GRP_CDID
-			,DTL_CDID
-			,GRP_CDNM
-			,DTL_CDNM
-			,USE_YN
-			,REG_DT
-	 	)
-	 	VALUES
-	 	(
-	 		#{GRP_CDID}
-			,#{DTL_CDID}
-			,#{GRP_CDNM}
-			,#{DTL_CDNM}
-			,#{USE_YN}
-			,#{REG_DT}
-	 	)
-	 </insert>
-	 
-	 <update id="cm_goods_modify" parameterType="GoodsVo">
-	 	
-	 	UPDATE
-			GOODS_CD_INFO
-		SET            	
-			GOODS_CDNM=#{GOODS_CDNM}	
-			,MDFCN_DT=#{MDFCN_DT}       
-        WHERE
-            GOODS_TYPE = #{GOODS_TYPE} AND GOODS_CD = #{GOODS_CD}	
-	 </update>
-	 
-	 <update id ="cm_br_modify" parameterType="BrVo">
-	 	UPDATE 
-	 		BR_INFO
-	 	SET
-	 		USER_ENO = #{USER_ENO}
-	 		,BR_NM = #{BR_NM}
-	 		,BR_ADR = #{BR_ADR}
-	 		,BR_ADR2 = #{BR_ADR2}
-	 		,MDFCN_DT = #{MDFCN_DT}
-	 	WHERE
-	 		USER_ENO = #{USER_ENO} AND BR_CD = #{BR_CD}
-	 </update>
-	 
-	 <update id ="cm_br_cls" parameterType="BrVo">
-	 	UPDATE 
-	 		BR_INFO
-	 	SET
-	 		MDFCN_DT = #{MDFCN_DT}
-	 		,CLS_DT = #{CLS_DT}
-	 	WHERE
-	 		USER_ENO = #{USER_ENO} AND BR_CD = #{BR_CD} AND CLS_DT IS NULL
-	 </update>
-	 
-	 <update id="cm_devc_modify" parameterType="DevcVo">
-	 	
-	 	UPDATE 
-		    DEVC_INFO
+	<update id="cm_goods_modify" parameterType="GoodsVo">
+		UPDATE
+			goods_cd_info
 		SET
-		    DEVC_IP = #{DEVC_IP}
-		    ,OS_INFO = #{OS_INFO}
-		    ,CPU_INFO = #{CPU_INFO}
-		    ,SW_VER = #{SW_VER}
-		    ,MDFCN_DT = #{MDFCN_DT}
+			goods_cdnm = #{GOODS_CDNM}
+			, mdfcn_dt = #{MDFCN_DT}
 		WHERE
-		    DEVC_UNO = #{DEVC_UNO}
-	 	
-	 </update>
-	 
-	 <update id ="cm_devc_cls" parameterType="DevcVo">
-	 	UPDATE 
-	 		DEVC_INFO
-	 	SET
-	 		MDFCN_DT = #{MDFCN_DT}
-	 		,DSCD_DATE= #{DSCD_DATE}
-	 	WHERE
-	 		DEVC_UNO=#{DEVC_UNO} 
-	 </update>
-	 
-	 <update id="cm_devc_stat_modify" parameterType="DevcVo">
-	 	UPDATE
-	 		DEVC_STAT
-	 	SET
-	 		DEVC_STAT = #{DEVC_STAT}
-			,MDFCN_DT = #{MDFCN_DT}
-		WHERE
-			DEVC_UNO = #{DEVC_UNO}
-	 </update>
-	 
-	 <update id="cm_user_my_modify" parameterType="UserVo">
-	 	UPDATE 
-	 		USER_INFO
-	 	SET
-	 		USER_PW = #{USER_PW}
-	 		,USER_HP = #{USER_HP}
-	 		,USER_EMAIL = #{USER_EMAIL}
-	 		,MDFCN_DT = #{MDFCN_DT}
-	 	WHERE 
-	 		USER_ENO = #{USER_ENO}
-	 </update>
-	 
-	 <update id="cm_user_modify" parameterType="UserVo">
-	 
-	 	UPDATE 
-	 		USER_INFO
-	 	SET
-	 		CNTRL_USER_ID = #{CNTRL_USER_ID}
-	 		,USER_PW = #{USER_PW}
-	 		,USER_HP = #{USER_HP}
-	 		,USER_EMAIL = #{USER_EMAIL}
-	 		,MDFCN_DT = #{MDFCN_DT}
-	 	WHERE 
-	 		CNTRL_USER_ID = #{CNTRL_USER_ID}
-	 
-	 </update>
-	 
-	 <update id="cm_mfbiz_modify" parameterType="MfbizVo">
-	 	UPDATE 
-	 		MFBIZ_INFO
-	 	SET
-	 		MFBIZ_ID = #{MFBIZ_ID}
-			,MFBIZ_NM = #{MFBIZ_NM}
-			,MNTMNG_TEL = #{MNTMNG_TEL}
-			,USE_YN = #{USE_YN}
-			,MDFCN_DT = #{MDFCN_DT}
-		WHERE
-			MFBIZ_ID = #{MFBIZ_ID}
-	 </update>
-	 
-	 <update id="cm_model_modify" parameterType="ModelVo">
-	 	UPDATE 
-	 		MODEL_INFO
-	 	SET
-	 		MFBIZ_ID = #{MFBIZ_ID}
-			,MODEL_NM = #{MODEL_NM}
-			,MODEL_ID = #{MODEL_ID}
-			,USE_YN = #{USE_YN}
-			,MDFCN_DT = #{MDFCN_DT}
-		WHERE
-			MFBIZ_ID = #{MFBIZ_ID}
-		AND
-			MODEL_ID = #{MODEL_ID}
-	 </update>
-	 
-	 <update id="cm_code_modify" parameterType="CodeVo">
-	 	UPDATE 
-	 		CODE_INFO
-	 	SET
-	 		GRP_CDID = #{GRP_CDID}
-			,DTL_CDID = #{DTL_CDID}
-			,GRP_CDNM = #{GRP_CDNM}
-			,DTL_CDNM = #{DTL_CDNM}
-			,USE_YN = #{USE_YN}
-			,MDFCN_DT = #{MDFCN_DT}
-		WHERE
-			GRP_CDID = #{GRP_CDID}
-		AND
-			DTL_CDID = #{DTL_CDID}
-	 </update>
-	 
-	 <delete id="cm_goods_del" parameterType="GoodsVo">
-	 
-	 	DELETE
-	 	FROM
-	 		GOODS_CD_INFO
-	 	WHERE
-	 		GOODS_TYPE = #{GOODS_TYPE}
-	 	AND
-	 		GOODS_CD = #{GOODS_CD}
-	 
-	 </delete>
+			goods_type = #{GOODS_TYPE}
+		AND goods_cd = #{GOODS_CD}
+	</update>
 
-	 <delete id="cm_user_del" parameterType="UserVo">
-	 	DELETE
-	 	FROM
-	 		USER_INFO
-	 	WHERE
-	 		CNTRL_USER_ID = #{CNTRL_USER_ID}
-	 </delete>
+	<update id ="cm_br_modify" parameterType="BrVo">
+		UPDATE
+			br_info
+		SET
+			user_eno = #{USER_ENO}
+			, br_nm = #{BR_NM}
+			, br_adr = #{BR_ADR}
+			, br_adr2 = #{BR_ADR2}
+			, mdfcn_dt = #{MDFCN_DT}
+		WHERE
+			user_eno = #{USER_ENO}
+		AND br_cd = #{BR_CD}
+	</update>
 
-	 <delete id="cm_mfbiz_delete" parameterType="MfbizVo">
-	 	DELETE FROM MFBIZ_INFO WHERE MFBIZ_ID = #{MFBIZ_ID}
-	 </delete>
+	<update id ="cm_br_cls" parameterType="BrVo">
+		UPDATE
+			br_info
+		SET
+			mdfcn_dt = #{MDFCN_DT}
+			, cls_dt = #{CLS_DT}
+		WHERE
+			user_eno = #{USER_ENO}
+		AND br_cd = #{BR_CD}
+		AND cls_dt IS NULL
+	</update>
 
-	 <delete id="cm_model_delete" parameterType="ModelVo">
-	 	DELETE FROM MODEL_INFO WHERE MFBIZ_ID = #{MFBIZ_ID} AND MODEL_ID = #{MODEL_ID}
-	 </delete>
+	<update id="cm_devc_modify" parameterType="DevcVo">
+		UPDATE
+			devc_info
+		SET
+			devc_ip = #{DEVC_IP}
+			, os_info = #{OS_INFO}
+			, cpu_info = #{CPU_INFO}
+			, sw_ver = #{SW_VER}
+			, mdfcn_dt = #{MDFCN_DT}
+		WHERE
+			devc_uno = #{DEVC_UNO}
 
-	 <delete id="cm_code_delete" parameterType="CodeVo">
-	 	DELETE FROM CODE_INFO 
-	 	WHERE 
-	 		GRP_CDID = #{GRP_CDID}
-		AND
-			DTL_CDID = #{DTL_CDID}
-	 </delete>
-	 
+	</update>
+
+	<update id ="cm_devc_cls" parameterType="DevcVo">
+		UPDATE
+			devc_info
+		SET
+			mdfcn_dt = #{MDFCN_DT}
+			, dscd_date= #{DSCD_DATE}
+		WHERE
+			devc_uno = #{DEVC_UNO}
+	</update>
+
+	<update id="cm_devc_stat_modify" parameterType="DevcVo">
+		UPDATE
+			devc_stat
+		SET
+			devc_stat = #{DEVC_STAT}
+			, mdfcn_dt = #{MDFCN_DT}
+		WHERE
+			devc_uno = #{DEVC_UNO}
+	</update>
+
+	<update id="cm_user_my_modify" parameterType="UserVo">
+		UPDATE
+			user_info
+		SET
+			user_pw = #{USER_PW}
+			, user_hp = #{USER_HP}
+			, user_email = #{USER_EMAIL}
+			, mdfcn_dt = #{MDFCN_DT}
+		WHERE
+			user_eno = #{USER_ENO}
+	</update>
+
+	<update id="cm_user_modify" parameterType="UserVo">
+		UPDATE
+			user_info
+		SET
+			cntrl_user_id = #{CNTRL_USER_ID}
+			, user_pw = #{USER_PW}
+			, user_hp = #{USER_HP}
+			, user_email = #{USER_EMAIL}
+			, mdfcn_dt = #{MDFCN_DT}
+		WHERE
+			cntrl_user_id = #{CNTRL_USER_ID}
+	</update>
+
+	<update id="cm_mfbiz_modify" parameterType="MfbizVo">
+		UPDATE
+			mfbiz_info
+		SET
+			mfbiz_id = #{MFBIZ_ID}
+			, mfbiz_nm = #{MFBIZ_NM}
+			, mntmng_tel = #{MNTMNG_TEL}
+			, use_yn = #{USE_YN}
+			, mdfcn_dt = #{MDFCN_DT}
+		WHERE
+			mfbiz_id = #{MFBIZ_ID}
+	</update>
+
+	<update id="cm_model_modify" parameterType="ModelVo">
+		UPDATE
+			model_info
+		SET
+			mfbiz_id = #{MFBIZ_ID}
+			, model_nm = #{MODEL_NM}
+			, model_id = #{MODEL_ID}
+			, use_yn = #{USE_YN}
+			, mdfcn_dt = #{MDFCN_DT}
+		WHERE
+			mfbiz_id = #{MFBIZ_ID}
+		AND	model_id = #{MODEL_ID}
+	</update>
+
+	<update id="cm_code_modify" parameterType="CodeVo">
+		UPDATE
+			code_info
+		SET
+			grp_cdid = #{GRP_CDID}
+			, dtl_cdid = #{DTL_CDID}
+			, grp_cdnm = #{GRP_CDNM}
+			, dtl_cdnm = #{DTL_CDNM}
+			, use_yn = #{USE_YN}
+			, mdfcn_dt = #{MDFCN_DT}
+		WHERE
+			grp_cdid = #{GRP_CDID}
+		AND	dtl_cdid = #{DTL_CDID}
+	</update>
+
+	<delete id="cm_goods_del" parameterType="GoodsVo">
+		DELETE FROM
+			goods_cd_info
+		WHERE
+			goods_type = #{GOODS_TYPE}
+		AND	goods_cd = #{GOODS_CD}
+	</delete>
+
+	<delete id="cm_user_del" parameterType="UserVo">
+		DELETE FROM
+			user_info
+		WHERE
+			cntrl_user_id = #{CNTRL_USER_ID}
+	</delete>
+
+	<delete id="cm_mfbiz_delete" parameterType="MfbizVo">
+		DELETE FROM
+			mfbiz_info
+		WHERE mfbiz_id = #{MFBIZ_ID}
+	</delete>
+
+	<delete id="cm_model_delete" parameterType="ModelVo">
+		DELETE FROM
+			model_info
+		WHERE
+			mfbiz_id = #{MFBIZ_ID}
+		AND model_id = #{MODEL_ID}
+	</delete>
+
+	<delete id="cm_code_delete" parameterType="CodeVo">
+		DELETE FROM
+			code_info
+		WHERE
+			grp_cdid = #{GRP_CDID}
+		AND	dtl_cdid = #{DTL_CDID}
+	</delete>
 </mapper>
