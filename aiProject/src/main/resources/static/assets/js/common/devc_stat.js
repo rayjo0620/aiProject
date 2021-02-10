@@ -134,7 +134,9 @@
 					console.log(error);
 					}
 			});*/
-								
+				console.log(data);	
+				$("#modal_nm").val(data.BR_NM);
+				$("#modal_no").val(data.DEVC_UNO);
 				$("#modal_view").modal('show');
 			});	
 	
