@@ -1,5 +1,12 @@
 (function($) {
 	
+	var eno = $('#sessionId').val();
+	var auth= $("#sessionAuthor").val();
+	
+	console.log("SESSION :: "+eno+"//"+auth);
+	
+	var USER_ENO = eno;
+	
 	var today = moment().format('YY/MM/DD');
 	var selectYn;
 	var selectYn2;

@@ -1,6 +1,11 @@
 (function($) {
 	
-	var user_eno = '001';
+	var eno = $('#sessionId').val();
+	var auth= $("#sessionAuthor").val();
+	
+	console.log("SESSION :: "+eno+"//"+auth);
+	
+	var USER_ENO = eno;
 		var today = moment().format('YY/MM/DD');
 		var pw_ori;
 		var pw_ori_input;
@@ -39,7 +44,7 @@
 	});
 	
 	function read(){
-		var param ={USER_ENO : user_eno};
+		var param ={USER_ENO : USER_ENO};
 		
 		$.ajax({
 				url : "/common/user_info",

@@ -1,6 +1,14 @@
 (function($) {
 	
-	var USER_ENO = '001';
+	//var USER_ENO = '001';
+	
+	var eno = $('#sessionId').val();
+	var auth= $("#sessionAuthor").val();
+	
+	console.log("SESSION :: "+eno+"//"+auth);
+	
+	var USER_ENO = eno;
+	
 	var select_br = "all";
 	var today = moment().format('YY/MM/DD');
 	var table;
@@ -10,6 +18,11 @@
 	var modal_br;
 	var modal_devc;
 	var modal_obty;
+	
+	var eno = $('#sessionId').val();
+	var auth= $("#sessionAuthor").val();
+	
+	console.log("SESSION :: "+eno+"//"+auth);
 
 	read();
 	
