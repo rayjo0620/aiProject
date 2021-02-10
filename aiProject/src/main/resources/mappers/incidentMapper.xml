@@ -146,7 +146,7 @@
 				</otherwise>
 			</choose>
 	</select>
-	
+
 	<select id="im_admin_grid" parameterType="IncidentVo" resultType="IncidentVo">
 		SELECT
 			  ocrn_date
@@ -211,7 +211,7 @@
 				</otherwise>
 			</choose>
 	</select>
-	
+
 	<select id="im_dash_grid" parameterType="IncidentVo" resultType="IncidentVo">
 	SELECT
 		br_cd
