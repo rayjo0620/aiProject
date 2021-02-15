@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.example.ai.controller;
+package com.thinkit.ai.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.ai.service.impl.MainServiceImpl;
 import com.google.gson.Gson;
+import com.thinkit.ai.service.impl.MainServiceImpl;
 
 /**
  * MainController.java

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.example.ai.controller;
+package com.thinkit.ai.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.ai.service.impl.MemberServiceImpl;
-import com.example.ai.vo.MemberVo;
+import com.thinkit.ai.service.impl.MemberServiceImpl;
+import com.thinkit.ai.vo.MemberVo;
 
 /**
  * MemberController.java

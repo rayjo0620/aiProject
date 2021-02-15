@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.example.ai.controller;
+package com.thinkit.ai.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,15 +27,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.ai.service.impl.CommonServiceImpl;
-import com.example.ai.vo.BrVo;
-import com.example.ai.vo.CodeVo;
-import com.example.ai.vo.DevcVo;
-import com.example.ai.vo.GoodsVo;
-import com.example.ai.vo.MfbizVo;
-import com.example.ai.vo.ModelVo;
-import com.example.ai.vo.UserVo;
 import com.google.gson.Gson;
+import com.thinkit.ai.service.impl.CommonServiceImpl;
+import com.thinkit.ai.vo.BrVo;
+import com.thinkit.ai.vo.CodeVo;
+import com.thinkit.ai.vo.DevcVo;
+import com.thinkit.ai.vo.GoodsVo;
+import com.thinkit.ai.vo.MfbizVo;
+import com.thinkit.ai.vo.ModelVo;
+import com.thinkit.ai.vo.UserVo;
 
 /**
  * CommonController.java

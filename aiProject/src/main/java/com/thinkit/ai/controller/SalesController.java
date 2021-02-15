@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.example.ai.controller;
+package com.thinkit.ai.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,10 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.ai.service.impl.SalesServiceImpl;
-import com.example.ai.vo.SalesVo;
-import com.example.ai.vo.StkVo;
 import com.google.gson.Gson;
+import com.thinkit.ai.service.impl.SalesServiceImpl;
+import com.thinkit.ai.vo.SalesVo;
+import com.thinkit.ai.vo.StkVo;
 
 /**
  * SalesController.java

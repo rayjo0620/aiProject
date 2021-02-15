@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.example.ai.controller;
+package com.thinkit.ai.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.ai.service.impl.IncidentServiceImpl;
-import com.example.ai.vo.IncidentVo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.thinkit.ai.service.impl.IncidentServiceImpl;
+import com.thinkit.ai.vo.IncidentVo;
 
 /**
  * IncidentController.java
