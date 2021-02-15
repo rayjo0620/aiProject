@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.ai.mapper.CommonMapper">
+<mapper namespace="com.thinkit.ai.mapper.CommonMapper">
 
 	<resultMap type="HashMap" id="br_list">
 		<id column="BR_CD" property="BR_CD"/>
@@ -24,7 +24,7 @@
 			br_info
 		WHERE
 			<choose>
-				<when test="USER_ENO != null AND USER_ENO.equals('admin')">
+				<when test="USER_ENO != null and USER_ENO.equals('admin')">
 					user_eno like '%'
 				</when>
 				<otherwise>
@@ -75,14 +75,14 @@
 			br_info
 		WHERE
 			<choose>
-				<when test="USER_ENO != null AND USER_ENO.equals('admin')">
+				<when test="USER_ENO != null and USER_ENO.equals('admin')">
 					user_eno LIKE '%'
 					AND br_cd = #{BR_CD}
 				</when>
-				<when test="BR_CD != null AND BR_CD.equals('all')">
+				<when test="BR_CD != null and BR_CD.equals('all')">
 					user_eno = #{USER_ENO}
 				</when>
-				<when test="USER_ENO != null AND USER_ENO.equals('admin') AND BR_CD != null AND	BR_CD.equals('aLL')">
+				<when test="USER_ENO != null and USER_ENO.equals('admin') and BR_CD != null and	BR_CD.equals('aLL')">
 					user_eno LIKE '%' AND br_cd LIKE '%'
 				</when>
 				<otherwise>
@@ -111,7 +111,7 @@
 			devc_info
 		WHERE
 			<choose>
-				<when test="USER_ENO != null AND USER_ENO != 'admin'">
+				<when test="USER_ENO != null and USER_ENO != 'admin'">
 					user_eno = #{USER_ENO}
 				</when>
 				<otherwise>
@@ -186,16 +186,16 @@
 			devc_info
 		WHERE
 			<choose>
-				<when test="MFBIZ_ID != null AND MFBIZ_ID.equals('ALL')">
+				<when test="MFBIZ_ID != null and MFBIZ_ID.equals('ALL')">
 					mfbiz_id LIKE '%'
 					AND user_eno = #{USER_ENO}
 				</when>
 
-				<when test="USER_ENO != null AND USER_ENO.equals('admin')">
+				<when test="USER_ENO != null and USER_ENO.equals('admin')">
 					mfbiz_id = #{MFBIZ_ID}
 				</when>
 
-				<when test="USER_ENO != null AND USER_ENO.equals('admin') AND MFBIZ_ID != null AND MFBIZ_ID.equals('ALL')">
+				<when test="USER_ENO != null and USER_ENO.equals('admin') AND MFBIZ_ID != null AND MFBIZ_ID.equals('ALL')">
 					mfbiz_id LIKE '%'
 				</when>
 
@@ -233,15 +233,15 @@
 			devc_info
 		WHERE
 			<choose>
-				<when test="USER_ENO != null AND USER_ENO.equals('admin')">
+				<when test="USER_ENO != null and USER_ENO.equals('admin')">
 					mfbiz_id = #{MFBIZ_ID}
 				</when>
 
-				<when test="MFBIZ_ID != null AND MFBIZ_ID.equals('ALL')">
+				<when test="MFBIZ_ID != null and MFBIZ_ID.equals('ALL')">
 					user_eno = #{USER_ENO}
 				</when>
 
-				<when test="USER_ENO != null AND USER_ENO.equals('admin') AND MFBIZ_ID != null AND MFBIZ_ID.equals('ALL')">
+				<when test="USER_ENO != null and USER_ENO.equals('admin') and MFBIZ_ID != null and MFBIZ_ID.equals('ALL')">
 					mfbiz_id LIKE '%'
 				</when>
 

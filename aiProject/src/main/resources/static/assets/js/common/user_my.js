@@ -83,7 +83,7 @@
 			USER_HP : pw_tel,
 			USER_EMAIL : pw_email,
 			MDFCN_DT : today,
-			USER_ENO : user_eno
+			USER_ENO : USER_ENO
 				
 		};
 		

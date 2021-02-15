@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.ai.mapper.SalesMapper">
+<mapper namespace="com.thinkit.ai.mapper.SalesMapper">
 
 	<resultMap type="HashMap" id="br_list">
 		<id column="BR_CD" property="BR_CD" />
@@ -114,7 +114,7 @@
 					) AS goods_nm
 				</when>
 				<otherwise>
-					(
+					, (
 						SELECT
 							br_nm
 						FROM
@@ -185,7 +185,7 @@
 					) AS goods_nm
 				</when>
 				<otherwise>
-					(
+					, (
 						SELECT
 							br_nm
 						FROM
