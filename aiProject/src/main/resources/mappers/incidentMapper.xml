@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.ai.mapper.IncidentMapper">
+<mapper namespace="com.thinkit.ai.mapper.IncidentMapper">
 
 	<resultMap type="HashMap" id="br_list">
 		<id column="BR_CD" property="BR_CD"/>
@@ -42,7 +42,7 @@
 			, ob_end_tm
 			<choose>
 				<when test="USER_ENO != null and USER_ENO.equals('admin')">
-					(
+					, (
 						SELECT
 							br_nm
 						FROM
@@ -85,47 +85,47 @@
 					) AS mntmng_tel
 				</when>
 				<otherwise>
-				(
-					SELECT
-						br_nm
-					FROM
-						br_info
-					WHERE
-						o.br_cd = br_info.br_cd
-					AND br_info.user_eno = #{USER_ENO}
-				) AS br_nm
-				, (
-					SELECT
-						mfbiz_nm
-					FROM
-						mfbiz_info
-					WHERE
-						mfbiz_id = (
-							SELECT
-								mfbiz_id
-							FROM
-								devc_info
-							WHERE
-								devc_uno = o.devc_uno
-							AND user_eno = #{USER_ENO}
-						)
-				) AS mfbiz_nm
-				, (
-					SELECT
-						mntmng_tel
-					FROM
-						mfbiz_info
-					WHERE
-						mfbiz_id = (
-							SELECT
-								mfbiz_id
-							FROM
-								devc_info
-							WHERE
-								devc_uno = o.devc_uno
-							AND user_eno = #{USER_ENO}
-						)
-				) AS mntmng_tel
+					, (
+						SELECT
+							br_nm
+						FROM
+							br_info
+						WHERE
+							o.br_cd = br_info.br_cd
+						AND br_info.user_eno = #{USER_ENO}
+					) AS br_nm
+					, (
+						SELECT
+							mfbiz_nm
+						FROM
+							mfbiz_info
+						WHERE
+							mfbiz_id = (
+								SELECT
+									mfbiz_id
+								FROM
+									devc_info
+								WHERE
+									devc_uno = o.devc_uno
+								AND user_eno = #{USER_ENO}
+							)
+					) AS mfbiz_nm
+					, (
+						SELECT
+							mntmng_tel
+						FROM
+							mfbiz_info
+						WHERE
+							mfbiz_id = (
+								SELECT
+									mfbiz_id
+								FROM
+									devc_info
+								WHERE
+									devc_uno = o.devc_uno
+								AND user_eno = #{USER_ENO}
+							)
+					) AS mntmng_tel
 				</otherwise>
 			</choose>
 		FROM
@@ -149,20 +149,20 @@
 
 	<select id="im_admin_grid" parameterType="IncidentVo" resultType="IncidentVo">
 		SELECT
-			  ocrn_date
-				, br_cd
-				, devc_uno
-				, user_eno
-				, ob_type
-				, ob_strt_tm
-				, ac_cd
-				, NVL2(ac_cd, '접수','접수 대기중') as reg_yn 
-				, NVL(ac_dts, '접수 대기중') AS ac_dts
-				, NVL(reqre_tm, '접수 대기중') AS reqre_tm
-				, reg_dt
-				, mdfcn_dt
-				, ob_end_tm
-			(
+			ocrn_date
+			, br_cd
+			, devc_uno
+			, user_eno
+			, ob_type
+			, ob_strt_tm
+			, ac_cd
+			, NVL2(ac_cd, '접수','접수 대기중') as reg_yn 
+			, NVL(ac_dts, '접수 대기중') AS ac_dts
+			, NVL(reqre_tm, '접수 대기중') AS reqre_tm
+			, reg_dt
+			, mdfcn_dt
+			, ob_end_tm
+			, (
 				SELECT
 					br_nm
 				FROM
@@ -291,18 +291,18 @@
 		USING
 		(
 			SELECT
-				ocrn_date,
-				br_cd,
-				devc_uno,
-				user_eno,
-				ob_type,
-				ob_strt_tm,
-				ob_end_tm,
-				ac_cd,
-				ac_dts,
-				reqre_tm,
-				reg_dt,
-				mdfcn_dt
+				ocrn_date
+				, br_cd
+				, devc_uno
+				, user_eno
+				, ob_type
+				, ob_strt_tm
+				, ob_end_tm
+				, ac_cd
+				, ac_dts
+				, reqre_tm
+				, reg_dt
+				, mdfcn_dt
 			FROM
 				ob_stat_hist
 			WHERE
