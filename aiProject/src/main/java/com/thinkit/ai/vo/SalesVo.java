@@ -11,9 +11,9 @@ package com.thinkit.ai.vo;
 public class SalesVo {
 	public String DELNG_DATE; //거래일자
 	public String DELNG_DATE2; //거래일자
-	public String USER_ENO; //사용자번호
+	public String USER_NO; //사용자번호
 	public String BR_CD; //영업점번호
-	public String DEVC_UNO; //기기번호
+	public String DEVC_NO; //기기번호
 	public String GOODS_CD; //상품코드
 	public String DELNG_SEQ; //거래번호
 	public String DLAMT; //거래금액
@@ -54,11 +54,11 @@ public class SalesVo {
 	public void setDELNG_DATE(String dELNG_DATE) {
 		DELNG_DATE = dELNG_DATE;
 	}
-	public String getUSER_ENO() {
-		return USER_ENO;
+	public String getUSER_NO() {
+		return USER_NO;
 	}
-	public void setUSER_ENO(String uSER_ENO) {
-		USER_ENO = uSER_ENO;
+	public void setUSER_NO(String uSER_NO) {
+		USER_NO = uSER_NO;
 	}
 	public String getBR_CD() {
 		return BR_CD;
@@ -66,11 +66,11 @@ public class SalesVo {
 	public void setBR_CD(String bR_CD) {
 		BR_CD = bR_CD;
 	}
-	public String getDEVC_UNO() {
-		return DEVC_UNO;
+	public String getDEVC_NO() {
+		return DEVC_NO;
 	}
-	public void setDEVC_UNO(String dEVC_UNO) {
-		DEVC_UNO = dEVC_UNO;
+	public void setDEVC_NO(String dEVC_NO) {
+		DEVC_NO = dEVC_NO;
 	}
 	public String getGOODS_CD() {
 		return GOODS_CD;

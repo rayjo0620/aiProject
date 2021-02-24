@@ -40,7 +40,7 @@
                 	</nav>
                 <div class="container-fluid" style="height: 500px;">
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                    	<input type="hidden" id="sessionId" th:value=" ${session.USER_ENO} " value="기본">
+                    	<input type="hidden" id="sessionId" th:value=" ${session.USER_NO} " value="기본">
                     	<input type="hidden" id="sessionAuthor" th:value=" ${session.CNTRL_AUTHOR} " value="기본">
                         <h3 class="text-dark mb-0">종합 상황판</h3>
                     </div>
@@ -76,7 +76,7 @@
                 </div>
             </div>
             
-            <input type="hidden" id="sessionId" th:value=" ${session.USER_ENO} " value="기본">
+            <input type="hidden" id="sessionId" th:value=" ${session.USER_NO} " value="기본">
             <input type="hidden" id="sessionAuthor" th:value=" ${session.CNTRL_AUTHOR} " value="기본">
             
             <!-- <footer class="bg-white sticky-footer" style="height: 70px;">

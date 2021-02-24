@@ -24,9 +24,9 @@ public class SalesServiceImpl implements SalesService{
 	@Autowired SalesMapper salesMapper;
 
 	@Override
-	public List<Map<String, Object>> br_list(String USER_ENO) throws Exception {
+	public List<Map<String, Object>> br_list(String USER_NO) throws Exception {
 		// TODO Auto-generated method stub
-		return salesMapper.brList(USER_ENO);
+		return salesMapper.brList(USER_NO);
 	}
 
 	@Override

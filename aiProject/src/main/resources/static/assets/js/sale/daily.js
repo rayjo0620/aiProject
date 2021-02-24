@@ -1,13 +1,13 @@
 (function($) {
 	
-	//var USER_ENO = '001';
+	//var USER_NO = '001';
 	
-	var eno = $('#sessionId').val();
+	var no = $('#sessionId').val();
 	var auth= $("#sessionAuthor").val();
-	var USER_ENO = eno;
-	console.log("SESSION :: "+eno+"//"+auth);
+	var USER_NO = no;
+	console.log("SESSION :: "+no+"//"+auth);
 	
-	var param_br = {USER_ENO : USER_ENO};
+	var param_br = {USER_NO : USER_NO};
 	var select_br = "all";
 	
 	//날짜 구하기
@@ -78,7 +78,7 @@
 		var BRCD = select_br;
 		
 		var param ={
-		USER_ENO : USER_ENO,
+		USER_NO : USER_NO,
 		BR_CD : select_br,
 		DELNG_DATE : today
 		}
@@ -109,7 +109,7 @@
 							"autofill": true,
 							"columns" : [
 								            { "data" : "BR_NM" },
-								            { "data" : "DEVC_UNO" },
+								            { "data" : "DEVC_NO" },
 								            { "data" : "GOODS_NM" },
 								            { "data" : "DLAMT" },
 								            { "data" : "DELNG_DATE" },

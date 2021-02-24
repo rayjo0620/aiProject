@@ -1,15 +1,15 @@
 (function($) {
 	
-	//var USER_ENO = '001';	
-	var param_br = {USER_ENO : USER_ENO};
+	//var USER_NO = '001';	
+	var param_br = {USER_NO : USER_NO};
 	
-	var eno = $('#sessionId').val();
+	var no = $('#sessionId').val();
 	var auth= $("#sessionAuthor").val();
 	
-	console.log("SESSION :: "+eno+"//"+auth);
+	console.log("SESSION :: "+no+"//"+auth);
 	
-	var USER_ENO = eno;	
-	var param_br = {USER_ENO : USER_ENO};
+	var USER_NO = no;	
+	var param_br = {USER_NO : USER_NO};
 	
 //////////////////////////////////////////////////////////////////		
 	var select_br = "all";
@@ -74,7 +74,7 @@
 					var brList = data;					
 					var brList2 = JSON.parse(data);
 					$('#sm_daily_grid').empty();
-					$('#sm_daily_grid').append('<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="all">전체 지점</a> </li>');
+					$('#sm_daily_grid').append('<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="">전체 지점</a> </li>');
 					$(brList2).each(function(index, data){
 						
 						var html_append = '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="'+data.BR_CD+'">'+data.BR_NM+'</a> </li>';
@@ -95,7 +95,7 @@
 		var BRCD = select_br;
 		
 		var param ={
-		USER_ENO : USER_ENO,
+		USER_NO : USER_NO,
 		BR_CD : select_br,
 		DELNG_DATE : startD,
 		DELNG_DATE2 : endD
@@ -125,7 +125,7 @@
 							"autofill": true,
 							"columns" : [
 								            { "data" : "BR_NM" },
-								            { "data" : "DEVC_UNO" },
+								            { "data" : "DEVC_NO" },
 								            { "data" : "GOODS_NM" },
 								            { "data" : "DLAMT" },
 								            { "data" : "DELNG_DATE" },

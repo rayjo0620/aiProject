@@ -38,9 +38,9 @@ public class MemberController {
 		vo = ms.logIn(vo);
 		
 		System.out.println("id+pw vo == " + vo.getCNTRL_USER_ID()+"/"+vo.getUSER_PW());
-		System.out.println("id == "+vo.getCNTRL_USER_ID()+"//USER_ENO == "+vo.getUSER_ENO()+"//pw == "+vo.getUSER_PW()+"//name == "+vo.getUSER_NM());
+		System.out.println("id == "+vo.getCNTRL_USER_ID()+"//USER_NO == "+vo.getUSER_NO()+"//pw == "+vo.getUSER_PW()+"//name == "+vo.getUSER_NM());
 		
-		hs.setAttribute("USER_ENO", vo.getUSER_ENO());
+		hs.setAttribute("USER_NO", vo.getUSER_NO());
 		hs.setAttribute("CNTRL_AUTHOR", vo.getCNTRL_AUTHOR());
 		return "";		
 	}

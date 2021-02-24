@@ -30,9 +30,9 @@ public class SalesController {
 	@Autowired SalesServiceImpl ssi;
 	
 	@RequestMapping("/sales/br_list")
-	public String getBrList(String USER_ENO, Model model) throws Exception {
+	public String getBrList(String USER_NO, Model model) throws Exception {
 		Gson gson = new Gson();
-		List<Map<String, Object>> brList = ssi.br_list(USER_ENO);
+		List<Map<String, Object>> brList = ssi.br_list(USER_NO);
 		model.addAttribute(brList);
 		String json = gson.toJson(brList);
 		return json;
@@ -88,7 +88,7 @@ public class SalesController {
 	@RequestMapping("/sales/stkDo")
 	public String stkDo(SalesVo vo) throws Exception {
 		Gson gson = new Gson();
-		System.out.println("-------------------------------------"+vo.getUSER_ENO());
+		System.out.println("-------------------------------------"+vo.getUSER_NO());
 		List<StkVo> brList = ssi.sm_stk_grid(vo);
 		String json = gson.toJson(brList);
 		return json;
@@ -158,3 +158,4 @@ public class SalesController {
 		return json;
 	}
 }
+
