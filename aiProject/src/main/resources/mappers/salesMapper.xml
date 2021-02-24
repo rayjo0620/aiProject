@@ -13,7 +13,7 @@
 		<id column="DELNG_DATE" property="start" />
 	</resultMap>
 
-	<select id="brList" parameterType="String" resultMap="br_list">
+	<select id="brList" parameterType="UserVo" resultMap="br_list">
 		SELECT
 			br.br_nm
 		    , mapp.user_no
@@ -23,7 +23,7 @@
 		    , br_info br
 		WHERE 1=1
 		AND mapp.br_cd = br.br_cd
-		<if test="!USER_NO.equals('')" >
+		<if test="!USER_NO.equals('') and CNTRL_AUTHOR!=1" >
 		AND mapp.user_no IN #{USER_NO}
 		</if>
 	</select>
@@ -41,7 +41,7 @@
 		AND devc.user_no = mapp.user_no
 		AND TO_CHAR(TO_DATE(sales.delng_date),'YY/MM/DD') = #{DELNG_DATE}
 		-- 회원번호
-		<if test="!USER_NO.equals('')">
+		<if test="!USER_NO.equals('') and CNTRL_AUTHOR!=1" >
 		AND mapp.user_no IN #{USER_NO}
 		</if>
 		-- 영업점번호
@@ -64,7 +64,7 @@
 		AND devc.user_no = mapp.user_no
 		AND TO_CHAR(TO_DATE(sales.delng_date),'YY/MM/DD') BETWEEN #{DELNG_DATE} AND #{DELNG_DATE2}
 		-- 회원번호
-		<if test="!USER_NO.equals('')">
+		<if test="!USER_NO.equals('') and CNTRL_AUTHOR!=1" >
 		AND mapp.user_no IN #{USER_NO}
 		</if>
 		-- 영업점번호
@@ -100,7 +100,7 @@
 	    AND mapp.br_cd = br.br_cd
 	    AND sales.delng_date = #{DELNG_DATE}
 	    -- 회원번호
-	    <if test="!USER_NO.equals('')">
+	    <if test="!USER_NO.equals('') and CNTRL_AUTHOR!=1" >
 	    AND mapp.user_no IN #{USER_NO}
 		</if>
 	    -- 영업점번호
@@ -136,7 +136,7 @@
 	    AND mapp.br_cd = br.br_cd
 	    AND sales.delng_date BETWEEN #{DELNG_DATE} AND #{DELNG_DATE2}
 	    -- 회원번호
-	    <if test="!USER_NO.equals('')">
+	    <if test="!USER_NO.equals('') and CNTRL_AUTHOR!=1" >
 	    AND mapp.user_no IN #{USER_NO}
 		</if>
 		-- 영업점번호
@@ -170,7 +170,7 @@
 	    AND devc.br_cd = mapp.br_cd
 	    AND mapp.user_no = devc.user_no
 	    -- 회원번호
-	    <if test="!USER_NO.equals('')">
+	    <if test="!USER_NO.equals('') and CNTRL_AUTHOR!=1" >
 	    AND mapp.user_no IN #{USER_NO}
 		</if>
 		-- 영업점번호
@@ -192,7 +192,9 @@
 		AND sales.devc_no = devc.devc_no
 		AND devc.user_no = mapp.user_no
 		AND devc.br_cd = mapp.br_cd
+		<if test="!USER_NO.equals('') and CNTRL_AUTHOR!=1" >
 		AND mapp.user_no IN #{USER_NO}
+		</if>
 		AND TO_CHAR(TO_DATE(sales.delng_date),'MM') = #{DELNG_DATE}
 		GROUP BY
 		    sales.delng_date

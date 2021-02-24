@@ -6,10 +6,11 @@
     console.log("SESSION :: "+no+"//"+auth);
 
     var USER_NO = no;
+    var CNTRL_AUTHOR = auth;
 
-    var select_br = "all";
+    var select_br = "";
     var table;
-    var param_br = { USER_NO : USER_NO }
+    var param_br = { USER_NO : USER_NO, CNTRL_AUTHOR : CNTRL_AUTHOR }
 
     var html_01;
     var html_02;
@@ -34,7 +35,7 @@
                     $('#modal_br_grid').empty();
 
 
-                    $('#im_grid').append('<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="all">전체 지점</a> </li>');
+                    $('#im_grid').append('<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="">전체 지점</a> </li>');
                     $(brList).each(function(index, data){
                         var html_append = '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="'+data.BR_CD+'">'+data.BR_NM+'</a> </li>';
                         $('#im_grid').append(html_append);
@@ -71,6 +72,7 @@
     function read(){
         var param ={
             USER_NO : USER_NO,
+            CNTRL_AUTHOR : CNTRL_AUTHOR,
             BR_CD : select_br
         }
 
@@ -87,19 +89,20 @@
 
                 $(list).each(function(index, data){
 
-                        console.log(data.AC_CD);
+                        console.log("ACT_CD : " + data.ACT_CD);
+						console.log("ACT_CDNM : " + data.ACT_CDNM);
 
                         var html_append = '<tr role="row" class="even"><td>'+data.BR_NM+'</td><td>'+data.DEVC_NO+'</td></tr>';
 
-                        if(data.AC_CD=="01"){
+                        if(data.ACT_CDNM=="출동요청중"){
                             $('#tbody01').append(html_append);
-                        }else if(data.AC_CD=="02"){
+                        }else if(data.ACT_CDNM=="기사배정중"){
                             $('#tbody02').append(html_append);
-                        }else if(data.AC_CD=="03"){
+                        }else if(data.ACT_CDNM=="출동중"){
                             $('#tbody03').append(html_append);
-                        }else if(data.AC_CD=="04"){
+                        }else if(data.ACT_CDNM=="조치중"){
                             $('#tbody04').append(html_append);
-                        }else if(data.AC_CD=="05"){
+                        }else if(data.ACT_CDNM=="복구확인중"){
                             $('#tbody05').append(html_append);
                         }
 

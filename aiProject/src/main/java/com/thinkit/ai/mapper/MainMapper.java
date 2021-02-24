@@ -8,6 +8,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.thinkit.ai.vo.UserVo;
+
 /**
  * MainMapper.java
  * @author 씽크2
@@ -15,6 +17,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface MainMapper {
-    public List<Map<String, Object>> main_chart_tot(String USER_NO) throws Exception;
+    public List<Map<String, Object>> main_chart_tot(UserVo vo) throws Exception;
 
 }

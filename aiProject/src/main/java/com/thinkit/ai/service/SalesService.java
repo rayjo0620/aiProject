@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.thinkit.ai.vo.SalesVo;
 import com.thinkit.ai.vo.StkVo;
+import com.thinkit.ai.vo.UserVo;
 
 /**
  * SalesService.java
@@ -15,7 +16,7 @@ import com.thinkit.ai.vo.StkVo;
  * @Date 2021. 1. 8.
  */
 public interface SalesService {
-	public List<Map<String, Object>> br_list(String USER_NO) throws Exception;
+	public List<Map<String, Object>> br_list(UserVo vo) throws Exception;
 	public String sm_daily_tot(SalesVo vo) throws Exception;
 	public List<SalesVo> sm_daily_grid(SalesVo vo) throws Exception;
 	public String sm_period_tot(SalesVo vo) throws Exception;

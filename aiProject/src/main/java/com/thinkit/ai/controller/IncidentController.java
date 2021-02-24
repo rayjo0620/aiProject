@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thinkit.ai.service.impl.IncidentServiceImpl;
 import com.thinkit.ai.vo.IncidentVo;
+import com.thinkit.ai.vo.UserVo;
 
 /**
  * IncidentController.java
@@ -28,9 +29,9 @@ public class IncidentController {
 	@Autowired IncidentServiceImpl isi;
 
 	@RequestMapping("/incident/br_list")
-	public String getBrList(String USER_NO, Model model) throws Exception {
+	public String getBrList(UserVo vo, Model model) throws Exception {
 		Gson gson = new GsonBuilder().serializeNulls().create();
-		List<Map<String, Object>> brList = isi.br_list(USER_NO);
+		List<Map<String, Object>> brList = isi.br_list(vo);
 		model.addAttribute(brList);
 		String json = gson.toJson(brList);
 		return json;

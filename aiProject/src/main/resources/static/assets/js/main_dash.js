@@ -13,9 +13,10 @@
     }
 
     var USER_NO = no;
+	var CNTRL_AUTHOR = auth;
 
     //유저번호 파라미터
-    var param ={ USER_NO : USER_NO};
+    var param ={ USER_NO : USER_NO, CNTRL_AUTHOR : CNTRL_AUTHOR };
 
     //날짜
     var today = moment().format('YY/MM/DD');
@@ -38,6 +39,7 @@
 
         var param = {
             USER_NO : USER_NO,
+			CNTRL_AUTHOR : CNTRL_AUTHOR,
             DELNG_DATE : month
         }
 
@@ -147,6 +149,7 @@
 
     var param ={
         USER_NO : USER_NO,
+		CNTRL_AUTHOR : CNTRL_AUTHOR,
         BR_CD : ''
         }
 

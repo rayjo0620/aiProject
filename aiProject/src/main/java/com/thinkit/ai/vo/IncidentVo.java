@@ -17,22 +17,38 @@ public class IncidentVo {
 	public String OB_TYPE;
 	public String OB_STRT_TM;
 	public String OB_END_TM;
-	public String AC_CD;
-	public String AC_DTS;
+	public String ACT_CD;
+	public String ACT_DTS;
 	public String REQRE_TM;
 	public String REG_DT;
 	public String MDFCN_DT;
 	public String BR_NM;
 	public String REG_YN;
-	public String MNTMNG_TEL;
+	public String MFBIZ_TEL;
 	public String MFBIZ_NM;
+	public String MFBIZ_ID;
+	public String CNTRL_AUTHOR;
+	public String OB_TYPENM;
+	public String ACT_CDNM;
 
 
-	public String getMNTMNG_TEL() {
-		return MNTMNG_TEL;
+	public String getACT_CD() {
+		return ACT_CD;
 	}
-	public void setMNTMNG_TEL(String mNTMNG_TEL) {
-		MNTMNG_TEL = mNTMNG_TEL;
+	public void setACT_CD(String aCT_CD) {
+		ACT_CD = aCT_CD;
+	}
+	public String getACT_DTS() {
+		return ACT_DTS;
+	}
+	public void setACT_DTS(String aCT_DTS) {
+		ACT_DTS = aCT_DTS;
+	}
+	public String getMFBIZ_TEL() {
+		return MFBIZ_TEL;
+	}
+	public void setMFBIZ_TEL(String mFBIZ_TEL) {
+		MFBIZ_TEL = mFBIZ_TEL;
 	}
 	public String getMFBIZ_NM() {
 		return MFBIZ_NM;
@@ -88,18 +104,7 @@ public class IncidentVo {
 	public void setOB_END_TM(String oB_END_TM) {
 		OB_END_TM = oB_END_TM;
 	}
-	public String getAC_CD() {
-		return AC_CD;
-	}
-	public void setAC_CD(String aC_CD) {
-		AC_CD = aC_CD;
-	}
-	public String getAC_DTS() {
-		return AC_DTS;
-	}
-	public void setAC_DTS(String aC_DTS) {
-		AC_DTS = aC_DTS;
-	}
+	
 	public String getREQRE_TM() {
 		return REQRE_TM;
 	}
@@ -123,6 +128,31 @@ public class IncidentVo {
 	}
 	public void setBR_NM(String bR_NM) {
 		BR_NM = bR_NM;
+	}
+	
+	public String getMFBIZ_ID() {
+		return MFBIZ_ID;
+	}
+	public void setMFBIZ_ID(String mFBIZ_ID) {
+		MFBIZ_ID = mFBIZ_ID;
+	}
+	public String getCNTRL_AUTHOR() {
+		return CNTRL_AUTHOR;
+	}
+	public void setCNTRL_AUTHOR(String cNTRL_AUTHOR) {
+		CNTRL_AUTHOR = cNTRL_AUTHOR;
+	}
+	public String getOB_TYPENM() {
+		return OB_TYPENM;
+	}
+	public void setOB_TYPENM(String oB_TYPENM) {
+		OB_TYPENM = oB_TYPENM;
+	}
+	public String getACT_CDNM() {
+		return ACT_CDNM;
+	}
+	public void setACT_CDNM(String aCT_CDNM) {
+		ACT_CDNM = aCT_CDNM;
 	}
 
 

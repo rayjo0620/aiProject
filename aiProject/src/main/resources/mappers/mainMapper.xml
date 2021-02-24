@@ -12,7 +12,7 @@
 		SELECT
 			a.devc_tot
 			, b.ob_tot
-			<if test="!USER_NO.equals('')">
+			<if test="!USER_NO.equals('') and CNTRL_AUTHOR!=1">
 			FROM
 				(
 					SELECT
@@ -31,6 +31,25 @@
 					WHERE 1=1
 					AND ob.devc_no = devc.devc_no
 					AND devc.user_no IN #{USER_NO}
+				) b
+			</if>
+			<if test="!USER_NO.equals('') and CNTRL_AUTHOR==1">
+			FROM
+				(
+					SELECT
+						COUNT(*) devc_tot
+					FROM
+						devc_info
+					WHERE 1=1
+				) a
+				,(
+					SELECT
+						COUNT(*) ob_tot
+					FROM
+						ob_stat ob
+						, devc_info devc
+					WHERE 1=1
+					AND ob.devc_no = devc.devc_no
 				) b
 			</if>
 	</select>

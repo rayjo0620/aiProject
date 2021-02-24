@@ -8,281 +8,134 @@
 		<id column="BR_NM" property="BR_NM"/>
 	</resultMap>
 
-	<select id="brList" parameterType="String" resultMap="br_list">
+	<select id="brList" parameterType="UserVo" resultMap="br_list">
 		SELECT
-			br_nm
-			, br_cd
+			br.br_nm
+		    , mapp.user_no
+		    , mapp.br_cd
 		FROM
-			br_info
-		WHERE
-			<choose>
-				<when test="USER_NO != null and USER_NO.equals('admin')">
-					user_no like '%'
-				</when>
-				<otherwise>
-					user_no = #{USER_NO}
-				</otherwise>
-			</choose>
+		    user_br_mapp mapp
+		    , br_info br
+		WHERE 1=1
+		AND mapp.br_cd = br.br_cd
+		<if test="!USER_NO.equals('') and CNTRL_AUTHOR!=1" >
+		AND mapp.user_no IN #{USER_NO}
+		</if>
 	</select>
 
 	<select id="im_user_grid" parameterType="IncidentVo" resultType="IncidentVo">
 		SELECT
-			ocrn_date
-			, br_cd
-			, devc_no
-			, user_no
-			, ob_type
-			, ob_strt_tm
-			, ac_cd
-			, NVL2(ac_cd, '접수','비접수') as reg_yn
-			, NVL(ac_dts, '비접수') AS ac_dts
-			, NVL(reqre_tm, '비접수') AS reqre_tm
-			, reg_dt
-			, mdfcn_dt
-			, ob_end_tm
-			<choose>
-				<when test="USER_NO != null and USER_NO.equals('admin')">
-					, (
-						SELECT
-							br_nm
-						FROM
-							br_info
-						WHERE
-							o.br_cd = br_info.br_cd
-						AND br_info.user_no = '%'
-					) AS br_nm
-					, (
-						SELECT
-							mfbiz_nm
-						FROM
-							mfbiz_info
-						WHERE
-							mfbiz_id = (
-								SELECT
-									mfbiz_id
-								FROM
-									devc_info
-								WHERE
-									devc_no=o.devc_no
-								AND user_no = '%'
-							)
-					) AS mfbiz_nm
-					, (
-						SELECT
-							mntmng_tel
-						FROM
-							mfbiz_info
-						WHERE
-							mfbiz_id = (
-							SELECT
-								mfbiz_id
-							FROM
-								devc_info
-							WHERE
-								devc_no = o.devc_no
-							AND user_no = '%'
-						)
-					) AS mntmng_tel
-				</when>
-				<otherwise>
-					, (
-						SELECT
-							br_nm
-						FROM
-							br_info
-						WHERE
-							o.br_cd = br_info.br_cd
-						AND br_info.user_no = #{USER_NO}
-					) AS br_nm
-					, (
-						SELECT
-							mfbiz_nm
-						FROM
-							mfbiz_info
-						WHERE
-							mfbiz_id = (
-								SELECT
-									mfbiz_id
-								FROM
-									devc_info
-								WHERE
-									devc_no = o.devc_no
-								AND user_no = #{USER_NO}
-							)
-					) AS mfbiz_nm
-					, (
-						SELECT
-							mntmng_tel
-						FROM
-							mfbiz_info
-						WHERE
-							mfbiz_id = (
-								SELECT
-									mfbiz_id
-								FROM
-									devc_info
-								WHERE
-									devc_no = o.devc_no
-								AND user_no = #{USER_NO}
-							)
-					) AS mntmng_tel
-				</otherwise>
-			</choose>
+		    br.br_nm
+		    , mapp.user_no
+		    , mapp.br_cd
+		    , ob.ocrn_date
+		    , ob.devc_no
+		    , ob.ob_type
+		    , cd1.dtl_cdnm AS ob_typenm
+		    , ob.ob_strt_tm
+		    , ob.act_cd
+		    , cd2.dtl_cdnm AS act_cdnm
+		    , nvl2(ob.act_cd, '접수', '비접수') AS reg_yn
+		    , nvl(ob.act_dts, '비접수') AS act_dts
+		    , nvl(ob.reqre_tm, '비접수') AS reqre_tm
+		    , ob.reg_dt
+		    , ob.mdfcn_dt
+		    , ob.ob_end_tm
+		    , ob.mfbiz_id
+		    , mf.mfbiz_tel
+		    , mf.mfbiz_nm
 		FROM
-			ob_stat o
-		WHERE
-			<choose>
-				<when test="USER_NO != null and USER_NO.equals('admin')">
-					user_no like '%' and br_cd=#{BR_CD}
-				</when>
-				<when test="BR_CD != null and BR_CD.equals('all')">
-					user_no=#{USER_NO}
-				</when>
-				<when test="BR_CD != null and BR_CD.equals('all') and USER_NO != null and USER_NO.equals('admin')">
-					user_no like '%' and br_cd like '%'
-				</when>
-				<otherwise>
-					user_no=#{USER_NO} and br_cd=#{BR_CD}
-				</otherwise>
-			</choose>
+		    ob_stat ob
+		    , mfbiz_info mf
+		    , devc_info devc
+		    , user_br_mapp mapp
+		    , br_info br
+		    , code_dtl_info cd1
+		    , code_dtl_info cd2
+		WHERE 1=1
+		AND ob.mfbiz_id = mf.mfbiz_id
+		AND ob.ob_type = cd1.dtl_cd
+		AND ob.act_cd = cd2.dtl_cd
+		AND ob.devc_no = devc.devc_no
+		AND devc.user_no = mapp.user_no
+		AND devc.br_cd = mapp.br_cd
+		AND mapp.br_cd = br.br_cd
+		<if test="!USER_NO.equals('') and CNTRL_AUTHOR!=1" >
+		AND mapp.user_no IN #{USER_NO}
+		</if>
+		<if test="!BR_CD.equals('')" >
+		AND mapp.br_cd IN #{BR_CD}
+		</if>
 	</select>
 
 	<select id="im_admin_grid" parameterType="IncidentVo" resultType="IncidentVo">
 		SELECT
-			ocrn_date
-			, br_cd
-			, devc_no
-			, user_no
-			, ob_type
-			, ob_strt_tm
-			, ac_cd
-			, NVL2(ac_cd, '접수','접수 대기중') as reg_yn
-			, NVL(ac_dts, '접수 대기중') AS ac_dts
-			, NVL(reqre_tm, '접수 대기중') AS reqre_tm
-			, reg_dt
-			, mdfcn_dt
-			, ob_end_tm
-			, (
-				SELECT
-					br_nm
-				FROM
-					br_info
-				WHERE
-					br_info.br_cd = o.br_cd
-				AND br_info.user_no = o.user_no
-			) AS br_nm
-			, (
-				SELECT mfbiz_nm
-				FROM mfbiz_info
-				WHERE mfbiz_id =(
-				SELECT mfbiz_id
-				FROM devc_info
-				WHERE devc_no=o.devc_no
-				AND user_no=o.user_no
-				)
-			) AS mfbiz_nm
-			, (
-				SELECT
-					mntmng_tel
-				FROM
-					mfbiz_info
-				WHERE
-					mfbiz_id = (
-						SELECT
-							mfbiz_id
-						FROM
-							devc_info
-						WHERE
-							devc_no = o.devc_no
-						AND user_no = o.user_no
-					)
-			) AS mntmng_tel
+		    br.br_nm
+		    , mapp.user_no
+		    , mapp.br_cd
+		    , ob.ocrn_date
+		    , ob.devc_no
+		    , ob.ob_type
+		    , cd1.dtl_cdnm AS ob_typenm
+		    , ob.ob_strt_tm
+		    , ob.act_cd
+		    , cd2.dtl_cdnm AS act_cdnm
+		    , nvl2(ob.act_cd, '접수', '비접수') AS reg_yn
+		    , nvl(ob.act_dts, '비접수') AS act_dts
+		    , nvl(ob.reqre_tm, '비접수') AS reqre_tm
+		    , ob.reg_dt
+		    , ob.mdfcn_dt
+		    , ob.ob_end_tm
+		    , ob.mfbiz_id
+		    , mf.mfbiz_tel
+		    , mf.mfbiz_nm
 		FROM
-			ob_stat o
-		WHERE
-			<choose>
-				<when test="BR_CD != null and BR_CD.equals('all')">
-					user_no like '%'
-					AND br_cd like '%'
-				</when>
-				<otherwise>
-					user_no like '%'
-					AND br_cd = #{BR_CD}
-				</otherwise>
-			</choose>
+		    ob_stat ob
+		    , mfbiz_info mf
+		    , devc_info devc
+		    , user_br_mapp mapp
+		    , br_info br
+		    , code_dtl_info cd1
+		    , code_dtl_info cd2
+		WHERE 1=1
+		AND ob.mfbiz_id = mf.mfbiz_id
+		AND ob.ob_type = cd1.dtl_cd
+		AND ob.act_cd = cd2.dtl_cd
+		AND ob.devc_no = devc.devc_no
+		AND devc.user_no = mapp.user_no
+		AND devc.br_cd = mapp.br_cd
+		AND mapp.br_cd = br.br_cd
+		<if test="!BR_CD.equals('')" >
+		AND mapp.br_cd IN #{BR_CD}
+		</if>		
 	</select>
 
 	<select id="im_dash_grid" parameterType="IncidentVo" resultType="IncidentVo">
-	SELECT
-		br_cd
-		, devc_no
-		, ac_cd
-		<choose>
-			<when test="BR_CD != null and BR_CD.equals('all')">
-				, (
-					SELECT
-						br_nm
-					FROM
-						br_info
-					WHERE
-						o.br_cd = br_info.br_cd
-						AND br_info.user_no = #{USER_NO}
-				) AS br_nm
-	FROM
-		ob_stat o
-	WHERE
-		user_no = #{USER_NO}
-	AND ac_cd != '06'
-			</when>
-
-			<when test="USER_NO != null and USER_NO.equals('admin')">
-				, (
-					SELECT
-						br_nm
-					FROM
-						br_info
-					WHERE
-						o.br_cd = br_info.br_cd
-					AND br_info.user_end = o.user_no
-				) AS br_nm
-	FROM
-		ob_stat o
-	WHERE
-		br_cd = #{BR_CD} and ac_cd != '06'
-			</when>
-
-			<when test="BR_CD != null and BR_CD.equals('all') and USER_NO != null and USER_NO.equals('admin')">
-				, (
-					SELECT
-						br_nm
-					FROM
-						br_info
-					WHERE
-						o.br_cd = br_info.br_cd AND br_info.user_end = o.user_end
-				) AS br_nm
-	FROM
-		ob_stat o
-	WHERE
-		ac_cd != '06'
-			</when>
-			<otherwise>
-				, (
-					SELECT
-						br_nm
-					FROM
-						br_info
-					WHERE
-						o.br_cd = br_info.br_cd
-					AND br_info.user_no = #{USER_NO}
-				) AS br_nm
-	FROM
-		ob_stat o
-	WHERE
-		br_cd = #{BR_CD}
-	AND user_no = #{USER_NO}
-	AND ac_cd != '06'
-			</otherwise>
-		</choose>
+		SELECT
+		    cd.dtl_cdnm AS act_cdnm
+		    , br.br_nm
+		    , mapp.br_cd
+		    , ob.devc_no
+		    , ob.act_cd
+		FROM
+		    ob_stat ob
+		    , code_dtl_info cd
+		    , devc_info devc
+		    , user_br_mapp mapp
+		    , br_info br
+		WHERE 1=1
+		AND ob.act_cd = cd.dtl_cd
+		AND ob.devc_no = devc.devc_no
+		AND devc.user_no = mapp.user_no
+		AND devc.br_cd = mapp.br_cd
+		AND mapp.br_cd = br.br_cd
+		AND cd.dtl_cdnm != '14'
+		<if test="!USER_NO.equals('') and CNTRL_AUTHOR!=1" >
+		AND mapp.user_no IN #{USER_NO}
+		</if>
+		<if test="!BR_CD.equals('')" >
+		AND mapp.br_cd IN #{BR_CD}
+		</if>
 	</select>
 
 	<update id="im_merge" parameterType="IncidentVo" >

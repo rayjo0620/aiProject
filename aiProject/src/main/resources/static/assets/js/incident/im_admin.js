@@ -6,11 +6,12 @@
     console.log("SESSION :: "+no+"//"+auth);
 
     var USER_NO = no;
+    var CNTRL_AUTHOR = auth;
 
     var select_br = "";
     var today = moment().format('YY/MM/DD');
     var table;
-    var param_br = { USER_NO : USER_NO }
+    var param_br = { USER_NO : USER_NO, CNTRL_AUTHOR : CNTRL_AUTHOR }
     var data;
 
 
@@ -18,8 +19,8 @@
     var modal_devc;
     var modal_user;
     var modal_obty;
-    var modal_accd;
-    var modal_acdts;
+    var modal_actcd;
+    var modal_actdts;
     var modal_ocrn;
     var modal_strt;
 
@@ -38,7 +39,7 @@
                     var brList = JSON.parse(data);
                     $('#im_grid').empty();
 
-                    $('#im_grid').append('<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="all">전체 지점</a> </li>');
+                    $('#im_grid').append('<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="">전체 지점</a> </li>');
                     $(brList).each(function(index, data){
                         var html_append = '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="'+data.BR_CD+'">'+data.BR_NM+'</a> </li>';
                         $('#im_grid').append(html_append);
@@ -66,6 +67,7 @@
     function read(){
             var param ={
             USER_NO : USER_NO,
+            CNTRL_AUTHOR : CNTRL_AUTHOR,
             BR_CD : select_br
             }
             $.ajax({
@@ -89,7 +91,7 @@
                                                 { "data" : "REG_YN" },
                                                 { "data" : "OCRN_DATE" },
                                                 { "data" : "OB_TYPE" },
-                                                { "data" : "AC_DTS" },
+                                                { "data" : "ACT_DTS" },
                                                 { "data" : "REQRE_TM" }
                                             ],
                                 "destroy": true,
@@ -148,7 +150,7 @@
         // 버튼에 선택된 항목 텍스트 넣기
         $('#modal_ac_dropdown_btn').text($(this).text());
         // 선택된 항목 값(value) 얻기
-        modal_accd=$(this).attr('value');
+        modal_actcd=$(this).attr('value');
     });
 
 
@@ -160,8 +162,8 @@
             DEVC_NO : modal_devc,
             USER_NO : modal_user,
             OB_TYPE : modal_obty,
-            AC_CD : modal_accd,
-            AC_DTS : $("#modal_acdts").val(),
+            ACT_CD : modal_actcd,
+            ACT_DTS : $("#modal_actdts").val(),
             REG_DT : today,
             OCRN_DATE : modal_ocrn,
             OB_STRT_TM : modal_strt

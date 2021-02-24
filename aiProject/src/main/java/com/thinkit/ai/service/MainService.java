@@ -6,6 +6,8 @@ package com.thinkit.ai.service;
 import java.util.List;
 import java.util.Map;
 
+import com.thinkit.ai.vo.UserVo;
+
 
 /**
  * MemberService.java
@@ -14,6 +16,6 @@ import java.util.Map;
  */
 public interface MainService {
 
-    public List<Map<String, Object>> main_chart_tot(String USER_NO) throws Exception;
+    public List<Map<String, Object>> main_chart_tot(UserVo vo) throws Exception;
 
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.thinkit.ai.vo.IncidentVo;
+import com.thinkit.ai.vo.UserVo;
 
 /**
  * IncidentService.java
@@ -14,7 +15,7 @@ import com.thinkit.ai.vo.IncidentVo;
  * @Date 2021. 1. 18.
  */
 public interface IncidentService {
-	public List<Map<String, Object>> br_list(String USER_NO) throws Exception;
+	public List<Map<String, Object>> br_list(UserVo vo) throws Exception;
 	public List<IncidentVo> im_user_grid(IncidentVo vo) throws Exception;
 
 	public String im_user_insert(IncidentVo vo)throws Exception;

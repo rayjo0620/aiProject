@@ -21,6 +21,7 @@ public class SalesVo {
 	public String DELNG_TM; //거래시간
 	public String BR_NM;
 	public String GOODS_NM;
+	public String CNTRL_AUTHOR;
 
 
 
@@ -95,6 +96,12 @@ public class SalesVo {
 	}
 	public void setDLNT(String dLNT) {
 		DLNT = dLNT;
+	}
+	public String getCNTRL_AUTHOR() {
+		return CNTRL_AUTHOR;
+	}
+	public void setCNTRL_AUTHOR(String cNTRL_AUTHOR) {
+		CNTRL_AUTHOR = cNTRL_AUTHOR;
 	}
 
 }

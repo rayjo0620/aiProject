@@ -10,8 +10,9 @@
 	console.log("SESSION :: "+no+"//"+auth);
 	
 	var USER_NO = no;
+	var CNTRL_AUTHOR = auth;
 	
-	var param_br = {USER_NO : USER_NO};
+	var param_br = {USER_NO : USER_NO, CNTRL_AUTHOR : CNTRL_AUTHOR};
 	
 ////////////////////////////////////////////////////////////////////////////////////////////
 	var select_br = "";
@@ -271,6 +272,7 @@
 	function read(){
 			var param ={
 			USER_NO : USER_NO,
+			CNTRL_AUTHOR : CNTRL_AUTHOR,
 			BR_CD : select_br
 			}
 		
@@ -328,6 +330,7 @@
 		
 		var param_modal = {
 							USER_NO : USER_NO,
+							CNTRL_AUTHOR : CNTRL_AUTHOR,
 							BR_CD : modal_br
 						}
 		

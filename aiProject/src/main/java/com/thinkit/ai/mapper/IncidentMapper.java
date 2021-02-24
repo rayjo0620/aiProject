@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.thinkit.ai.vo.IncidentVo;
+import com.thinkit.ai.vo.UserVo;
 
 /**
  * SalesMapper.java
@@ -18,7 +19,7 @@ import com.thinkit.ai.vo.IncidentVo;
 
 @Mapper
 public interface IncidentMapper {
-	public List<Map<String, Object>> brList(String USER_NO) throws Exception;
+	public List<Map<String, Object>> brList(UserVo vo) throws Exception;
 	
 	public List<IncidentVo> im_user_grid(IncidentVo vo) throws Exception;
 	

@@ -8,11 +8,12 @@
     console.log("SESSION :: "+no+"//"+auth);
 
     var USER_NO = no;
+    var CNTRL_AUTHOR = auth;
 
     var select_br = "";
     var today = moment().format('YY/MM/DD');
     var table;
-    var param_br = { USER_NO : USER_NO }
+    var param_br = { USER_NO : USER_NO, CNTRL_AUTHOR : CNTRL_AUTHOR }
     var data;
 
     var modal_br;
@@ -38,7 +39,7 @@
                     $('#modal_br_grid').empty();
 
 
-                    $('#im_grid').append('<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="all">전체 지점</a> </li>');
+                    $('#im_grid').append('<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="">전체 지점</a> </li>');
                     $(brList).each(function(index, data){
                         var html_append = '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="'+data.BR_CD+'">'+data.BR_NM+'</a> </li>';
                         $('#im_grid').append(html_append);
@@ -75,6 +76,7 @@
     function read(){
             var param ={
             USER_NO : USER_NO,
+            CNTRL_AUTHOR : CNTRL_AUTHOR,
             BR_CD : select_br
             }
 
@@ -106,7 +108,7 @@
                                                         }
                                                     }
                                                  },
-                                                { "data" : "AC_DTS" },
+                                                { "data" : "ACT_DTS" },
                                                 { "data" : "REQRE_TM" },
                                                 { "data" : null, defaultContent: "<button>상세</button>"}
                                             ],
@@ -139,7 +141,7 @@
                 $("#modal_devc").val(data.DEVC_NO);
                 $("#modal_obty").val(data.OB_TYPE);
                 $("#modal_mfbizNm").val(data.MFBIZ_NM);
-                $("#modal_mfbizTel").val(data.MNTMNG_TEL);
+                $("#modal_mfbizTel").val(data.MFBIZ_TEL);
                 $("#modal_btn").modal('show');
             });
 
@@ -182,6 +184,7 @@
 
         var param_modal = {
                             USER_NO : USER_NO,
+                            CNTRL_AUTHOR : CNTRL_AUTHOR,
                             BR_CD : modal_br
                         }
 

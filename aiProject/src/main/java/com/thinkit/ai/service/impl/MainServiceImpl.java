@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.thinkit.ai.mapper.MainMapper;
 import com.thinkit.ai.service.MainService;
+import com.thinkit.ai.vo.UserVo;
 
 /**
  * IncidentServiceImpl.java
@@ -22,9 +23,9 @@ public class MainServiceImpl implements MainService{
 	@Autowired MainMapper mainMapper;
 
 	@Override
-	public List<Map<String, Object>> main_chart_tot(String USER_NO) throws Exception {
+	public List<Map<String, Object>> main_chart_tot(UserVo vo) throws Exception {
 		// TODO Auto-generated method stub
-		return mainMapper.main_chart_tot(USER_NO);
+		return mainMapper.main_chart_tot(vo);
 	}
 
 

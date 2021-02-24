@@ -23,6 +23,7 @@ public class DevcVo {
 	public String REG_DT;
 	public String MDFCN_DT;
 	public String DTL_CDNM;
+	public String CNTRL_AUTHOR;
 
 
 
@@ -148,6 +149,12 @@ public class DevcVo {
 	}
 	public void setMFBIZ_NM(String mFBIZ_NM) {
 		MFBIZ_NM = mFBIZ_NM;
+	}
+	public String getCNTRL_AUTHOR() {
+		return CNTRL_AUTHOR;
+	}
+	public void setCNTRL_AUTHOR(String cNTRL_AUTHOR) {
+		CNTRL_AUTHOR = cNTRL_AUTHOR;
 	}
 
 

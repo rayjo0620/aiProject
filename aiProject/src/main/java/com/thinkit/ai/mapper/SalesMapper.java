@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.thinkit.ai.vo.SalesVo;
 import com.thinkit.ai.vo.StkVo;
+import com.thinkit.ai.vo.UserVo;
 
 /**
  * SalesMapper.java
@@ -19,7 +20,7 @@ import com.thinkit.ai.vo.StkVo;
 
 @Mapper
 public interface SalesMapper {
-	public List<Map<String, Object>> brList(String USER_NO) throws Exception;
+	public List<Map<String, Object>> brList(UserVo vo) throws Exception;
 	
 	public String sm_daily_tot(SalesVo vo)throws Exception;
 	

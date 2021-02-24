@@ -21,6 +21,7 @@ public class BrVo {
 	public String MFBIZ_ID;
 	public String MODEL_ID;
 	public String DEVC_NO;
+	public String CNTRL_AUTHOR;
 
 	public String getMFBIZ_ID() {
 		return MFBIZ_ID;
@@ -93,6 +94,12 @@ public class BrVo {
 	}
 	public void setMDFCN_DT(String mDFCN_DT) {
 		MDFCN_DT = mDFCN_DT;
+	}
+	public String getCNTRL_AUTHOR() {
+		return CNTRL_AUTHOR;
+	}
+	public void setCNTRL_AUTHOR(String cNTRL_AUTHOR) {
+		CNTRL_AUTHOR = cNTRL_AUTHOR;
 	}
 
 

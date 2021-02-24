@@ -1,15 +1,16 @@
 (function($) {
 	
 	//var USER_NO = '001';	
-	var param_br = {USER_NO : USER_NO};
+	//var param_br = {USER_NO : USER_NO};
 	
 	var no = $('#sessionId').val();
 	var auth= $("#sessionAuthor").val();
 	
 	console.log("SESSION :: "+no+"//"+auth);
 	
-	var USER_NO = no;	
-	var param_br = {USER_NO : USER_NO};
+	var USER_NO = no;
+	var CNTRL_AUTHOR = auth;	
+	var param_br = {USER_NO : USER_NO, CNTRL_AUTHOR : CNTRL_AUTHOR};
 	
 //////////////////////////////////////////////////////////////////		
 	var select_br = "";
@@ -96,6 +97,7 @@
 		
 		var param ={
 		USER_NO : USER_NO,
+		CNTRL_AUTHOR : CNTRL_AUTHOR,
 		BR_CD : select_br,
 		DELNG_DATE : startD,
 		DELNG_DATE2 : endD

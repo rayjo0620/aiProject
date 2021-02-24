@@ -13,6 +13,7 @@ import com.thinkit.ai.mapper.SalesMapper;
 import com.thinkit.ai.service.SalesService;
 import com.thinkit.ai.vo.SalesVo;
 import com.thinkit.ai.vo.StkVo;
+import com.thinkit.ai.vo.UserVo;
 
 /**
  * SalesServiceImpl.java
@@ -24,9 +25,9 @@ public class SalesServiceImpl implements SalesService{
 	@Autowired SalesMapper salesMapper;
 
 	@Override
-	public List<Map<String, Object>> br_list(String USER_NO) throws Exception {
+	public List<Map<String, Object>> br_list(UserVo vo) throws Exception {
 		// TODO Auto-generated method stub
-		return salesMapper.brList(USER_NO);
+		return salesMapper.brList(vo);
 	}
 
 	@Override

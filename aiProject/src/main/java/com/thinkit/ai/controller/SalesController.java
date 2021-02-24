@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import com.thinkit.ai.service.impl.SalesServiceImpl;
 import com.thinkit.ai.vo.SalesVo;
 import com.thinkit.ai.vo.StkVo;
+import com.thinkit.ai.vo.UserVo;
 
 /**
  * SalesController.java
@@ -30,9 +31,9 @@ public class SalesController {
 	@Autowired SalesServiceImpl ssi;
 
 	@RequestMapping("/sales/br_list")
-	public String getBrList(String USER_NO, Model model) throws Exception {
+	public String getBrList(UserVo vo, Model model) throws Exception {
 		Gson gson = new Gson();
-		List<Map<String, Object>> brList = ssi.br_list(USER_NO);
+		List<Map<String, Object>> brList = ssi.br_list(vo);
 		model.addAttribute(brList);
 		String json = gson.toJson(brList);
 		return json;

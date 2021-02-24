@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.thinkit.ai.mapper.IncidentMapper;
 import com.thinkit.ai.service.IncidentService;
 import com.thinkit.ai.vo.IncidentVo;
+import com.thinkit.ai.vo.UserVo;
 
 /**
  * IncidentServiceImpl.java
@@ -23,9 +24,9 @@ public class IncidentServiceImpl implements IncidentService{
 	@Autowired IncidentMapper incidentMapper;
 
 	@Override
-	public List<Map<String, Object>> br_list(String USER_NO) throws Exception {
+	public List<Map<String, Object>> br_list(UserVo vo) throws Exception {
 		// TODO Auto-generated method stub
-		return incidentMapper.brList(USER_NO);
+		return incidentMapper.brList(vo);
 	}
 
 	@Override

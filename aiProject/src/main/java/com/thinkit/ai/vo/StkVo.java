@@ -20,7 +20,7 @@ public class StkVo {
 	public String GOODS_TYPE;
 	public String GOODS_TYPENM;
 	public String REG_DT;
-	
+	public String CNTRL_AUTHOR;
 	
 	public String getREG_DT() {
 		return REG_DT;
@@ -82,14 +82,12 @@ public class StkVo {
 	public void setGOODS_QY(String gOODS_QY) {
 		GOODS_QY = gOODS_QY;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+	public String getCNTRL_AUTHOR() {
+		return CNTRL_AUTHOR;
+	}
+	public void setCNTRL_AUTHOR(String cNTRL_AUTHOR) {
+		CNTRL_AUTHOR = cNTRL_AUTHOR;
+	}
 	
 	
 }

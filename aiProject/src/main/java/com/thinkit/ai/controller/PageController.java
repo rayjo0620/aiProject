@@ -3,6 +3,8 @@
  */
 package com.thinkit.ai.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -63,14 +65,20 @@ public class PageController {
 	//판매관리영역 종료
 
 	//장애관리
-	@RequestMapping("/im_info_user")
-	public String ImInfoUser() {
-		return "incident/im_user";
-	}
-
-	@RequestMapping("/im_info_admin")
-	public String ImInfoAdmin() {
-		return "incident/im_admin";
+	@RequestMapping("/im_info")
+	public String ImInfoUser(HttpSession session) {
+		
+		String auth = (String) session.getAttribute("CNTRL_AUTHOR");
+		
+		if(auth.equals("1")) {
+			
+			return "incident/im_admin";
+			
+		}else {
+			
+			return "incident/im_user";
+		}
+		
 	}
 
 	@RequestMapping("/im_dash")
