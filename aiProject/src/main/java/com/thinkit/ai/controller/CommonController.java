@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.thinkit.ai.controller;
 
@@ -39,7 +39,7 @@ import com.thinkit.ai.vo.UserVo;
 
 /**
  * CommonController.java
- * 
+ *
  * @author 씽크2
  * @Date 2021. 1. 19.
  */
@@ -126,12 +126,12 @@ public class CommonController {
 	}
 
 	@RequestMapping("/common/br_map_grid")
-	public String br_map_grid(String USER_ENO) throws Exception {
+	public String br_map_grid(String USER_NO) throws Exception {
 
 		Gson gson = new Gson();
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<Map<String, Object>> list1 = csi.cm_br_map_grid_br(USER_ENO);
-		List<Map<String, Object>> list2 = csi.cm_br_map_grid_devc(USER_ENO);
+		List<Map<String, Object>> list1 = csi.cm_br_map_grid_br(USER_NO);
+		List<Map<String, Object>> list2 = csi.cm_br_map_grid_devc(USER_NO);
 
 		String br_list = gson.toJson(list1);
 		String devc_list = gson.toJson(list2);
@@ -177,9 +177,9 @@ public class CommonController {
 	}
 
 	@RequestMapping("/common/devc_manage_insert_chk")
-	public String devc_manage_insertChk(String DEVC_UNO) throws Exception {
+	public String devc_manage_insertChk(String DEVC_NO) throws Exception {
 
-		String result = csi.cm_devc_insert_chk(DEVC_UNO);
+		String result = csi.cm_devc_insert_chk(DEVC_NO);
 		return result;
 	}
 
@@ -356,7 +356,7 @@ public class CommonController {
 
 	/**
 	 * USER_INFO 목록을 엑셀파일로 다운로드한다. (pageing)
-	 * 
+	 *
 	 * @exception Exception
 	 */
 	@GetMapping("/mfbizInfoExcelDown.do")
@@ -456,10 +456,10 @@ public class CommonController {
 		wb.write(response.getOutputStream());
 		wb.close();
 	}
-	
+
 	/**
 	 * MODEL_INFO 목록을 엑셀파일로 다운로드한다. (pageing)
-	 * 
+	 *
 	 * @exception Exception
 	 */
 	@GetMapping("/modelInfoExcelDown.do")
@@ -559,10 +559,10 @@ public class CommonController {
 		wb.write(response.getOutputStream());
 		wb.close();
 	}
-	
+
 	/**
 	 * CODE_INFO 목록을 엑셀파일로 다운로드한다. (pageing)
-	 * 
+	 *
 	 * @exception Exception
 	 */
 	@GetMapping("/codeInfoExcelDown.do")

@@ -8,7 +8,7 @@
 	console.log("SESSION :: "+no+"//"+auth);
 	
 	var param_br = {USER_NO : USER_NO};
-	var select_br = "all";
+	var select_br = "";
 	
 	//날짜 구하기
 	var now = new Date();
@@ -57,7 +57,7 @@
 					var brList = data;					
 					var brList2 = JSON.parse(data);
 					$('#sm_daily_grid').empty();
-					$('#sm_daily_grid').append('<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="all">전체 지점</a> </li>');
+					$('#sm_daily_grid').append('<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="">전체 지점</a> </li>');
 					$(brList2).each(function(index, data){
 						
 						var html_append = '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="'+data.BR_CD+'">'+data.BR_NM+'</a> </li>';

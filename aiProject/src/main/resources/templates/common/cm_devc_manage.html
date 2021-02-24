@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="../assets/fonts/fontawesome5-overrides.min.css">
     <link rel="stylesheet" href="../assets/css/Navigation-Clean.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/datatables.min.css?2">
-	<link rel="stylesheet" type="text/css" href="../assets/css/select.datatables.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightpick@1.3.4/css/lightpick.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/select.datatables.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightpick@1.3.4/css/lightpick.min.css">
 </head>
 
 <body id="page-top">
@@ -26,97 +26,97 @@
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item" style="text-align: center;">
-                    		<span>-공통 정보-</span>
-                    		<a class="nav-link" href="../cm_goods">
-	                    		<i class="fas fa-tachometer-alt" style="color: var(--light);"></i>
-	                    		<span style="color: var(--light);">상품관리</span>
-                    		</a>
-                    		<a class="nav-link" href="../cm_br">
-	                    		<i class="fas fa-tachometer-alt" style="color: var(--light);"></i>
-	                    		<span style="color: var(--light);">영업점관리</span>
-                    		</a>
-	                    	<hr style="text-align: left;" />
-                    		<a class="nav-link" href="../cm_devc">
-                    			<i class="fas fa-tachometer-alt" style="color: var(--warning);"></i>
-                    			<span style="color: var(--warning);">기기관리</span>
-                    		</a>
-                    		<a style="color: var(--warning);" href="../cm_devc_manage"><font size="1">-기기관리-</font> </a>
-                    		<p>
-                    		<p>
-	                    	<a style="color: var(--light);" href="../cm_devc_hwsw"><font size="1">-HW/SW-</font></a>
-	                    	<p>
-	                    	<a style="color: var(--light);" href="../cm_devc_stat"><font size="1">-기기상태-</font></a>
-	                    	<p>
-	                    	<hr style="text-align: left;" />
-                    		<a class="nav-link" href="../cm_user">
-                    			<i class="fas fa-tachometer-alt" style="color: var(--light);"></i>
-                    			<span style="color: var(--light);">사용자관리</span>
-                    		</a>
-                    		<a class="nav-link" href="../cm_code">
-                    			<i class="fas fa-tachometer-alt" style="color: var(--light);"></i>
-                    			<span style="color: var(--light);">정보관리</span>
-                    		</a>
-                    	</li>
+                            <span>-공통 정보-</span>
+                            <a class="nav-link" href="../cm_goods">
+                                <i class="fas fa-tachometer-alt" style="color: var(--light);"></i>
+                                <span style="color: var(--light);">상품관리</span>
+                            </a>
+                            <a class="nav-link" href="../cm_br">
+                                <i class="fas fa-tachometer-alt" style="color: var(--light);"></i>
+                                <span style="color: var(--light);">영업점관리</span>
+                            </a>
+                            <hr style="text-align: left;" />
+                            <a class="nav-link" href="../cm_devc">
+                                <i class="fas fa-tachometer-alt" style="color: var(--warning);"></i>
+                                <span style="color: var(--warning);">기기관리</span>
+                            </a>
+                            <a style="color: var(--warning);" href="../cm_devc_manage"><font size="1">-기기관리-</font> </a>
+                            <p>
+                            <p>
+                            <a style="color: var(--light);" href="../cm_devc_hwsw"><font size="1">-HW/SW-</font></a>
+                            <p>
+                            <a style="color: var(--light);" href="../cm_devc_stat"><font size="1">-기기상태-</font></a>
+                            <p>
+                            <hr style="text-align: left;" />
+                            <a class="nav-link" href="../cm_user">
+                                <i class="fas fa-tachometer-alt" style="color: var(--light);"></i>
+                                <span style="color: var(--light);">사용자관리</span>
+                            </a>
+                            <a class="nav-link" href="../cm_code">
+                                <i class="fas fa-tachometer-alt" style="color: var(--light);"></i>
+                                <span style="color: var(--light);">정보관리</span>
+                            </a>
+                        </li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
         </nav>
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
-			<nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" style="padding-bottom: 0px;">
+            <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" style="padding-bottom: 0px;">
                     <div class="container-fluid" style="width : 100%; text-align:center;" th:insert="/topnav">
-                    	<button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                     </div>
                 </nav>
                 <div class="container-fluid">
                     <div class="row">
-				        <div class="col">
-				            <h3 class="text-dark mb-1">기기 관리</h3>
-				        </div>
-				        <div class="col" style="text-align: right;">
-				        	<button class="btn btn-primary" type="button" id="cm_search">조회</button>
-				        </div>
-				        <hr style="text-align: left;" />
-				        <hr style="text-align: left;" />
-				    </div>
-				    <hr style="text-align: left;" />
-				    <div>				        
-				        <div>
-				        	<div>
-				        		<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"  type="button" id="cm_dropdown_btn"> 제조사 선택 </button>
-					        	<ul id="cm_mfbiz_list" class="dropdown-menu" role="menu" aria-labelledby="searchType"></ul>
-				        	</div>			        	
-				        	<div>
-				        		<p></p>
-				        		<button class="btn btn-primary" type="button" id="cm_insert">등록</button>
-				        		<button class="btn btn-primary" type="button" id="cm_modify">수정</button>
-				        	</div>
-				        	 
-				        </div>				        
-				    </div>
-				    <hr style="text-align: left;" />
-				    <div id="cm_grid">
-				    	<table id="example" class="table table-striped table-bordered" style="width:100%; text-align:center;">
-					        <thead>
-					            <tr>
-					            	<th></th>
-					                <th>제조사</th>
-					                <th>모델</th>
-					                <th>기기번호</th>
-					                <th>기기상태</th>
-					                <th>도입일자</th>
-					                <th>폐기일자</th>
-					                
-					            </tr>
-					        </thead>
-					    </table>
-				    </div>
+                        <div class="col">
+                            <h3 class="text-dark mb-1">기기 관리</h3>
+                        </div>
+                        <div class="col" style="text-align: right;">
+                            <button class="btn btn-primary" type="button" id="cm_search">조회</button>
+                        </div>
+                        <hr style="text-align: left;" />
+                        <hr style="text-align: left;" />
+                    </div>
+                    <hr style="text-align: left;" />
+                    <div>                       
+                        <div>
+                            <div>
+                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"  type="button" id="cm_dropdown_btn"> 제조사 선택 </button>
+                                <ul id="cm_mfbiz_list" class="dropdown-menu" role="menu" aria-labelledby="searchType"></ul>
+                            </div>                      
+                            <div>
+                                <p></p>
+                                <button class="btn btn-primary" type="button" id="cm_insert">등록</button>
+                                <button class="btn btn-primary" type="button" id="cm_modify">수정</button>
+                            </div>
+                             
+                        </div>                      
+                    </div>
+                    <hr style="text-align: left;" />
+                    <div id="cm_grid">
+                        <table id="example" class="table table-striped table-bordered" style="width:100%; text-align:center;">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>제조사</th>
+                                    <th>모델</th>
+                                    <th>기기번호</th>
+                                    <th>기기상태</th>
+                                    <th>도입일자</th>
+                                    <th>폐기일자</th>
+                                    
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
             <footer class="bg-white sticky-footer" style="height: 70px;">
                 <div class="container my-auto">
                     <div class="text-center my-auto copyright"><span>Copyright © Brand 2021</span></div>
-                     <input type="hidden" id="sessionId" th:value=" ${session.USER_ENO} " value="기본">
+                     <input type="hidden" id="sessionId" th:value=" ${session.USER_NO} " value="기본">
                     <input type="hidden" id="sessionAuthor" th:value=" ${session.CNTRL_AUTHOR} " value="기본">
                 </div>
             </footer>
@@ -125,118 +125,118 @@
     
     <!--등록 modal -->
      <div role="dialog" tabindex="-1" class="modal fade" style="text-align: center;" id="modal_insert" >
-		    <div class="modal-dialog" role="document">
-		        <div class="modal-content" style="overflow-y: initial !important;">
-		            <div class="modal-header" style="text-align: center;">
-		                <h4 class="modal-title">기기등록</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-		            </div>
-		            <div class="modal-body" style="height: 400px; overflow-y: auto;">
-				        <div style="text-align: center;" >
-		                 	<span style="width: 10%;margin-right: 10px;margin-left: 10px;">기기번호</span>
-				        	<input class="form-control form-control-user" type="text" id="modal_devc" placeholder="기기번호" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;"  />
-				        </div>
-				        <div style="text-align: center;" >
-					        <span style="width: 20%;margin-right: 10px;margin-left: 10px;">제조사</span>
-					    </div>
-					    <div style="text-align: center;" >    
-				        	<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button" id="modal_dropdown_btn" style="width: 80%;margin-right: 10px;margin-left: 10px;">제조사선택 </button>
-				        	 <ul id="modal_mfbiz_grid" class="dropdown-menu" role="menu" aria-labelledby="searchType"></ul>
-				        </div>
-				        <div style="text-align: center;" >
-		                 	<span style="width: 10%;margin-right: 10px;margin-left: 10px;">모델명</span>
-				        	<input class="form-control form-control-user" type="text" id="modal_model" placeholder="모델명" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;"  />
-				        </div>
-				         <div style="text-align: center;" >
-		                 	<span style="width: 10%;margin-right: 10px;margin-left: 10px;">기기IP</span>
-				        	<input class="form-control form-control-user" type="text" id="modal_ip" placeholder="IP" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;"  />
-				        </div>
-				         <div style="text-align: center;" >
-		                 	<span style="width: 10%;margin-right: 10px;margin-left: 10px;">OS정보</span>
-				        	<input class="form-control form-control-user" type="text" id="modal_os" placeholder="OS" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;"  />
-				        </div>
-				         <div style="text-align: center;" >
-		                 	<span style="width: 10%;margin-right: 10px;margin-left: 10px;">CPU정보</span>
-				        	<input class="form-control form-control-user" type="text" id="modal_cpu" placeholder="CPU" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;"  />
-				        </div>
-				         <div style="text-align: center;" >
-		                 	<span style="width: 10%;margin-right: 10px;margin-left: 10px;">SW버전</span>
-				        	<input class="form-control form-control-user" type="text" id="modal_sw" placeholder="SW" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;"  />
-				        </div>
-				        <div style="text-align: center;" >
-		                 	<span style="width: 10%;margin-right: 10px;margin-left: 10px;">도입일자</span>
-				        	<input class="form-control form-control-user" type="text" id="modal_date" placeholder="도입일자" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;" readonly />
-				        </div>
-				       
-		            </div>
-		            <div style="text-align: center; margin-bottom: 10px;">
-		            	<button class="btn btn-primary" type="button" style="margin-right: 6px;margin-left: 6px;" id="modal_submit_btn">확인</button>
-		            	<button class="btn btn-primary" type="button" style="margin-right: 6px;margin-left: 6px;" data-dismiss="modal">취소</button>
-		            </div>
-		        </div>
-		    </div>
-		</div>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="overflow-y: initial !important;">
+                    <div class="modal-header" style="text-align: center;">
+                        <h4 class="modal-title">기기등록</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body" style="height: 400px; overflow-y: auto;">
+                        <div style="text-align: center;" >
+                            <span style="width: 10%;margin-right: 10px;margin-left: 10px;">기기번호</span>
+                            <input class="form-control form-control-user" type="text" id="modal_devc" placeholder="기기번호" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;"  />
+                        </div>
+                        <div style="text-align: center;" >
+                            <span style="width: 20%;margin-right: 10px;margin-left: 10px;">제조사</span>
+                        </div>
+                        <div style="text-align: center;" >    
+                            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button" id="modal_dropdown_btn" style="width: 80%;margin-right: 10px;margin-left: 10px;">제조사선택 </button>
+                             <ul id="modal_mfbiz_grid" class="dropdown-menu" role="menu" aria-labelledby="searchType"></ul>
+                        </div>
+                        <div style="text-align: center;" >
+                            <span style="width: 10%;margin-right: 10px;margin-left: 10px;">모델명</span>
+                            <input class="form-control form-control-user" type="text" id="modal_model" placeholder="모델명" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;"  />
+                        </div>
+                         <div style="text-align: center;" >
+                            <span style="width: 10%;margin-right: 10px;margin-left: 10px;">기기IP</span>
+                            <input class="form-control form-control-user" type="text" id="modal_ip" placeholder="IP" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;"  />
+                        </div>
+                         <div style="text-align: center;" >
+                            <span style="width: 10%;margin-right: 10px;margin-left: 10px;">OS정보</span>
+                            <input class="form-control form-control-user" type="text" id="modal_os" placeholder="OS" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;"  />
+                        </div>
+                         <div style="text-align: center;" >
+                            <span style="width: 10%;margin-right: 10px;margin-left: 10px;">CPU정보</span>
+                            <input class="form-control form-control-user" type="text" id="modal_cpu" placeholder="CPU" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;"  />
+                        </div>
+                         <div style="text-align: center;" >
+                            <span style="width: 10%;margin-right: 10px;margin-left: 10px;">SW버전</span>
+                            <input class="form-control form-control-user" type="text" id="modal_sw" placeholder="SW" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;"  />
+                        </div>
+                        <div style="text-align: center;" >
+                            <span style="width: 10%;margin-right: 10px;margin-left: 10px;">도입일자</span>
+                            <input class="form-control form-control-user" type="text" id="modal_date" placeholder="도입일자" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;" readonly />
+                        </div>
+                       
+                    </div>
+                    <div style="text-align: center; margin-bottom: 10px;">
+                        <button class="btn btn-primary" type="button" style="margin-right: 6px;margin-left: 6px;" id="modal_submit_btn">확인</button>
+                        <button class="btn btn-primary" type="button" style="margin-right: 6px;margin-left: 6px;" data-dismiss="modal">취소</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     <!-- 등록 modal 종료 -->
     
     <!--수정 modal -->
      <div role="dialog" tabindex="-1" class="modal fade" style="text-align: center;" id="modal_modify" >
-		    <div class="modal-dialog" role="document">
-		       <div class="modal-content" style="overflow-y: initial !important;">
-		            <div class="modal-header" style="text-align: center;">
-		                <h4 class="modal-title">기기수정</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-		            </div>
-		            <div class="modal-body" style="height: 400px; overflow-y: auto;">
-				        <div style="text-align: center;" >
-		                 	<span style="width: 10%;margin-right: 10px;margin-left: 10px;">기기번호</span>
-				        	<input class="form-control form-control-user" type="text" id="modal_devc2" placeholder="기기번호" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;" readonly />
-				        </div>
-				        <div style="text-align: center;" >
-					        <span style="width: 20%;margin-right: 10px;margin-left: 10px;">제조사</span>
-					        <input class="form-control form-control-user" type="text" id="modal_mfbiz2" placeholder="제조사" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;" readonly />
-					    </div>
-				        <div style="text-align: center;" >
-		                 	<span style="width: 10%;margin-right: 10px;margin-left: 10px;">모델명</span>
-				        	<input class="form-control form-control-user" type="text" id="modal_model2" placeholder="모델명" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;" readonly />
-				        </div>
-				         <div style="text-align: center;" >
-		                 	<span style="width: 10%;margin-right: 10px;margin-left: 10px;">기기IP</span>
-				        	<input class="form-control form-control-user" type="text" id="modal_ip2" placeholder="기기IP" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;" />
-				        </div>
-				         <div style="text-align: center;" >
-		                 	<span style="width: 10%;margin-right: 10px;margin-left: 10px;">OS정보</span>
-				        	<input class="form-control form-control-user" type="text" id="modal_os2" placeholder="OS정보" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;" />
-				        </div>
-				         <div style="text-align: center;" >
-		                 	<span style="width: 10%;margin-right: 10px;margin-left: 10px;">CPU정보</span>
-				        	<input class="form-control form-control-user" type="text" id="modal_cpu2" placeholder="CPU정보" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;"  />
-				        </div>
-				         <div style="text-align: center;" >
-		                 	<span style="width: 10%;margin-right: 10px;margin-left: 10px;">SW버전</span>
-				        	<input class="form-control form-control-user" type="text" id="modal_sw2" placeholder="SW" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;"  />
-				        </div>
-				        <div style="text-align: center;" >
-		                 	<span style="width: 10%;margin-right: 10px;margin-left: 10px;">도입일자</span>
-				        	<input class="form-control form-control-user" type="text" id="modal_date2" placeholder="도입일자" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;" readonly />
-				        </div>
-				        <div style="text-align: center;" >
-					        <span style="width: 20%;margin-right: 10px;margin-left: 10px;">기기상태</span>
-					    </div>
-					    <div style="text-align: center;" >    
-				        	<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button" id="modal_dropdown" style="width: 80%;margin-right: 10px;margin-left: 10px;">기기상태 </button>
-				        	 <ul id="modal_stat" class="dropdown-menu" role="menu" aria-labelledby="searchType">
-				        	 	<li><a value="1">정상가동</a></li>
-				        	 	<li><a value="2">가동중지</a></li>
-				        	 </ul>
-				        </div>
-				       
-		            </div>
-		            <div style="text-align: center; margin-bottom: 10px;">
-		            	<button class="btn btn-primary" type="button" style="margin-right: 6px;margin-left: 6px;" id="modal_submit_btn2">수정</button>
-		            	<button class="btn btn-primary" type="button" style="margin-right: 6px;margin-left: 6px;" data-dismiss="modal">취소</button>
-		            	<button class="btn btn-primary" type="button" style="margin-right: 6px;margin-left: 6px;" id="modal_cls_btn">폐쇄</button>
-		            </div>
-		        </div>
-		    </div>
-		</div>
+            <div class="modal-dialog" role="document">
+               <div class="modal-content" style="overflow-y: initial !important;">
+                    <div class="modal-header" style="text-align: center;">
+                        <h4 class="modal-title">기기수정</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body" style="height: 400px; overflow-y: auto;">
+                        <div style="text-align: center;" >
+                            <span style="width: 10%;margin-right: 10px;margin-left: 10px;">기기번호</span>
+                            <input class="form-control form-control-user" type="text" id="modal_devc2" placeholder="기기번호" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;" readonly />
+                        </div>
+                        <div style="text-align: center;" >
+                            <span style="width: 20%;margin-right: 10px;margin-left: 10px;">제조사</span>
+                            <input class="form-control form-control-user" type="text" id="modal_mfbiz2" placeholder="제조사" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;" readonly />
+                        </div>
+                        <div style="text-align: center;" >
+                            <span style="width: 10%;margin-right: 10px;margin-left: 10px;">모델명</span>
+                            <input class="form-control form-control-user" type="text" id="modal_model2" placeholder="모델명" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;" readonly />
+                        </div>
+                         <div style="text-align: center;" >
+                            <span style="width: 10%;margin-right: 10px;margin-left: 10px;">기기IP</span>
+                            <input class="form-control form-control-user" type="text" id="modal_ip2" placeholder="기기IP" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;" />
+                        </div>
+                         <div style="text-align: center;" >
+                            <span style="width: 10%;margin-right: 10px;margin-left: 10px;">OS정보</span>
+                            <input class="form-control form-control-user" type="text" id="modal_os2" placeholder="OS정보" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;" />
+                        </div>
+                         <div style="text-align: center;" >
+                            <span style="width: 10%;margin-right: 10px;margin-left: 10px;">CPU정보</span>
+                            <input class="form-control form-control-user" type="text" id="modal_cpu2" placeholder="CPU정보" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;"  />
+                        </div>
+                         <div style="text-align: center;" >
+                            <span style="width: 10%;margin-right: 10px;margin-left: 10px;">SW버전</span>
+                            <input class="form-control form-control-user" type="text" id="modal_sw2" placeholder="SW" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;"  />
+                        </div>
+                        <div style="text-align: center;" >
+                            <span style="width: 10%;margin-right: 10px;margin-left: 10px;">도입일자</span>
+                            <input class="form-control form-control-user" type="text" id="modal_date2" placeholder="도입일자" style="width: 80%;margin-right: 10px;margin-left: 50px; text-align : center;" readonly />
+                        </div>
+                        <div style="text-align: center;" >
+                            <span style="width: 20%;margin-right: 10px;margin-left: 10px;">기기상태</span>
+                        </div>
+                        <div style="text-align: center;" >    
+                            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button" id="modal_dropdown" style="width: 80%;margin-right: 10px;margin-left: 10px;">기기상태 </button>
+                             <ul id="modal_stat" class="dropdown-menu" role="menu" aria-labelledby="searchType">
+                                <li><a value="1">정상가동</a></li>
+                                <li><a value="2">가동중지</a></li>
+                             </ul>
+                        </div>
+                       
+                    </div>
+                    <div style="text-align: center; margin-bottom: 10px;">
+                        <button class="btn btn-primary" type="button" style="margin-right: 6px;margin-left: 6px;" id="modal_submit_btn2">수정</button>
+                        <button class="btn btn-primary" type="button" style="margin-right: 6px;margin-left: 6px;" data-dismiss="modal">취소</button>
+                        <button class="btn btn-primary" type="button" style="margin-right: 6px;margin-left: 6px;" id="modal_cls_btn">폐쇄</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     <!-- 등록 modal 종료 -->
     
  
@@ -252,7 +252,7 @@
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lightpick@1.3.4/lightpick.min.js"></script>
-  	<script src="../assets/js/common/devc_manage.js"></script>
+    <script src="../assets/js/common/devc_manage.js"></script>
 </body>
 
 </html>

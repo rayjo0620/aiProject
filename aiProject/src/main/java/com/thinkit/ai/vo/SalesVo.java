@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.thinkit.ai.vo;
 
@@ -18,12 +18,12 @@ public class SalesVo {
 	public String DELNG_SEQ; //거래번호
 	public String DLAMT; //거래금액
 	public String DLNT; //거래수량
-	public String DELNG_TM; //거래시간 
+	public String DELNG_TM; //거래시간
 	public String BR_NM;
 	public String GOODS_NM;
-	
-	
-	
+
+
+
 	public String getDELNG_DATE2() {
 		return DELNG_DATE2;
 	}
@@ -96,6 +96,6 @@ public class SalesVo {
 	public void setDLNT(String dLNT) {
 		DLNT = dLNT;
 	}
-	
+
 }
-	
+

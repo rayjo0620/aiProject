@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.thinkit.ai.controller;
 
@@ -22,28 +22,28 @@ import com.thinkit.ai.vo.MemberVo;
 
 @RestController
 public class MemberController {
-	
+
 	@Autowired
 	MemberServiceImpl ms;
-	
+
 	@PostMapping("/loginAction.do")
 	public String login(HttpServletRequest hsr, MemberVo vo ) throws Exception {
-		
+
 		HttpSession hs = hsr.getSession();
-		
+
 		String id = vo.getCNTRL_USER_ID();
-		
+
 		System.out.println("id+pw origin == " + id+"/"+hsr.getParameter("USER_PW"));
-		
+
 		vo = ms.logIn(vo);
-		
+
 		System.out.println("id+pw vo == " + vo.getCNTRL_USER_ID()+"/"+vo.getUSER_PW());
 		System.out.println("id == "+vo.getCNTRL_USER_ID()+"//USER_NO == "+vo.getUSER_NO()+"//pw == "+vo.getUSER_PW()+"//name == "+vo.getUSER_NM());
-		
+
 		hs.setAttribute("USER_NO", vo.getUSER_NO());
 		hs.setAttribute("CNTRL_AUTHOR", vo.getCNTRL_AUTHOR());
-		return "";		
+		return "";
 	}
-	
-	
+
+
 }

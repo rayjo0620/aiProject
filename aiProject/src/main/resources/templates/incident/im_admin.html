@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="../assets/fonts/fontawesome5-overrides.min.css">
     <link rel="stylesheet" href="../assets/css/Navigation-Clean.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/datatables.min.css?2">
-	<link rel="stylesheet" type="text/css" href="../assets/css/select.datatables.min.css">
-	
-    
+    <link rel="stylesheet" type="text/css" href="../assets/css/select.datatables.min.css">
+
+
 </head>
 
 <body id="page-top">
@@ -28,14 +28,14 @@
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item" style="text-align: center;">
                     <span style="text-align: center; color: var(--warining);">-장애관리-</span>
-	                    <a class="nav-link" href="/im_info_user">
-		                    <i class="fas fa-tachometer-alt" style="color: var(--light);"></i>
-		                    <span style="color: var(--warining);" id="daily">장애 정보</span>
-	                    </a>
-	                    <a class="nav-link" href="/im_dash">
-		                    <i class="fas fa-tachometer-alt" style="color: var(--light);"></i>
-		                    <span style="color: var(--light);" id="period";>장애 현황</span>
-	                    </a>
+                        <a class="nav-link" href="/im_info_user">
+                            <i class="fas fa-tachometer-alt" style="color: var(--light);"></i>
+                            <span style="color: var(--warining);" id="daily">장애 정보</span>
+                        </a>
+                        <a class="nav-link" href="/im_dash">
+                            <i class="fas fa-tachometer-alt" style="color: var(--light);"></i>
+                            <span style="color: var(--light);" id="period";>장애 현황</span>
+                        </a>
                     </li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
@@ -45,115 +45,115 @@
             <div id="content">
               <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" style="padding-bottom: 0px;">
                     <div class="container-fluid" style="width : 100%; text-align:center;" th:insert="/topnav">
-                    	<button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                     </div>
                 </nav>
                <div class="container-fluid">
                     <div class="row">
-				        <div class="col">
-				            <h3 class="text-dark mb-1">장애상태 현황</h3>
-				        </div>
-				        <div class="col" style="text-align: right;"><button class="btn btn-primary" type="button" id="im_search">조회</button></div>
-				        <hr style="text-align: left;" />
-				        <hr style="text-align: left;" />
-				    </div>
-				    <hr style="text-align: left;" />
-				    <div>				        
-				        <div>
-				        	<div>
-				        		<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"  type="button" id="im_dropdown_btn">영업점 선택 </button>
-				        	 <ul id="im_grid" class="dropdown-menu" role="menu" aria-labelledby="searchType">
-						    </ul>
-				        	</div>
-				        	<div>
-				        		<p></p>
-				        		<button class="btn btn-primary" type="button" id="im_insert">수정</button>
-				        	</div>
-				        </div>				        
-				    </div>
-				    <hr style="text-align: left;" />
-				    <div id="im_grid">
-				    	<table id="example" class="table table-striped table-bordered" style="width:100%; text-align:center;">
-					        <thead>
-					            <tr>
-					            	<th></th>
-					                <th>영업점명</th>
-					                <th>기기번호</th>
-					                <th>접수여부</th>
-					                <th>발생시간</th>
-					                <th>장애종류</th>
-					                <th>조치현황</th>
-					                <th>소요시간</th>					                			                
-					            </tr>
-					        </thead>
-					    </table>
-				    </div>
+                        <div class="col">
+                            <h3 class="text-dark mb-1">장애상태 현황</h3>
+                        </div>
+                        <div class="col" style="text-align: right;"><button class="btn btn-primary" type="button" id="im_search">조회</button></div>
+                        <hr style="text-align: left;" />
+                        <hr style="text-align: left;" />
+                    </div>
+                    <hr style="text-align: left;" />
+                    <div>
+                        <div>
+                            <div>
+                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"  type="button" id="im_dropdown_btn">영업점 선택 </button>
+                             <ul id="im_grid" class="dropdown-menu" role="menu" aria-labelledby="searchType">
+                            </ul>
+                            </div>
+                            <div>
+                                <p></p>
+                                <button class="btn btn-primary" type="button" id="im_insert">수정</button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr style="text-align: left;" />
+                    <div id="im_grid">
+                        <table id="example" class="table table-striped table-bordered" style="width:100%; text-align:center;">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>영업점명</th>
+                                    <th>기기번호</th>
+                                    <th>접수여부</th>
+                                    <th>발생시간</th>
+                                    <th>장애종류</th>
+                                    <th>조치현황</th>
+                                    <th>소요시간</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
             <footer class="bg-white sticky-footer" style="height: 70px;">
                 <div class="container my-auto">
                     <div class="text-center my-auto copyright"><span>Copyright © Brand 2021</span></div>
-                    <input type="hidden" id="sessionId" th:value=" ${session.USER_ENO} " value="기본">
+                    <input type="hidden" id="sessionId" th:value=" ${session.USER_NO} " value="기본">
                     <input type="hidden" id="sessionAuthor" th:value=" ${session.CNTRL_AUTHOR} " value="기본">
                 </div>
             </footer>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>		
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
-  
-		<!-- 장애 등록 모달 -->
+
+        <!-- 장애 등록 모달 -->
     <div role="dialog" tabindex="-1" class="modal fade" style="text-align: center;" id="modal_admin" >
-		    <div class="modal-dialog" role="document">
-		        <div class="modal-content">
-		            <div class="modal-header" style="text-align: center;">
-		                <h4 class="modal-title">장애등록</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-		            </div>
-		            <div class="modal-body">
-		                
-		                <div style="text-align: center;">
-		                	<span style="width: 10%;margin-right: 10px;margin-left: 10px;">영업점명</span>
-				        	<input class="form-control form-control-user" type="text" id="modal_br" style="width: 80%;margin-right: 10px;margin-left: 50px;text-align: center;" readonly />
-				        </div>
-				        <div style="text-align: center;" >
-		                 	<span style="width: 10%;margin-right: 10px;margin-left: 10px;">기기번호</span>
-				        	<input class="form-control form-control-user" type="text" id="modal_devc" style="width: 80%;margin-right: 10px;margin-left: 50px;text-align: center;" readonly />
-				        </div>
-				        <div style="text-align: center;" >
-		                 	<span style="width: 10%;margin-right: 10px;margin-left: 10px;">장애종류</span>
-				        	<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"  type="button" id="modal_obty_dropdown_btn" style="width: 80%;margin-right: 10px;margin-left: 10px;">장애종류</button>
-				        	<ul id="modal_obty_grid" class="dropdown-menu" role="menu" aria-labelledby="searchType">
-				        	<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="01">01</a></li>
-				        	<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="02">02</a></li>
-				        	</ul>
-				        </div>
-				        <div style="text-align: center;" >
-		                 	<span style="width: 10%;margin-right: 10px;margin-left: 10px;">처리상태</span>
-				        	<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"  type="button" id="modal_ac_dropdown_btn" style="width: 80%;margin-right: 10px;margin-left: 10px;">장애종류</button>
-				        	<ul id="modal_ac_grid" class="dropdown-menu" role="menu" aria-labelledby="searchType">
-				        	<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="00">미접수</a></li>
-				        	<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="01">출동요청</a></li>
-				        	<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="02">기사배정</a></li>
-				        	<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="03">출동중</a></li>
-				        	<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="04">조치중</a></li>
-				        	<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="05">복구확인중</a></li>
-				        	<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="06">처리완료</a></li>
-				        	</ul>
-				        </div>
-				         <div class="form-group" style="text-align: center;" >
-				        	<span style="width: 10%;margin-right: 10px;margin-left: 10px;">비고</span>
-				        	<input class="form-control form-control-user" type="text" id="modal_acdts" placeholder="장애 조치 내역" style="width: 80%;margin-right: 10px;margin-left: 50px;" />
-				   		 </div> 	
-				        
-		            </div>
-		            <div style="text-align: center; margin-bottom: 10px;">
-		            	<button class="btn btn-primary" type="button" style="margin-right: 6px;margin-left: 6px;" data-dismiss="modal">취소</button>
-		            	<button class="btn btn-primary" type="button" style="margin-right: 6px;margin-left: 6px;" id="modal_submit_btn">확인</button>
-		            </div>
-		        </div>
-		    </div>
-		</div>
-		
-	
-    
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="text-align: center;">
+                        <h4 class="modal-title">장애등록</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div style="text-align: center;">
+                            <span style="width: 10%;margin-right: 10px;margin-left: 10px;">영업점명</span>
+                            <input class="form-control form-control-user" type="text" id="modal_br" style="width: 80%;margin-right: 10px;margin-left: 50px;text-align: center;" readonly />
+                        </div>
+                        <div style="text-align: center;" >
+                            <span style="width: 10%;margin-right: 10px;margin-left: 10px;">기기번호</span>
+                            <input class="form-control form-control-user" type="text" id="modal_devc" style="width: 80%;margin-right: 10px;margin-left: 50px;text-align: center;" readonly />
+                        </div>
+                        <div style="text-align: center;" >
+                            <span style="width: 10%;margin-right: 10px;margin-left: 10px;">장애종류</span>
+                            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"  type="button" id="modal_obty_dropdown_btn" style="width: 80%;margin-right: 10px;margin-left: 10px;">장애종류</button>
+                            <ul id="modal_obty_grid" class="dropdown-menu" role="menu" aria-labelledby="searchType">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="01">01</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="02">02</a></li>
+                            </ul>
+                        </div>
+                        <div style="text-align: center;" >
+                            <span style="width: 10%;margin-right: 10px;margin-left: 10px;">처리상태</span>
+                            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"  type="button" id="modal_ac_dropdown_btn" style="width: 80%;margin-right: 10px;margin-left: 10px;">장애종류</button>
+                            <ul id="modal_ac_grid" class="dropdown-menu" role="menu" aria-labelledby="searchType">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="00">미접수</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="01">출동요청</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="02">기사배정</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="03">출동중</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="04">조치중</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="05">복구확인중</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="06">처리완료</a></li>
+                            </ul>
+                        </div>
+                         <div class="form-group" style="text-align: center;" >
+                            <span style="width: 10%;margin-right: 10px;margin-left: 10px;">비고</span>
+                            <input class="form-control form-control-user" type="text" id="modal_acdts" placeholder="장애 조치 내역" style="width: 80%;margin-right: 10px;margin-left: 50px;" />
+                         </div>
+
+                    </div>
+                    <div style="text-align: center; margin-bottom: 10px;">
+                        <button class="btn btn-primary" type="button" style="margin-right: 6px;margin-left: 6px;" data-dismiss="modal">취소</button>
+                        <button class="btn btn-primary" type="button" style="margin-right: 6px;margin-left: 6px;" id="modal_submit_btn">확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>

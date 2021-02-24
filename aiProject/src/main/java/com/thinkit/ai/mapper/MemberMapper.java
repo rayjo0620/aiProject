@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.thinkit.ai.mapper;
 
@@ -15,6 +15,6 @@ import com.thinkit.ai.vo.MemberVo;
 
 @Mapper
 public interface MemberMapper {
-	public MemberVo login(MemberVo vo); 
+	public MemberVo login(MemberVo vo);
 	public Integer join(MemberVo vo);
 }

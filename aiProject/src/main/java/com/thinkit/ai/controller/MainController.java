@@ -20,16 +20,16 @@ import com.thinkit.ai.service.impl.MainServiceImpl;
  */
 @RestController
 public class MainController {
-	
-	@Autowired MainServiceImpl msi;
-	
-	@RequestMapping("/main/chart_list")
-	public String getChartList(String USER_ENO) throws Exception {
-		Gson gson = new Gson();
-		List<Map<String, Object>> brList = msi.main_chart_tot(USER_ENO);
-		String json = gson.toJson(brList);
-		return json;
-		
-	}
-	
+    
+    @Autowired MainServiceImpl msi;
+    
+    @RequestMapping("/main/chart_list")
+    public String getChartList(String USER_NO) throws Exception {
+        Gson gson = new Gson();
+        List<Map<String, Object>> brList = msi.main_chart_tot(USER_NO);
+        String json = gson.toJson(brList);
+        return json;
+        
+    }
+    
 }

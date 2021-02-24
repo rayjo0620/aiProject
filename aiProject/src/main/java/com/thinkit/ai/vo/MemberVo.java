@@ -3,8 +3,6 @@
  */
 package com.thinkit.ai.vo;
 
-import java.util.Date;
-
 /**
  * MemberVo.java
  * @author 씽크2
@@ -19,8 +17,8 @@ public class MemberVo {
 	public String USER_HP;
 	public String USER_EMAIL;
 	public String CNTRL_AUTHOR;
-	public Date REG_DT;
-	public Date MDFCN_DT;
+	public String REG_DT;
+	public String MDFCN_DT;
 	
 	public String getCNTRL_USER_ID() {
 		return CNTRL_USER_ID;
@@ -64,16 +62,16 @@ public class MemberVo {
 	public void setCNTRL_AUTHOR(String cNTRL_AUTHOR) {
 		CNTRL_AUTHOR = cNTRL_AUTHOR;
 	}
-	public Date getREG_DT() {
+	public String getREG_DT() {
 		return REG_DT;
 	}
-	public void setREG_DT(Date rEG_DT) {
+	public void setREG_DT(String rEG_DT) {
 		REG_DT = rEG_DT;
 	}
-	public Date getMDFCN_DT() {
+	public String getMDFCN_DT() {
 		return MDFCN_DT;
 	}
-	public void setMDFCN_DT(Date mDFCN_DT) {
+	public void setMDFCN_DT(String mDFCN_DT) {
 		MDFCN_DT = mDFCN_DT;
 	}
 	

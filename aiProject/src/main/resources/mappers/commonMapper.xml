@@ -24,11 +24,11 @@
 			br_info
 		WHERE
 			<choose>
-				<when test="USER_ENO != null and USER_ENO.equals('admin')">
-					user_eno like '%'
+				<when test="USER_NO != null and USER_NO.equals('admin')">
+					user_no like '%'
 				</when>
 				<otherwise>
-					user_eno = #{USER_ENO}
+					user_no = #{USER_NO}
 				</otherwise>
 			</choose>
 	</select>
@@ -64,7 +64,7 @@
 
 	<select id="cm_br_loc_grid" parameterType="BrVo" resultType="java.util.HashMap">
 		SELECT
-			user_eno
+			user_no
 			, br_cd
 			, br_nm
 			, br_adr
@@ -75,18 +75,18 @@
 			br_info
 		WHERE
 			<choose>
-				<when test="USER_ENO != null and USER_ENO.equals('admin')">
-					user_eno LIKE '%'
+				<when test="USER_NO != null and USER_NO.equals('admin')">
+					user_no LIKE '%'
 					AND br_cd = #{BR_CD}
 				</when>
 				<when test="BR_CD != null and BR_CD.equals('all')">
-					user_eno = #{USER_ENO}
+					user_no = #{USER_NO}
 				</when>
-				<when test="USER_ENO != null and USER_ENO.equals('admin') and BR_CD != null and	BR_CD.equals('aLL')">
-					user_eno LIKE '%' AND br_cd LIKE '%'
+				<when test="USER_NO != null and USER_NO.equals('admin') and BR_CD != null and	BR_CD.equals('aLL')">
+					user_no LIKE '%' AND br_cd LIKE '%'
 				</when>
 				<otherwise>
-					user_eno = #{USER_ENO} AND br_cd = #{BR_CD}
+					user_no = #{USER_NO} AND br_cd = #{BR_CD}
 				</otherwise>
 			</choose>
 	</select>
@@ -99,31 +99,31 @@
 		FROM
 			br_info
 		WHERE
-			user_eno = #{USER_ENO}
+			user_no = #{USER_NO}
 	</select>
 
 	<select id="cm_br_map_grid_devc"  parameterType="String" resultType="java.util.HashMap">
 		SELECT
 			mfbiz_id
 			, model_id
-			, devc_uno
+			, devc_no
 		FROM
 			devc_info
 		WHERE
 			<choose>
-				<when test="USER_ENO != null and USER_ENO != 'admin'">
-					user_eno = #{USER_ENO}
+				<when test="USER_NO != null and USER_NO != 'admin'">
+					user_no = #{USER_NO}
 				</when>
 				<otherwise>
-					devc_uno  NOT IN (
+					devc_no  NOT IN (
 						SELECT
-							devc_uno
+							devc_no
 						FROM
 							br_devc_mapp
 					)
 				</otherwise>
 			</choose>
-		AND devc_uno  NOT IN (SELECT devc_uno FROM br_devc_mapp)
+		AND devc_no  NOT IN (SELECT devc_no FROM br_devc_mapp)
 	</select>
 
 	<!-- devc -->
@@ -148,9 +148,9 @@
 				WHERE
 					mfbiz_info.mfbiz_id = devc_info.mfbiz_id
 			) AS mfbiz_nm
-			, user_eno
+			, user_no
 			, model_id
-			, devc_uno
+			, devc_no
 			, (
 				SELECT
 					dtl_cdnm
@@ -164,7 +164,7 @@
 					FROM
 						devc_stat
 					WHERE
-						devc_info.devc_uno = devc_stat.devc_uno
+						devc_info.devc_no = devc_stat.devc_no
 				)
 			) AS dtl_cdnm
 			, (
@@ -173,7 +173,7 @@
 				FROM
 					devc_stat
 				WHERE
-					devc_info.devc_uno = devc_stat.devc_uno
+					devc_info.devc_no = devc_stat.devc_no
 			) AS devc_stat
 			, indc_date
 			, dscd_date
@@ -188,31 +188,31 @@
 			<choose>
 				<when test="MFBIZ_ID != null and MFBIZ_ID.equals('ALL')">
 					mfbiz_id LIKE '%'
-					AND user_eno = #{USER_ENO}
+					AND user_no = #{USER_NO}
 				</when>
 
-				<when test="USER_ENO != null and USER_ENO.equals('admin')">
+				<when test="USER_NO != null and USER_NO.equals('admin')">
 					mfbiz_id = #{MFBIZ_ID}
 				</when>
 
-				<when test="USER_ENO != null and USER_ENO.equals('admin') AND MFBIZ_ID != null AND MFBIZ_ID.equals('ALL')">
+				<when test="USER_NO != null and USER_NO.equals('admin') AND MFBIZ_ID != null AND MFBIZ_ID.equals('ALL')">
 					mfbiz_id LIKE '%'
 				</when>
 
 				<otherwise>
 					mfbiz_id = #{MFBIZ_ID}
-					AND user_eno = #{USER_ENO}
+					AND user_no = #{USER_NO}
 				</otherwise>
 			</choose>
 	</select>
 
 	<select id="cm_devc_insert_chk" parameterType="String" resultType="int">
 		SELECT
-			COUNT(devc_uno)
+			COUNT(devc_no)
 		FROM
 			devc_info
 		WHERE
-			devc_uno = #{DEVC_UNO}
+			devc_no = #{DEVC_NO}
 	</select>
 
 	<select id="cm_devc_hwsw" parameterType="DevcVo" resultType="java.util.HashMap">
@@ -225,7 +225,7 @@
 				WHERE
 					mfbiz_info.mfbiz_id = devc_info.mfbiz_id
 			) AS mfbiz_nm
-			, devc_uno
+			, devc_no
 			, os_info
 			, cpu_info
 			, sw_ver
@@ -233,20 +233,20 @@
 			devc_info
 		WHERE
 			<choose>
-				<when test="USER_ENO != null and USER_ENO.equals('admin')">
+				<when test="USER_NO != null and USER_NO.equals('admin')">
 					mfbiz_id = #{MFBIZ_ID}
 				</when>
 
 				<when test="MFBIZ_ID != null and MFBIZ_ID.equals('ALL')">
-					user_eno = #{USER_ENO}
+					user_no = #{USER_NO}
 				</when>
 
-				<when test="USER_ENO != null and USER_ENO.equals('admin') and MFBIZ_ID != null and MFBIZ_ID.equals('ALL')">
+				<when test="USER_NO != null and USER_NO.equals('admin') and MFBIZ_ID != null and MFBIZ_ID.equals('ALL')">
 					mfbiz_id LIKE '%'
 				</when>
 
 				<otherwise>
-					user_eno = #{USER_ENO}
+					user_no = #{USER_NO}
 					AND	mfbiz_id = #{MFBIZ_ID}
 				</otherwise>
 			</choose>
@@ -266,8 +266,8 @@
 						FROM
 							devc_info di
 						WHERE
-							di.user_eno = #{USER_ENO}
-						AND di.devc_uno = d.devc_uno
+							di.user_no = #{USER_NO}
+						AND di.devc_no = d.devc_no
 					)
 			) AS mfbiz_nm
 			, (
@@ -276,10 +276,10 @@
 					FROM
 						devc_info I
 					WHERE
-						i.user_eno = #{USER_ENO}
-					AND i.devc_uno = D.DEVC_UNO
+						i.user_no = #{USER_NO}
+					AND i.devc_no = D.DEVC_NO
 			) AS model_id
-			, devc_uno
+			, devc_no
 			, devc_stat
 			, strt_date
 			, strt_tm
@@ -289,13 +289,13 @@
 				FROM
 					devc_stat_hist
 				WHERE
-					user_eno = #{USER_ENO}
-				AND devc_stat_hist.devc_uno = d.devc_uno
+					user_no = #{USER_NO}
+				AND devc_stat_hist.devc_no = d.devc_no
 			) strt_cnt
 		FROM
 			devc_stat d
 		WHERE
-			user_eno = #{USER_ENO}
+			user_no = #{USER_NO}
 	</select>
 
 	<select id="cm_user_my" parameterType="UserVo" resultType="java.util.HashMap">
@@ -307,7 +307,7 @@
 		FROM
 			user_info
 		WHERE
-			user_eno = #{USER_ENO}
+			user_no = #{USER_NO}
 	</select>
 
 	<select id="cm_user_list" resultType="java.util.HashMap">
@@ -315,7 +315,7 @@
 			cntrl_user_id
 			, user_hp
 			, user_email
-			, user_eno
+			, user_no
 			, cntrl_author
 			, user_pw
 		FROM
@@ -397,7 +397,7 @@
 		INSERT INTO
 			br_info
 			(
-				user_eno
+				user_no
 				, br_cd
 				, br_nm
 				, br_adr
@@ -406,7 +406,7 @@
 			)
 			VALUES
 			(
-				#{USER_ENO}
+				#{USER_NO}
 				, NVL(
 					(
 						SELECT
@@ -414,7 +414,7 @@
 						FROM
 							br_info
 						WHERE
-							user_eno = #{USER_ENO})+1, 1)
+							user_no = #{USER_NO})+1, 1)
 				, #{BR_NM}
 				, #{BR_ADR}
 				, #{BR_ADR2}
@@ -426,11 +426,11 @@
 		INSERT INTO
 			br_devc_mapp
 		VALUES (
-			#{USER_ENO}
+			#{USER_NO}
 			, #{BR_CD}
 			, #{MFBIZ_ID}
 			, #{MODEL_ID}
-			, #{DEVC_UNO}
+			, #{DEVC_NO}
 		)
 	</insert>
 
@@ -438,10 +438,10 @@
 		INSERT INTO
 			devc_info
 			(
-				user_eno
+				user_no
 				, mfbiz_id
 				, model_id
-				, devc_uno
+				, devc_no
 				, indc_date
 				, reg_dt
 				, devc_ip
@@ -451,10 +451,10 @@
 			)
 			VALUES
 			(
-				#{USER_ENO}
+				#{USER_NO}
 				, #{MFBIZ_ID}
 				, #{MODEL_ID}
-				, #{DEVC_UNO}
+				, #{DEVC_NO}
 				, #{INDC_DATE}
 				, #{REG_DT}
 				, #{DEVC_IP}
@@ -468,10 +468,10 @@
 		INSERT INTO
 			devc_info_hist
 			(
-				user_eno
+				user_no
 				, mfbiz_id
 				, model_id
-				, devc_uno
+				, devc_no
 				, indc_date
 				, reg_dt
 				, devc_ip
@@ -482,10 +482,10 @@
 			)
 			VALUES
 			(
-				#{USER_ENO}
+				#{USER_NO}
 				, #{MFBIZ_ID}
 				, #{MODEL_ID}
-				, #{DEVC_UNO}
+				, #{DEVC_NO}
 				, #{INDC_DATE}
 				, #{REG_DT}
 				, #{DEVC_IP}
@@ -500,10 +500,10 @@
 		INSERT INTO
 			DEVC_INFO_HIST
 			(
-				user_eno
+				user_no
 				, mfbiz_id
 				, model_id
-				, devc_uno
+				, devc_no
 				, seq
 				, devc_ip
 				, os_info
@@ -519,10 +519,10 @@
 			)
 			VALUES
 			(
-				#{USER_ENO}
+				#{USER_NO}
 				, #{MFBIZ_ID}
 				, #{MODEL_ID}
-				, #{DEVC_UNO}
+				, #{DEVC_NO}
 				, (
 					(
 						SELECT
@@ -530,7 +530,7 @@
 						FROM
 							devc_info_hist
 						WHERE
-							devc_uno = #{DEVC_UNO}
+							devc_no = #{DEVC_NO}
 					) + 1
 				)
 				, #{DEVC_IP}
@@ -551,14 +551,14 @@
 		INSERT INTO
 			devc_stat
 			(
-				devc_uno
-				, user_eno
+				devc_no
+				, user_no
 				, devc_stat
 				, reg_dt
 			)
 			VALUES (
-				#{DEVC_UNO}
-				, #{USER_ENO}
+				#{DEVC_NO}
+				, #{USER_NO}
 				, '1'
 				, #{REG_DT}
 			)
@@ -568,15 +568,15 @@
 		INSERT INTO
 			devc_stat_hist
 			(
-				devc_uno
-				, user_eno
+				devc_no
+				, user_no
 				, devc_stat
 				, reg_dt
 				, seq
 			)
 			VALUES(
-				#{DEVC_UNO}
-				, #{USER_ENO}
+				#{DEVC_NO}
+				, #{USER_NO}
 				, '1'
 				, #{REG_DT}
 				, '1'
@@ -587,15 +587,15 @@
 		INSERT INTO
 			devc_stat_hist
 			(
-				devc_uno
-				, user_eno
+				devc_no
+				, user_no
 				, devc_stat
 				, reg_dt
 				, seq
 			)
 			VALUES (
-				#{DEVC_UNO}
-				, #{USER_ENO}
+				#{DEVC_NO}
+				, #{USER_NO}
 				, #{DEVC_STAT}
 				, #{REG_DT}
 				, (
@@ -605,7 +605,7 @@
 						FROM
 							devc_stat_hist
 						WHERE
-							devc_uno = #{DEVC_UNO}
+							devc_no = #{DEVC_NO}
 					) +1
 				)
 			)
@@ -616,7 +616,7 @@
 		user_info
 		(
 			cntrl_user_id
-			, user_eno
+			, user_no
 			, user_pw
 			, user_nm
 			, user_hp
@@ -630,7 +630,7 @@
 			, NVL(
 				(
 					SELECT
-						MAX(user_eno)
+						MAX(user_no)
 					FROM
 						user_info
 				) +1, 1
@@ -722,13 +722,13 @@
 		UPDATE
 			br_info
 		SET
-			user_eno = #{USER_ENO}
+			user_no = #{USER_NO}
 			, br_nm = #{BR_NM}
 			, br_adr = #{BR_ADR}
 			, br_adr2 = #{BR_ADR2}
 			, mdfcn_dt = #{MDFCN_DT}
 		WHERE
-			user_eno = #{USER_ENO}
+			user_no = #{USER_NO}
 		AND br_cd = #{BR_CD}
 	</update>
 
@@ -739,7 +739,7 @@
 			mdfcn_dt = #{MDFCN_DT}
 			, cls_dt = #{CLS_DT}
 		WHERE
-			user_eno = #{USER_ENO}
+			user_no = #{USER_NO}
 		AND br_cd = #{BR_CD}
 		AND cls_dt IS NULL
 	</update>
@@ -754,7 +754,7 @@
 			, sw_ver = #{SW_VER}
 			, mdfcn_dt = #{MDFCN_DT}
 		WHERE
-			devc_uno = #{DEVC_UNO}
+			devc_no = #{DEVC_NO}
 
 	</update>
 
@@ -765,7 +765,7 @@
 			mdfcn_dt = #{MDFCN_DT}
 			, dscd_date= #{DSCD_DATE}
 		WHERE
-			devc_uno = #{DEVC_UNO}
+			devc_no = #{DEVC_NO}
 	</update>
 
 	<update id="cm_devc_stat_modify" parameterType="DevcVo">
@@ -775,7 +775,7 @@
 			devc_stat = #{DEVC_STAT}
 			, mdfcn_dt = #{MDFCN_DT}
 		WHERE
-			devc_uno = #{DEVC_UNO}
+			devc_no = #{DEVC_NO}
 	</update>
 
 	<update id="cm_user_my_modify" parameterType="UserVo">
@@ -787,7 +787,7 @@
 			, user_email = #{USER_EMAIL}
 			, mdfcn_dt = #{MDFCN_DT}
 		WHERE
-			user_eno = #{USER_ENO}
+			user_no = #{USER_NO}
 	</update>
 
 	<update id="cm_user_modify" parameterType="UserVo">

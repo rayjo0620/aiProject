@@ -1,19 +1,19 @@
 /**
- * 
+ *
  */
 package com.thinkit.ai.vo;
 
 /**
- * 
+ *
  * @author 씽크2
  * @Date 2021. 1. 12.
  */
 public class IncidentVo {
-	
+
 	public String OCRN_DATE;
 	public String BR_CD;
-	public String DEVC_UNO;
-	public String USER_ENO;
+	public String DEVC_NO;
+	public String USER_NO;
 	public String OB_TYPE;
 	public String OB_STRT_TM;
 	public String OB_END_TM;
@@ -26,8 +26,8 @@ public class IncidentVo {
 	public String REG_YN;
 	public String MNTMNG_TEL;
 	public String MFBIZ_NM;
-	
-	
+
+
 	public String getMNTMNG_TEL() {
 		return MNTMNG_TEL;
 	}
@@ -58,17 +58,17 @@ public class IncidentVo {
 	public void setBR_CD(String bR_CD) {
 		BR_CD = bR_CD;
 	}
-	public String getDEVC_UNO() {
-		return DEVC_UNO;
+	public String getDEVC_NO() {
+		return DEVC_NO;
 	}
-	public void setDEVC_UNO(String dEVC_UNO) {
-		DEVC_UNO = dEVC_UNO;
+	public void setDEVC_NO(String dEVC_NO) {
+		DEVC_NO = dEVC_NO;
 	}
-	public String getUSER_ENO() {
-		return USER_ENO;
+	public String getUSER_NO() {
+		return USER_NO;
 	}
-	public void setUSER_ENO(String uSER_ENO) {
-		USER_ENO = uSER_ENO;
+	public void setUSER_NO(String uSER_NO) {
+		USER_NO = uSER_NO;
 	}
 	public String getOB_TYPE() {
 		return OB_TYPE;
@@ -124,7 +124,7 @@ public class IncidentVo {
 	public void setBR_NM(String bR_NM) {
 		BR_NM = bR_NM;
 	}
-	
-	
-	
+
+
+
 }

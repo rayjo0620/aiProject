@@ -6,7 +6,6 @@
 	<resultMap type="HashMap" id="br_list">
 		<id column="BR_CD" property="BR_CD" />
 		<id column="BR_NM" property="BR_NM" />
-		<id column="BR_NM" property="USER_NO" />
 	</resultMap>
 
 	<resultMap type="HashMap" id="dash_cal">
@@ -79,7 +78,7 @@
 	        br.br_nm
 	        , br.br_cd
 	        , mapp.user_no
-	        , goods.goods_cdnm AS goods_nm
+	        , gc.goods_cdnm AS goods_nm
 	        , sales.dlamt
 	        , sales.delng_date
 	        , sales.delng_tm
@@ -89,12 +88,12 @@
 	        , sales.sub_seq
 	    FROM
 	        sales_info sales
-	        , goods_cd_info goods
+	        , goods_cd_info gc
 	        , devc_info devc
 	        , user_br_mapp mapp
 	        , br_info br
 	    WHERE 1=1
-	    AND sales.goods_cd = goods.goods_cd
+	    AND sales.goods_cd = gc.goods_cd
 	    AND sales.devc_no = devc.devc_no
 	    AND devc.user_no = mapp.user_no
 	    AND devc.br_cd = mapp.br_cd
@@ -102,11 +101,11 @@
 	    AND sales.delng_date = #{DELNG_DATE}
 	    -- 회원번호
 	    <if test="!USER_NO.equals('')">
-	    --AND mapp.user_no IN #{USER_NO}
+	    AND mapp.user_no IN #{USER_NO}
 		</if>
 	    -- 영업점번호
 	    <if test="!BR_CD.equals('')">
-	    --AND mapp.br_cd IN #{BR_CD}
+	    AND mapp.br_cd IN #{BR_CD}
 		</if>
 	</select>
 
@@ -115,7 +114,7 @@
 	        br.br_nm
 	        , br.br_cd
 	        , mapp.user_no
-	        , goods.goods_cdnm AS goods_nm
+	        , gc.goods_cdnm AS goods_nm
 	        , sales.dlamt
 	        , sales.delng_date
 	        , sales.delng_tm
@@ -125,12 +124,12 @@
 	        , sales.sub_seq
 	    FROM
 	        sales_info sales
-	        , goods_cd_info goods
+	        , goods_cd_info gc
 	        , devc_info devc
 	        , user_br_mapp mapp
 	        , br_info br
 	    WHERE 1=1
-	    AND sales.goods_cd = goods.goods_cd
+	    AND sales.goods_cd = gc.goods_cd
 	    AND sales.devc_no = devc.devc_no
 	    AND devc.user_no = mapp.user_no
 	    AND devc.br_cd = mapp.br_cd
@@ -151,18 +150,21 @@
 	    SELECT
 	        br.br_nm
 	        , br.br_cd
-	        , goods.goods_cdnm AS goods_nm
+	        , gt.goods_typenm AS goods_typenm
+	        , gc.goods_cdnm AS goods_nm
 	        , invn.goods_qy
 	        , invn.devc_no
 	        , invn.goods_cd
 	    FROM
 	        invntry_info invn
-	        , goods_cd_info goods
+	        , goods_cd_info gc
+	        , goods_type_info gt
 	        , devc_info devc
 	        , user_br_mapp mapp
 	        , br_info br
 	    WHERE 1=1
-	    AND invn.goods_cd = goods.goods_cd
+	    AND invn.goods_cd = gc.goods_cd
+	    AND gc.goods_type = gt.goods_type
 	    AND invn.devc_no = devc.devc_no
 	    AND br.br_cd = mapp.br_cd
 	    AND devc.br_cd = mapp.br_cd
@@ -243,7 +245,7 @@
 		UPDATE
 			invntry_info
 		SET
-			goods_qy IN #{GOODS_QY}
+			goods_qy = #{GOODS_QY}
 			, mdfcn_dt = #{REG_DT}
 		WHERE 1=1
 		AND devc_no IN #{DEVC_NO}

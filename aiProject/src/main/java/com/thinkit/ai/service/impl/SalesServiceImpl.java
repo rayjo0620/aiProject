@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.thinkit.ai.service.impl;
 
@@ -63,9 +63,9 @@ public class SalesServiceImpl implements SalesService{
 	public String sm_stkManage_del(StkVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Del in ss");
-		
+
 		String result =  Integer.toString(salesMapper.sm_stkManage_del(vo));
-		
+
 		return result;
 	}
 
@@ -74,13 +74,13 @@ public class SalesServiceImpl implements SalesService{
 		// TODO Auto-generated method stub
 		return salesMapper.modal_devc(vo);
 	}
-	
+
 	@Override
 	public List<Map<String, Object>> modal_gt() throws Exception {
 		// TODO Auto-generated method stub
 		return salesMapper.modal_gt();
 	}
-	
+
 	@Override
 	public List<Map<String, Object>> modal_gnm(StkVo vo) throws Exception {
 		// TODO Auto-generated method stub
@@ -89,17 +89,17 @@ public class SalesServiceImpl implements SalesService{
 
 	@Override
 	public String sm_stkManage_insert(StkVo vo) throws Exception {
-		
+
 		String result = Integer.toString(salesMapper.modal_insert(vo));
-		
+
 		return result;
 	}
-	
+
 	@Override
 	public String sm_stkManage_update(StkVo vo) throws Exception {
-		
+
 		String result = Integer.toString(salesMapper.modal_update(vo));
-		
+
 		return result;
 	}
 
@@ -108,11 +108,11 @@ public class SalesServiceImpl implements SalesService{
 		// TODO Auto-generated method stub
 		return salesMapper.dash_cal(vo);
 	}
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
 }

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.thinkit.ai.vo;
 
@@ -9,7 +9,7 @@ package com.thinkit.ai.vo;
  * @Date 2021. 1. 21.
  */
 public class BrVo {
-	public String USER_ENO;
+	public String USER_NO;
 	public String BR_CD;
 	public String BR_NM;
 	public String BR_ADR;
@@ -20,8 +20,8 @@ public class BrVo {
 	public String BR_ADR3;
 	public String MFBIZ_ID;
 	public String MODEL_ID;
-	public String DEVC_UNO;
-	
+	public String DEVC_NO;
+
 	public String getMFBIZ_ID() {
 		return MFBIZ_ID;
 	}
@@ -34,11 +34,11 @@ public class BrVo {
 	public void setMODEL_ID(String mODEL_ID) {
 		MODEL_ID = mODEL_ID;
 	}
-	public String getDEVC_UNO() {
-		return DEVC_UNO;
+	public String getDEVC_NO() {
+		return DEVC_NO;
 	}
-	public void setDEVC_UNO(String dEVC_UNO) {
-		DEVC_UNO = dEVC_UNO;
+	public void setDEVC_NO(String dEVC_NO) {
+		DEVC_NO = dEVC_NO;
 	}
 	public String getCLS_DT() {
 		return CLS_DT;
@@ -52,11 +52,11 @@ public class BrVo {
 	public void setBR_ADR3(String bR_ADR3) {
 		BR_ADR3 = bR_ADR3;
 	}
-	public String getUSER_ENO() {
-		return USER_ENO;
+	public String getUSER_NO() {
+		return USER_NO;
 	}
-	public void setUSER_ENO(String uSER_ENO) {
-		USER_ENO = uSER_ENO;
+	public void setUSER_NO(String uSER_NO) {
+		USER_NO = uSER_NO;
 	}
 	public String getBR_CD() {
 		return BR_CD;
@@ -94,6 +94,6 @@ public class BrVo {
 	public void setMDFCN_DT(String mDFCN_DT) {
 		MDFCN_DT = mDFCN_DT;
 	}
-	
-	
+
+
 }

@@ -1,20 +1,20 @@
 (function($) {
 	
-	/*var USER_ENO = '001';
+	/*var USER_NO = '001';
 	
-	var param_br = {USER_ENO : USER_ENO};*/
+	var param_br = {USER_NO : USER_NO};*/
 	
-	var eno = $('#sessionId').val();
+	var no = $('#sessionId').val();
 	var auth= $("#sessionAuthor").val();
 	
-	console.log("SESSION :: "+eno+"//"+auth);
+	console.log("SESSION :: "+no+"//"+auth);
 	
-	var USER_ENO = eno;
+	var USER_NO = no;
 	
-	var param_br = {USER_ENO : USER_ENO};
+	var param_br = {USER_NO : USER_NO};
 	
 ////////////////////////////////////////////////////////////////////////////////////////////
-	var select_br = "all";
+	var select_br = "";
 	var table;
 	var table_cnt = 0;
 	var today = moment().format('YY/MM/DD');
@@ -26,7 +26,7 @@
 	
 	var MODIFY_BR_NM;
 	var MODIFY_BR_CD;
-	var MODIFY_DEVC_UNO;
+	var MODIFY_DEVC_NO;
 	var MODIFY_GOODS_CD;
 	var MODIFY_GOODS_TYPE;
 	var MODIFY_GOODS_NM;
@@ -119,7 +119,7 @@
 					$('#sm_daily_grid').empty();
 					$('#modal_br_grid').empty();
 					
-					$('#sm_daily_grid').append('<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="all">전체 지점</a> </li>');
+					$('#sm_daily_grid').append('<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="">전체 지점</a> </li>');
 					$(brList2).each(function(index, data){
 						
 						var html_append = '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="'+data.BR_CD+'">'+data.BR_NM+'</a> </li>';
@@ -183,7 +183,7 @@
 		}else{
 			MODIFY_BR_NM = select[0].BR_NM;
 			MODIFY_BR_CD = select[0].BR_CD;
-			MODIFY_DEVC_UNO = select[0].DEVC_UNO;
+			MODIFY_DEVC_NO = select[0].DEVC_NO;
 			MODIFY_GOODS_CD = select[0].GOODS_CD;
 			MODIFY_GOODS_TYPE = select[0].GOODS_TYPE;
 			MODIFY_GOODS_NM = select[0].GOODS_NM;
@@ -191,7 +191,7 @@
 			MODIFY_GOODS_QY = select[0].GOODS_QY;
 			
 			$('#modal_modify_br').val(MODIFY_BR_NM);
-			$('#modal_modify_devc').val(MODIFY_DEVC_UNO);
+			$('#modal_modify_devc').val(MODIFY_DEVC_NO);
 			$('#modal_modify_gt').val(MODIFY_GOODS_TYPENM);
 			$('#modal_modify_gnm').val(MODIFY_GOODS_NM);
 			$('#modal_modify_qy').val(MODIFY_GOODS_QY);
@@ -231,9 +231,9 @@
 			
 	  		var param_del={
 							BR_CD : select[0].BR_CD,
-							DEVC_UNO : select[0].DEVC_UNO,
+							DEVC_NO : select[0].DEVC_NO,
 							GOODS_CD : select[0].GOODS_CD,
-							USER_ENO : select[0].USER_ENO,
+							USER_NO : select[0].USER_NO,
 							GOODS_TYPE : select[0].GOODS_TYPE
 							}
 							
@@ -270,7 +270,7 @@
 	
 	function read(){
 			var param ={
-			USER_ENO : USER_ENO,
+			USER_NO : USER_NO,
 			BR_CD : select_br
 			}
 		
@@ -295,7 +295,7 @@
 								"columns" : [	
 												{ "data" : null, defaultContent: ""},
 									            { "data" : "BR_NM" },
-									            { "data" : "DEVC_UNO" },
+									            { "data" : "DEVC_NO" },
 									            { "data" : "GOODS_NM" },
 									            { "data" : "GOODS_QY" },
 												
@@ -327,7 +327,7 @@
 	function modalDevc(){
 		
 		var param_modal = {
-							USER_ENO : USER_ENO,
+							USER_NO : USER_NO,
 							BR_CD : modal_br
 						}
 		
@@ -344,7 +344,7 @@
 					
 					$(modal_devc_list).each(function(index, data){
 						
-						var html_append = '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="'+data.DEVC_UNO+'">'+data.DEVC_UNO+'</a> </li>';
+						var html_append = '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="'+data.DEVC_NO+'">'+data.DEVC_NO+'</a> </li>';
 						
 						$('#modal_devc_grid').append(html_append);
 					});
@@ -424,9 +424,9 @@
 			}
 			
 			var param = {
-						USER_ENO : USER_ENO,
+						USER_NO : USER_NO,
 						BR_CD : modal_br,
-						DEVC_UNO : modal_devc,
+						DEVC_NO : modal_devc,
 						GOODS_TYPE : modal_gt,
 						GOODS_CD : modal_gnm,
 						GOODS_QY : modal_qy,
@@ -466,14 +466,14 @@
 		var param = {
 				BR_NM : MODIFY_BR_NM,
 				BR_CD : MODIFY_BR_CD,
-				DEVC_UNO : MODIFY_DEVC_UNO,
+				DEVC_NO : MODIFY_DEVC_NO,
 				GOODS_CD : MODIFY_GOODS_CD,
 				GOODS_TYPE : MODIFY_GOODS_TYPE,
 				GOODS_NM : MODIFY_GOODS_NM,
 				GOODS_TYPENM : MODIFY_GOODS_TYPENM,
 				GOODS_QY : $('#modal_modify_qy').val(),
 				REG_DT : today,
-				USER_ENO : USER_ENO
+				USER_NO : USER_NO
 			}
 			
 			

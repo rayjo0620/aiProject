@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.thinkit.ai.vo;
 
@@ -16,15 +16,15 @@ public class GoodsVo {
 	public String REG_DT;
 	public String MDFCN_DT;
 	public String GOODS_TYPE_MODIFY;
-	
-	
+
+
 	public String getGOODS_TYPE_MODIFY() {
 		return GOODS_TYPE_MODIFY;
 	}
 	public void setGOODS_TYPE_MODIFY(String gOODS_TYPE_MODIFY) {
 		GOODS_TYPE_MODIFY = gOODS_TYPE_MODIFY;
 	}
-	
+
 	public String getREG_DT() {
 		return REG_DT;
 	}

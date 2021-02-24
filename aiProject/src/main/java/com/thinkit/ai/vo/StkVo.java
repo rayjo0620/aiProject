@@ -12,11 +12,11 @@ public class StkVo {
 	
 	public String BR_CD;
 	public String BR_NM;
-	public String DEVC_UNO;
+	public String DEVC_NO;
 	public String GOODS_CD;
 	public String GOODS_NM;
 	public String GOODS_QY;
-	public String USER_ENO;
+	public String USER_NO;
 	public String GOODS_TYPE;
 	public String GOODS_TYPENM;
 	public String REG_DT;
@@ -40,11 +40,11 @@ public class StkVo {
 	public void setGOODS_TYPE(String gOODS_TYPE) {
 		GOODS_TYPE = gOODS_TYPE;
 	}
-	public String getUSER_ENO() {
-		return USER_ENO;
+	public String getUSER_NO() {
+		return USER_NO;
 	}
-	public void setUSER_ENO(String uSER_ENO) {
-		USER_ENO = uSER_ENO;
+	public void setUSER_NO(String uSER_NO) {
+		USER_NO = uSER_NO;
 	}
 	public String getBR_CD() {
 		return BR_CD;
@@ -58,11 +58,11 @@ public class StkVo {
 	public void setBR_NM(String bR_NM) {
 		BR_NM = bR_NM;
 	}
-	public String getDEVC_UNO() {
-		return DEVC_UNO;
+	public String getDEVC_NO() {
+		return DEVC_NO;
 	}
-	public void setDEVC_UNO(String dEVC_UNO) {
-		DEVC_UNO = dEVC_UNO;
+	public void setDEVC_NO(String dEVC_NO) {
+		DEVC_NO = dEVC_NO;
 	}
 	public String getGOODS_CD() {
 		return GOODS_CD;

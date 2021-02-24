@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.thinkit.ai.vo;
 
@@ -15,7 +15,7 @@ public class MfbizVo {
 	public String USE_YN;
 	public String REG_DT;
 	public String MDFCN_DT;
-	
+
 	public String getMFBIZ_ID() {
 		return MFBIZ_ID;
 	}
@@ -52,6 +52,6 @@ public class MfbizVo {
 	public void setMDFCN_DT(String mDFCN_DT) {
 		MDFCN_DT = mDFCN_DT;
 	}
-	
-	
+
+
 }

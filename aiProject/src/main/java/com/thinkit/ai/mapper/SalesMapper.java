@@ -19,7 +19,7 @@ import com.thinkit.ai.vo.StkVo;
 
 @Mapper
 public interface SalesMapper {
-	public List<Map<String, Object>> brList(String USER_ENO) throws Exception;
+	public List<Map<String, Object>> brList(String USER_NO) throws Exception;
 	
 	public String sm_daily_tot(SalesVo vo)throws Exception;
 	

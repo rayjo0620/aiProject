@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.thinkit.ai.vo;
 
@@ -11,9 +11,9 @@ package com.thinkit.ai.vo;
 public class DevcVo {
 	public String MFBIZ_ID;
 	public String MFBIZ_NM;
-	public String USER_ENO;
+	public String USER_NO;
 	public String MODEL_ID;
-	public String DEVC_UNO;
+	public String DEVC_NO;
 	public String DEVC_IP;
 	public String OS_INFO;
 	public String CPU_INFO;
@@ -23,9 +23,9 @@ public class DevcVo {
 	public String REG_DT;
 	public String MDFCN_DT;
 	public String DTL_CDNM;
-	
-	
-	
+
+
+
 	public String getDTL_CDNM() {
 		return DTL_CDNM;
 	}
@@ -68,13 +68,13 @@ public class DevcVo {
 	public String END_DATE;
 	public String END_TM;
 
-	
-	
-	public String getUSER_ENO() {
-		return USER_ENO;
+
+
+	public String getUSER_NO() {
+		return USER_NO;
 	}
-	public void setUSER_ENO(String uSER_ENO) {
-		USER_ENO = uSER_ENO;
+	public void setUSER_NO(String uSER_NO) {
+		USER_NO = uSER_NO;
 	}
 	public String getMODEL_ID() {
 		return MODEL_ID;
@@ -82,11 +82,11 @@ public class DevcVo {
 	public void setMODEL_ID(String mODEL_ID) {
 		MODEL_ID = mODEL_ID;
 	}
-	public String getDEVC_UNO() {
-		return DEVC_UNO;
+	public String getDEVC_NO() {
+		return DEVC_NO;
 	}
-	public void setDEVC_UNO(String dEVC_UNO) {
-		DEVC_UNO = dEVC_UNO;
+	public void setDEVC_NO(String dEVC_NO) {
+		DEVC_NO = dEVC_NO;
 	}
 	public String getDEVC_IP() {
 		return DEVC_IP;
@@ -136,7 +136,7 @@ public class DevcVo {
 	public void setMDFCN_DT(String mDFCN_DT) {
 		MDFCN_DT = mDFCN_DT;
 	}
-	
+
 	public String getMFBIZ_ID() {
 		return MFBIZ_ID;
 	}
@@ -149,7 +149,7 @@ public class DevcVo {
 	public void setMFBIZ_NM(String mFBIZ_NM) {
 		MFBIZ_NM = mFBIZ_NM;
 	}
-	
-	
+
+
 
 }

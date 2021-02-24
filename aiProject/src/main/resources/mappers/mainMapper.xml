@@ -12,41 +12,26 @@
 		SELECT
 			a.devc_tot
 			, b.ob_tot
-			<choose>
-				<when test="USER_ENO != null and USER_ENO == 'admin'">
+			<if test="!USER_NO.equals('')">
+			FROM
+				(
+					SELECT
+						COUNT(*) devc_tot
 					FROM
-						(
-							SELECT
-								COUNT(*) devc_tot
-							FROM
-								devc_info
-						) a
-						,(
-							SELECT
-								COUNT(*) ob_tot
-							FROM
-								ob_stat
-						) b
-				</when>
-				<otherwise>
+						devc_info
+					WHERE 1=1
+					AND user_no IN #{USER_NO}
+				) a
+				,(
+					SELECT
+						COUNT(*) ob_tot
 					FROM
-						(
-							SELECT
-								COUNT(*) devc_tot
-							FROM
-								devc_info
-							WHERE
-								user_eno = #{USER_ENO}
-						) a
-						,(
-							SELECT
-								COUNT(*) ob_tot
-							FROM
-								ob_stat
-							WHERE
-								user_eno = #{USER_ENO}
-						) b
-				</otherwise>
-			</choose>
+						ob_stat ob
+						, devc_info devc
+					WHERE 1=1
+					AND ob.devc_no = devc.devc_no
+					AND devc.user_no IN #{USER_NO}
+				) b
+			</if>
 	</select>
 </mapper>

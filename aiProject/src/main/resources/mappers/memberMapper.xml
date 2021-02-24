@@ -12,13 +12,13 @@
 	 	AND
 	 		user_pw = #{USER_PW}
 	 </select>
-	
+
 	<select id="join" parameterType="MemberVo" >
 		INSERT INTO
-			user_info 
+			user_info
 			(
 				cntrl_user_id
-				, user_eno
+				, user_no
 				, user_pw
 				, user_nm
 				, user_hp
@@ -26,12 +26,12 @@
 				, cntrl_author
 				, reg_dt
 			)
-			VALUES 
+			VALUES
 			(
 				#{CNTRL_USER_ID}
 				, (
 					SELECT
-						NVL(MAX(user_eno), 0)+1
+						NVL(MAX(user_no), 0)+1
 					FROM
 						user_info
 				)
@@ -40,7 +40,7 @@
 				, '01'
 				, TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
 			)
-	
+
 	</select>
-	
+
 </mapper>

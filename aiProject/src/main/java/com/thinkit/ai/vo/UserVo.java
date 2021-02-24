@@ -11,7 +11,7 @@ package com.thinkit.ai.vo;
 public class UserVo {
 	
 	public String CNTRL_USER_ID;
-	public String USER_ENO;
+	public String USER_NO;
 	public String USER_PW;
 	public String USER_NM;
 	public String USER_HP;
@@ -25,11 +25,11 @@ public class UserVo {
 	public void setCNTRL_USER_ID(String cNTRL_USER_ID) {
 		CNTRL_USER_ID = cNTRL_USER_ID;
 	}
-	public String getUSER_ENO() {
-		return USER_ENO;
+	public String getUSER_NO() {
+		return USER_NO;
 	}
-	public void setUSER_ENO(String uSER_ENO) {
-		USER_ENO = uSER_ENO;
+	public void setUSER_NO(String uSER_NO) {
+		USER_NO = uSER_NO;
 	}
 	public String getUSER_PW() {
 		return USER_PW;

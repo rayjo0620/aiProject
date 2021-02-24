@@ -16,11 +16,11 @@
 			br_info
 		WHERE
 			<choose>
-				<when test="USER_ENO != null and USER_ENO.equals('admin')">
-					user_eno like '%'
+				<when test="USER_NO != null and USER_NO.equals('admin')">
+					user_no like '%'
 				</when>
 				<otherwise>
-					user_eno = #{USER_ENO}
+					user_no = #{USER_NO}
 				</otherwise>
 			</choose>
 	</select>
@@ -29,8 +29,8 @@
 		SELECT
 			ocrn_date
 			, br_cd
-			, devc_uno
-			, user_eno
+			, devc_no
+			, user_no
 			, ob_type
 			, ob_strt_tm
 			, ac_cd
@@ -41,7 +41,7 @@
 			, mdfcn_dt
 			, ob_end_tm
 			<choose>
-				<when test="USER_ENO != null and USER_ENO.equals('admin')">
+				<when test="USER_NO != null and USER_NO.equals('admin')">
 					, (
 						SELECT
 							br_nm
@@ -49,7 +49,7 @@
 							br_info
 						WHERE
 							o.br_cd = br_info.br_cd
-						AND br_info.user_eno = '%'
+						AND br_info.user_no = '%'
 					) AS br_nm
 					, (
 						SELECT
@@ -63,8 +63,8 @@
 								FROM
 									devc_info
 								WHERE
-									devc_uno=o.devc_uno
-								AND user_eno = '%'
+									devc_no=o.devc_no
+								AND user_no = '%'
 							)
 					) AS mfbiz_nm
 					, (
@@ -79,8 +79,8 @@
 							FROM
 								devc_info
 							WHERE
-								devc_uno = o.devc_uno
-							AND user_eno = '%'
+								devc_no = o.devc_no
+							AND user_no = '%'
 						)
 					) AS mntmng_tel
 				</when>
@@ -92,7 +92,7 @@
 							br_info
 						WHERE
 							o.br_cd = br_info.br_cd
-						AND br_info.user_eno = #{USER_ENO}
+						AND br_info.user_no = #{USER_NO}
 					) AS br_nm
 					, (
 						SELECT
@@ -106,8 +106,8 @@
 								FROM
 									devc_info
 								WHERE
-									devc_uno = o.devc_uno
-								AND user_eno = #{USER_ENO}
+									devc_no = o.devc_no
+								AND user_no = #{USER_NO}
 							)
 					) AS mfbiz_nm
 					, (
@@ -122,8 +122,8 @@
 								FROM
 									devc_info
 								WHERE
-									devc_uno = o.devc_uno
-								AND user_eno = #{USER_ENO}
+									devc_no = o.devc_no
+								AND user_no = #{USER_NO}
 							)
 					) AS mntmng_tel
 				</otherwise>
@@ -132,17 +132,17 @@
 			ob_stat o
 		WHERE
 			<choose>
-				<when test="USER_ENO != null and USER_ENO.equals('admin')">
-					user_eno like '%' and br_cd=#{BR_CD}
+				<when test="USER_NO != null and USER_NO.equals('admin')">
+					user_no like '%' and br_cd=#{BR_CD}
 				</when>
 				<when test="BR_CD != null and BR_CD.equals('all')">
-					user_eno=#{USER_ENO}
+					user_no=#{USER_NO}
 				</when>
-				<when test="BR_CD != null and BR_CD.equals('all') and USER_ENO != null and USER_ENO.equals('admin')">
-					user_eno like '%' and br_cd like '%'
+				<when test="BR_CD != null and BR_CD.equals('all') and USER_NO != null and USER_NO.equals('admin')">
+					user_no like '%' and br_cd like '%'
 				</when>
 				<otherwise>
-					user_eno=#{USER_ENO} and br_cd=#{BR_CD}
+					user_no=#{USER_NO} and br_cd=#{BR_CD}
 				</otherwise>
 			</choose>
 	</select>
@@ -151,12 +151,12 @@
 		SELECT
 			ocrn_date
 			, br_cd
-			, devc_uno
-			, user_eno
+			, devc_no
+			, user_no
 			, ob_type
 			, ob_strt_tm
 			, ac_cd
-			, NVL2(ac_cd, '접수','접수 대기중') as reg_yn 
+			, NVL2(ac_cd, '접수','접수 대기중') as reg_yn
 			, NVL(ac_dts, '접수 대기중') AS ac_dts
 			, NVL(reqre_tm, '접수 대기중') AS reqre_tm
 			, reg_dt
@@ -169,7 +169,7 @@
 					br_info
 				WHERE
 					br_info.br_cd = o.br_cd
-				AND br_info.user_eno = o.user_eno
+				AND br_info.user_no = o.user_no
 			) AS br_nm
 			, (
 				SELECT mfbiz_nm
@@ -177,8 +177,8 @@
 				WHERE mfbiz_id =(
 				SELECT mfbiz_id
 				FROM devc_info
-				WHERE devc_uno=o.devc_uno
-				AND user_eno=o.user_eno
+				WHERE devc_no=o.devc_no
+				AND user_no=o.user_no
 				)
 			) AS mfbiz_nm
 			, (
@@ -193,8 +193,8 @@
 						FROM
 							devc_info
 						WHERE
-							devc_uno = o.devc_uno
-						AND user_eno = o.user_eno
+							devc_no = o.devc_no
+						AND user_no = o.user_no
 					)
 			) AS mntmng_tel
 		FROM
@@ -202,11 +202,11 @@
 		WHERE
 			<choose>
 				<when test="BR_CD != null and BR_CD.equals('all')">
-					user_eno like '%'
+					user_no like '%'
 					AND br_cd like '%'
 				</when>
 				<otherwise>
-					user_eno like '%'
+					user_no like '%'
 					AND br_cd = #{BR_CD}
 				</otherwise>
 			</choose>
@@ -215,7 +215,7 @@
 	<select id="im_dash_grid" parameterType="IncidentVo" resultType="IncidentVo">
 	SELECT
 		br_cd
-		, devc_uno
+		, devc_no
 		, ac_cd
 		<choose>
 			<when test="BR_CD != null and BR_CD.equals('all')">
@@ -226,16 +226,16 @@
 						br_info
 					WHERE
 						o.br_cd = br_info.br_cd
-						AND br_info.user_eno = #{USER_ENO}
+						AND br_info.user_no = #{USER_NO}
 				) AS br_nm
 	FROM
 		ob_stat o
 	WHERE
-		user_eno = #{USER_ENO}
+		user_no = #{USER_NO}
 	AND ac_cd != '06'
 			</when>
 
-			<when test="USER_ENO != null and USER_ENO.equals('admin')">
+			<when test="USER_NO != null and USER_NO.equals('admin')">
 				, (
 					SELECT
 						br_nm
@@ -243,7 +243,7 @@
 						br_info
 					WHERE
 						o.br_cd = br_info.br_cd
-					AND br_info.user_end = o.user_eno
+					AND br_info.user_end = o.user_no
 				) AS br_nm
 	FROM
 		ob_stat o
@@ -251,7 +251,7 @@
 		br_cd = #{BR_CD} and ac_cd != '06'
 			</when>
 
-			<when test="BR_CD != null and BR_CD.equals('all') and USER_ENO != null and USER_ENO.equals('admin')">
+			<when test="BR_CD != null and BR_CD.equals('all') and USER_NO != null and USER_NO.equals('admin')">
 				, (
 					SELECT
 						br_nm
@@ -273,13 +273,13 @@
 						br_info
 					WHERE
 						o.br_cd = br_info.br_cd
-					AND br_info.user_eno = #{USER_ENO}
+					AND br_info.user_no = #{USER_NO}
 				) AS br_nm
 	FROM
 		ob_stat o
 	WHERE
 		br_cd = #{BR_CD}
-	AND user_eno = #{USER_ENO}
+	AND user_no = #{USER_NO}
 	AND ac_cd != '06'
 			</otherwise>
 		</choose>
@@ -293,8 +293,8 @@
 			SELECT
 				ocrn_date
 				, br_cd
-				, devc_uno
-				, user_eno
+				, devc_no
+				, user_no
 				, ob_type
 				, ob_strt_tm
 				, ob_end_tm
@@ -308,8 +308,8 @@
 			WHERE
 				ocrn_date = #{OCRN_DATE}
 			AND	br_cd = #{BR_CD}
-			AND	devc_uno =#{DEVC_UNO}
-			AND	user_eno=#{USER_ENO}
+			AND	devc_no =#{DEVC_NO}
+			AND	user_no=#{USER_NO}
 			AND	SEQ = (
 				SELECT
 					MAX(SEQ)
@@ -317,15 +317,15 @@
 					ob_stat_hist
 				WHERE ocrn_date = #{OCRN_DATE}
 				AND br_cd = #{BR_CD}
-				AND devc_uno = #{DEVC_UNO}
-				AND user_eno= #{USER_ENO}
+				AND devc_no = #{DEVC_NO}
+				AND user_no= #{USER_NO}
 			)
 		) b
 		ON (
 			a.ocrn_date = b.ocrn_date
 			AND a.br_cd = b.br_cd
-			AND a.devc_uno = b.devc_uno
-			AND a.user_eno= b.user_eno
+			AND a.devc_no = b.devc_no
+			AND a.user_no= b.user_no
 		)
 		WHEN MATCHED THEN
 
@@ -344,8 +344,8 @@
 		INSERT (
 			ocrn_date
 			, br_cd
-			, devc_uno
-			, user_eno
+			, devc_no
+			, user_no
 			, ob_type
 			, ob_strt_tm
 			, ob_end_tm
@@ -358,8 +358,8 @@
 		VALUES(
 			b.ocrn_date
 			, b.br_cd
-			, b.devc_uno
-			, b.user_eno
+			, b.devc_no
+			, b.user_no
 			, b.ob_type
 			, b.ob_strt_tm
 			, b.ob_end_tm
@@ -372,8 +372,8 @@
 		WHERE
 			b.ocrn_date = #{OCRN_DATE}
 		AND b.br_cd = #{BR_CD}
-		AND b.devc_uno = #{DEVC_UNO}
-		AND b.user_eno= #{USER_ENO}
+		AND b.devc_no = #{DEVC_NO}
+		AND b.user_no= #{USER_NO}
 	</update>
 
 	<insert id="im_user_insert" parameterType="IncidentVo">
@@ -382,8 +382,8 @@
 			(
 				ocrn_date
 				, br_cd
-				, devc_uno
-				, user_eno
+				, devc_no
+				, user_no
 				, seq
 				, ob_type
 				, ob_strt_tm
@@ -393,8 +393,8 @@
 			(
 				#{OCRN_DATE}
 				, #{BR_CD}
-				, #{DEVC_UNO}
-				, #{USER_ENO}
+				, #{DEVC_NO}
+				, #{USER_NO}
 				, '1'
 				, #{OB_TYPE}
 				, #{OB_STRT_TM}
@@ -408,8 +408,8 @@
 			(
 				ocrn_date
 				, br_cd
-				, devc_uno
-				, user_eno
+				, devc_no
+				, user_no
 				, seq
 				, ob_type
 				, ob_strt_tm
@@ -421,21 +421,21 @@
 		(
 			#{OCRN_DATE}
 			, #{BR_CD}
-			, #{DEVC_UNO}
-			, #{USER_ENO}
+			, #{DEVC_NO}
+			, #{USER_NO}
 			, (
 				SELECT MAX(seq)
 				FROM ob_stat_hist
 				WHERE
 					ocrn_date = #{OCRN_DATE}
 				AND br_cd = #{BR_CD}
-				AND devc_uno = #{DEVC_UNO}
-				AND user_eno= #{USER_ENO})+1
+				AND devc_no = #{DEVC_NO}
+				AND user_no= #{USER_NO})+1
 			, #{OB_TYPE}
 			, #{OB_STRT_TM}
 			, #{REG_DT}
 			, #{AC_CD}
 			, #{AC_DTS}
 		)
-	</insert>	
+	</insert>
 </mapper>

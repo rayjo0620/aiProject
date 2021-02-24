@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.thinkit.ai.service.impl;
 
@@ -22,11 +22,11 @@ public class MainServiceImpl implements MainService{
 	@Autowired MainMapper mainMapper;
 
 	@Override
-	public List<Map<String, Object>> main_chart_tot(String USER_ENO) throws Exception {
+	public List<Map<String, Object>> main_chart_tot(String USER_NO) throws Exception {
 		// TODO Auto-generated method stub
-		return mainMapper.main_chart_tot(USER_ENO);
+		return mainMapper.main_chart_tot(USER_NO);
 	}
 
-	
+
 
 }

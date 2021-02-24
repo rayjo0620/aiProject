@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.thinkit.ai.service.impl;
 
@@ -17,9 +17,9 @@ import com.thinkit.ai.vo.MemberVo;
  */
 @Service
 public class MemberServiceImpl implements MemberService{
-	
+
 	@Autowired MemberMapper memberMapper;
-	
+
 	@Override
 	public int chkId(String userId) throws Exception {
 		// TODO Auto-generated method stub
@@ -34,8 +34,8 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public MemberVo logIn(MemberVo vo) throws Exception {
-		
+
 		return memberMapper.login(vo);
 	}
-	
+
 }

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.thinkit.ai.vo;
 
@@ -16,7 +16,7 @@ public class CodeVo {
 	public String USE_YN;
 	public String REG_DT;
 	public String MDFCN_DT;
-	
+
 	public String getGRP_CDID() {
 		return GRP_CDID;
 	}
@@ -59,7 +59,7 @@ public class CodeVo {
 	public void setMDFCN_DT(String mDFCN_DT) {
 		MDFCN_DT = mDFCN_DT;
 	}
-	
-	
-	
+
+
+
 }

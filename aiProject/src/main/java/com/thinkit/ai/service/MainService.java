@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.thinkit.ai.service;
 
@@ -13,7 +13,7 @@ import java.util.Map;
  * @Date 2021. 1. 6.
  */
 public interface MainService {
-	
-	public List<Map<String, Object>> main_chart_tot(String USER_ENO) throws Exception;
+
+    public List<Map<String, Object>> main_chart_tot(String USER_NO) throws Exception;
 
 }

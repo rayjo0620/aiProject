@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.thinkit.ai.service.impl;
 
@@ -28,9 +28,9 @@ import com.thinkit.ai.vo.UserVo;
 public class CommonServiceImpl implements CommonService {
 	@Autowired
 	CommonMapper commonMapper;
-	
+
 	//goods
-	
+
 	@Override
 	public List<Map<String, Object>> cm_goods_grid() throws Exception {
 		// TODO Auto-generated method stub
@@ -60,9 +60,9 @@ public class CommonServiceImpl implements CommonService {
 		String result = Integer.toString(commonMapper.cm_goods_modify(vo));
 		return result;
 	}
-	
+
 	//br
-	
+
 	@Override
 	public List<Map<String, Object>> cm_br_loc_grid(BrVo vo) throws Exception {
 		// TODO Auto-generated method stub
@@ -70,7 +70,7 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	public String cm_br_insert(BrVo vo) throws Exception {		
+	public String cm_br_insert(BrVo vo) throws Exception {
 		String result = Integer.toString(commonMapper.cm_br_insert(vo));
 		return result;
 	}
@@ -88,15 +88,15 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	public List<Map<String, Object>> cm_br_map_grid_br(String USER_ENO) throws Exception {
+	public List<Map<String, Object>> cm_br_map_grid_br(String USER_NO) throws Exception {
 		// TODO Auto-generated method stub
-		return commonMapper.cm_br_map_grid_br(USER_ENO);
+		return commonMapper.cm_br_map_grid_br(USER_NO);
 	}
 
 	@Override
-	public List<Map<String, Object>> cm_br_map_grid_devc(String USER_ENO) throws Exception {
+	public List<Map<String, Object>> cm_br_map_grid_devc(String USER_NO) throws Exception {
 		// TODO Auto-generated method stub
-		return commonMapper.cm_br_map_grid_devc(USER_ENO);
+		return commonMapper.cm_br_map_grid_devc(USER_NO);
 	}
 
 	@Override
@@ -104,9 +104,9 @@ public class CommonServiceImpl implements CommonService {
 		String result = Integer.toString(commonMapper.cm_br_mapping(vo));
 		return result;
 	}
-	
+
 	//devc
-	
+
 	@Override
 	public List<Map<String, Object>> cm_mfbiz() throws Exception {
 		// TODO Auto-generated method stub
@@ -133,48 +133,48 @@ public class CommonServiceImpl implements CommonService {
 
 	@Override
 	public String cm_devc_insert(DevcVo vo) throws Exception {
-		
+
 		String result = Integer.toString(commonMapper.cm_devc_insert(vo));
 		result += Integer.toString(commonMapper.cm_devc_insert_hist(vo));
 		result += Integer.toString(commonMapper.cm_devc_stat_insert(vo));
 		result += Integer.toString(commonMapper.cm_devc_stat_hist_insert(vo));
-		
+
 		return result;
 	}
-	
+
 	@Override
-	public String cm_devc_insert_chk(String DEVC_UNO) throws Exception {
-		String result = Integer.toString(commonMapper.cm_devc_insert_chk(DEVC_UNO));
-		
+	public String cm_devc_insert_chk(String DEVC_NO) throws Exception {
+		String result = Integer.toString(commonMapper.cm_devc_insert_chk(DEVC_NO));
+
 		return result;
 	}
-	
+
 	@Override
 	public String cm_devc_modify(DevcVo vo) throws Exception {
-		
+
 		String result = Integer.toString(commonMapper.cm_devc_modify(vo));
 		result += Integer.toString(commonMapper.cm_devc_modify_hist(vo));
 		result += Integer.toString(commonMapper.cm_devc_stat_modify(vo));
 		result += Integer.toString(commonMapper.cm_devc_stat_hist_modify(vo));
-		
+
 		return result;
 	}
-	
+
 	@Override
 	public String cm_devc_cls(DevcVo vo) throws Exception{
 		String result = Integer.toString(commonMapper.cm_devc_cls(vo));
 		result += Integer.toString(commonMapper.cm_devc_modify_hist(vo));
 		result += Integer.toString(commonMapper.cm_devc_stat_modify(vo));
 		result += Integer.toString(commonMapper.cm_devc_stat_hist_modify(vo));
-		
+
 		return result;
 	}
-	
+
 	@Override
 	public String cm_devc_stat(DevcVo vo) throws Exception{
 		String result = Integer.toString(commonMapper.cm_devc_stat_insert(vo));
 		result += Integer.toString(commonMapper.cm_devc_stat_hist_insert(vo));
-		
+
 		return result;
 	}
 
@@ -183,20 +183,20 @@ public class CommonServiceImpl implements CommonService {
 		// TODO Auto-generated method stub
 		return commonMapper.cm_user_list();
 	}
-	
+
 	@Override
 	public String cm_user_my_modify(UserVo vo) throws Exception {
-		
+
 		String result = Integer.toBinaryString(commonMapper.cm_user_my_modify(vo));
-		
+
 		return result;
 	}
 
 	@Override
 	public String cm_user_insert(UserVo vo) throws Exception {
-		
+
 		String result = Integer.toString(commonMapper.cm_user_insert(vo));
-		
+
 		return result;
 	}
 
@@ -205,7 +205,7 @@ public class CommonServiceImpl implements CommonService {
 		String result = Integer.toString(commonMapper.cm_user_modify(vo));
 		return result;
 	}
-	
+
 	@Override
 	public String cm_user_del(UserVo vo) throws Exception {
 		String result = Integer.toString(commonMapper.cm_user_del(vo));
@@ -299,12 +299,12 @@ public class CommonServiceImpl implements CommonService {
 		return null;
 	}
 
-	
 
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
 }

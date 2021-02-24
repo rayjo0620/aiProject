@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.thinkit.ai.service.impl;
 
@@ -23,14 +23,14 @@ public class IncidentServiceImpl implements IncidentService{
 	@Autowired IncidentMapper incidentMapper;
 
 	@Override
-	public List<Map<String, Object>> br_list(String USER_ENO) throws Exception {
+	public List<Map<String, Object>> br_list(String USER_NO) throws Exception {
 		// TODO Auto-generated method stub
-		return incidentMapper.brList(USER_ENO);
+		return incidentMapper.brList(USER_NO);
 	}
 
 	@Override
 	public List<IncidentVo> im_user_grid(IncidentVo vo) throws Exception {
-				
+
 		return incidentMapper.im_user_grid(vo);
 	}
 
@@ -61,7 +61,7 @@ public class IncidentServiceImpl implements IncidentService{
 
 	@Override
 	public List<IncidentVo> im_dash_grid(IncidentVo vo) throws Exception {
-		
+
 		return incidentMapper.im_dash_grid(vo);
 	}
 

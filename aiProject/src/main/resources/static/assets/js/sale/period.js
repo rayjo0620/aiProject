@@ -12,7 +12,7 @@
 	var param_br = {USER_NO : USER_NO};
 	
 //////////////////////////////////////////////////////////////////		
-	var select_br = "all";
+	var select_br = "";
 
 	
 	/*
