@@ -166,7 +166,7 @@
                             "data" :grid,
                             "scrollX": true,
                             "scrollY": true,
-                            "paging": false,
+                            "paging": true,
                             "responsive": true,
                             "autofill": true,
                             "columns" : [

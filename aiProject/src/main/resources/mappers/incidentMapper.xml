@@ -129,7 +129,7 @@
 		AND devc.user_no = mapp.user_no
 		AND devc.br_cd = mapp.br_cd
 		AND mapp.br_cd = br.br_cd
-		AND cd.dtl_cdnm != '14'
+		AND cd.dtl_cd != '14'
 		<if test="!USER_NO.equals('') and CNTRL_AUTHOR!=1" >
 		AND mapp.user_no IN #{USER_NO}
 		</if>
@@ -137,7 +137,8 @@
 		AND mapp.br_cd IN #{BR_CD}
 		</if>
 	</select>
-
+	
+	<!--  im_merge, im_user_insert, im_admin_modify 변경 필요함 -->
 	<update id="im_merge" parameterType="IncidentVo" >
 		MERGE INTO
 			ob_stat a
