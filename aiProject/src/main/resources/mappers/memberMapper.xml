@@ -2,15 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.thinkit.ai.mapper.MemberMapper">
-	 <select id="login" parameterType="MemberVo" resultType="MemberVo">
+
+	<resultMap id="MemberVo" type="com.thinkit.ai.vo.MemberVo">
+		<result property="cntrlUserId" column="CNTRL_USER_ID" />
+		<result property="userEno" column="USER_ENO" />
+		<result property="userPw" column="USER_PW" />
+		<result property="userNm" column="USER_NM" />
+		<result property="userHp" column="USER_HP" />
+		<result property="userEmail" column="USER_EMAIL" />
+		<result property="cntrlAuthor" column="CNTRL_AUTHOR" />
+	</resultMap>
+
+	 <select id="login" parameterType="MemberVo" resultMap="MemberVo">
 		SELECT
 			*
 	 	FROM
 	 		user_info
 	 	WHERE
-	 		cntrl_user_id = #{CNTRL_USER_ID}
+	 		cntrl_user_id = #{cntrlUserId}
 	 	AND
-	 		user_pw = #{USER_PW}
+	 		user_pw = #{userPw}
 	 </select>
 	
 	<select id="join" parameterType="MemberVo" >
@@ -28,15 +39,15 @@
 			)
 			VALUES 
 			(
-				#{CNTRL_USER_ID}
+				#{cntrlUserId}
 				, (
 					SELECT
 						NVL(MAX(user_eno), 0)+1
 					FROM
 						user_info
 				)
-				, #{USER_PW}, #{USER_NM}
-				, #{USER_HP}, #{USER_EMAIL}
+				, #{userPw}, #{userNm}
+				, #{userHp}, #{userEmail}
 				, '01'
 				, TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
 			)

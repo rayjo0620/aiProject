@@ -15,6 +15,6 @@ import com.thinkit.ai.vo.MemberVo;
 
 @Mapper
 public interface MemberMapper {
-	public MemberVo login(MemberVo vo); 
-	public Integer join(MemberVo vo);
+	 MemberVo login(MemberVo vo); 
+	 Integer join(MemberVo vo);
 }

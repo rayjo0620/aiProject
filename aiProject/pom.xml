@@ -38,9 +38,21 @@
 			<artifactId>ojdbc8</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-				
-		
-		
+		<!-- 접속디바이스 구분 -->		
+		<dependency>
+			<groupId>org.springframework.mobile</groupId>
+			<artifactId>spring-mobile-starter</artifactId>
+			<version>2.0.0.M3</version>
+			<type>pom</type>
+		</dependency>
+		<!-- 롬복 -->
+		<dependency>
+         <groupId>org.projectlombok</groupId>
+         <artifactId>lombok</artifactId>
+         <optional>true</optional>
+         <scope>provided</scope>
+      	</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -103,5 +115,13 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<repositories>         
+		      <repository>
+		            <id>spring-milestones</id>
+		            <name>Spring Milestones</name>
+		            <url>https://repo.spring.io/milestone</url>
+		      </repository>
+	</repositories>
 
 </project>
