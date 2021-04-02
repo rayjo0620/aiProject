@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.thinkit.ai.service.impl.IncidentServiceImpl;
+import com.thinkit.ai.mapper.IncidentMapper;
 import com.thinkit.ai.vo.IncidentVo;
 
 /**
@@ -25,12 +25,14 @@ import com.thinkit.ai.vo.IncidentVo;
 @RestController
 public class IncidentController {
 	
-	@Autowired IncidentServiceImpl isi;
+	//@Autowired IncidentServiceImpl incidentMapper;
+	@Autowired
+	IncidentMapper incidentMapper;
 	
 	@RequestMapping("/incident/br_list")
 	public String getBrList(String USER_ENO, Model model) throws Exception {
 		Gson gson = new GsonBuilder().serializeNulls().create();
-		List<Map<String, Object>> brList = isi.br_list(USER_ENO);
+		List<Map<String, Object>> brList = incidentMapper.brList(USER_ENO);
 		model.addAttribute(brList);
 		String json = gson.toJson(brList);
 		return json;
@@ -40,7 +42,7 @@ public class IncidentController {
 	public String user_grid(IncidentVo vo) throws Exception{
 		Gson gson = new Gson();
 		List<IncidentVo> list = new ArrayList<IncidentVo>();
-		list = isi.im_user_grid(vo);
+		list = incidentMapper.im_user_grid(vo);
 		
 		String json = gson.toJson(list);
 		return json;
@@ -48,8 +50,8 @@ public class IncidentController {
 	
 	@RequestMapping("/incident/user_insert")
 	public String user_insert(IncidentVo vo) throws Exception{
-		String result1 = isi.im_user_insert(vo);
-		String result2 = isi.im_merge(vo);
+		int result1 = incidentMapper.im_user_insert(vo);
+		int result2 = incidentMapper.im_merge(vo);
 		
 		System.out.println("result1 == "+result1);
 		System.out.println("result2 == "+result2);
@@ -61,7 +63,7 @@ public class IncidentController {
 	public String admin_grid(IncidentVo vo) throws Exception{
 		Gson gson = new Gson();
 		List<IncidentVo> list = new ArrayList<IncidentVo>();
-		list = isi.im_admin_grid(vo);
+		list = incidentMapper.im_admin_grid(vo);
 		
 		String json = gson.toJson(list);
 		return json;
@@ -69,8 +71,8 @@ public class IncidentController {
 	
 	@RequestMapping("/incident/admin_modify")
 	public String admin_modify(IncidentVo vo) throws Exception{
-		String result1 = isi.im_admin_modify(vo);
-		String result2 = isi.im_merge(vo);
+		int result1 = incidentMapper.im_admin_modify(vo);
+		int result2 = incidentMapper.im_merge(vo);
 		
 		return "";
 	}
@@ -79,7 +81,7 @@ public class IncidentController {
 	public String dashGrid(IncidentVo vo) throws Exception{
 		List<IncidentVo> list = new ArrayList<IncidentVo>();
 		
-		list = isi.im_dash_grid(vo);
+		list = incidentMapper.im_dash_grid(vo);
 		
 		Gson gson = new Gson();
 		

@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mobile.device.Device;
+import org.springframework.mobile.device.DeviceUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.thinkit.ai.service.impl.MemberServiceImpl;
+import com.thinkit.ai.mapper.MemberMapper;
 import com.thinkit.ai.vo.MemberVo;
 
 /**
@@ -24,25 +26,37 @@ import com.thinkit.ai.vo.MemberVo;
 public class MemberController {
 	
 	@Autowired
-	MemberServiceImpl ms;
+	MemberMapper memberMaper;
 	
 	@PostMapping("/loginAction.do")
 	public String login(HttpServletRequest hsr, MemberVo vo ) throws Exception {
+		Device device = DeviceUtils.getCurrentDevice(hsr); 
 		
 		HttpSession hs = hsr.getSession();
 		
-		String id = vo.getCNTRL_USER_ID();
+		String id = vo.getCntrlUserId();
 		
-		System.out.println("id+pw origin == " + id+"/"+hsr.getParameter("USER_PW"));
+		System.out.println("id+pw origin == " + id+"/"+hsr.getParameter("UserPw"));
 		
-		vo = ms.logIn(vo);
+		vo = memberMaper.login(vo);
 		
-		System.out.println("id+pw vo == " + vo.getCNTRL_USER_ID()+"/"+vo.getUSER_PW());
-		System.out.println("id == "+vo.getCNTRL_USER_ID()+"//USER_ENO == "+vo.getUSER_ENO()+"//pw == "+vo.getUSER_PW()+"//name == "+vo.getUSER_NM());
+		System.out.println("id+pw vo == " + vo.getCntrlUserId()+"/"+vo.getUserPw());
+		System.out.println("id == "+vo.getCntrlUserId()+"//USER_ENO == "+vo.getUserEno()+"//name == "+vo.getUserNm());
 		
-		hs.setAttribute("USER_ENO", vo.getUSER_ENO());
-		hs.setAttribute("CNTRL_AUTHOR", vo.getCNTRL_AUTHOR());
-		return "";		
+		hs.setAttribute("USER_ENO", vo.getUserEno());
+		hs.setAttribute("CNTRL_AUTHOR", vo.getCntrlAuthor());
+		
+		String conn_device = null;
+		if(device.isMobile()) {
+			conn_device = "Mobile";
+		}else if(device.isTablet()) {
+			conn_device = "Tablet";
+		}else {
+			conn_device = "Desktop";
+		}
+		
+		
+		return conn_device;		
 	}
 	
 	

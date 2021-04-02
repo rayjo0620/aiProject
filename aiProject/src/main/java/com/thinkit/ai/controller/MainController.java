@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
-import com.thinkit.ai.service.impl.MainServiceImpl;
+import com.thinkit.ai.mapper.MainMapper;
 
 /**
  * MainController.java
@@ -21,12 +21,14 @@ import com.thinkit.ai.service.impl.MainServiceImpl;
 @RestController
 public class MainController {
 	
-	@Autowired MainServiceImpl msi;
+	//@Autowired MainServiceImpl msi;
+	@Autowired
+	MainMapper mainMapper;
 	
 	@RequestMapping("/main/chart_list")
 	public String getChartList(String USER_ENO) throws Exception {
 		Gson gson = new Gson();
-		List<Map<String, Object>> brList = msi.main_chart_tot(USER_ENO);
+		List<Map<String, Object>> brList = mainMapper.main_chart_tot(USER_ENO);
 		String json = gson.toJson(brList);
 		return json;
 		

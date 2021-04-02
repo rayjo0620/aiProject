@@ -4,8 +4,8 @@
 
  $("#login").on('click', function(e) {
     var param = {
-					CNTRL_USER_ID : $("#id").val(),
-					USER_PW : $("#password").val()
+					cntrlUserId : $("#id").val(),
+					userPw : $("#password").val()
 				}
 				
 	console.log(param);
@@ -24,7 +24,7 @@
 			dataType : 'text',
 			success : function(data) {
 						
-				alert("로그인 성공");
+				alert("로그인 성공! 현재접속 환경 : "+data);
 				location.href = "/main";				
 				},
 			error : function(request, status, error) {

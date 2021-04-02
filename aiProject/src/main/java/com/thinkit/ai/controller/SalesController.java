@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
-import com.thinkit.ai.service.impl.SalesServiceImpl;
+import com.thinkit.ai.mapper.SalesMapper;
 import com.thinkit.ai.vo.SalesVo;
 import com.thinkit.ai.vo.StkVo;
 
@@ -27,12 +27,14 @@ import com.thinkit.ai.vo.StkVo;
  */
 @RestController
 public class SalesController {
-	@Autowired SalesServiceImpl ssi;
+	//@Autowired SalesServiceImpl salesMapper;
+	@Autowired
+	SalesMapper salesMapper;
 	
 	@RequestMapping("/sales/br_list")
 	public String getBrList(String USER_ENO, Model model) throws Exception {
 		Gson gson = new Gson();
-		List<Map<String, Object>> brList = ssi.br_list(USER_ENO);
+		List<Map<String, Object>> brList = salesMapper.brList(USER_ENO);
 		model.addAttribute(brList);
 		String json = gson.toJson(brList);
 		return json;
@@ -47,10 +49,10 @@ public class SalesController {
 		List<SalesVo> list = new ArrayList<SalesVo>();
 		
 		String BR_CD = request.getParameter("BR_CD");
-		list = ssi.sm_daily_grid(vo);
+		list = salesMapper.sm_daily_grid(vo);
 		String grid_list = gson.toJson(list);
 	
-		String tot = ssi.sm_daily_tot(vo);
+		String tot = salesMapper.sm_daily_tot(vo);
 		
 		if(tot==null) {
 			return "empty";
@@ -71,9 +73,9 @@ public class SalesController {
 		List<SalesVo> list = new ArrayList<SalesVo>();
 		
 		String BR_CD = request.getParameter("BR_CD");
-		list = ssi.sm_period_grid(vo);
+		list = salesMapper.sm_period_grid(vo);
 		String grid_list = gson.toJson(list);	
-		String tot = ssi.sm_period_tot(vo);
+		String tot = salesMapper.sm_period_tot(vo);
 		
 		if(tot==null) {
 			return "empty";
@@ -89,7 +91,7 @@ public class SalesController {
 	public String stkDo(SalesVo vo) throws Exception {
 		Gson gson = new Gson();
 		System.out.println("-------------------------------------"+vo.getUSER_ENO());
-		List<StkVo> brList = ssi.sm_stk_grid(vo);
+		List<StkVo> brList = salesMapper.sm_stk_grid(vo);
 		String json = gson.toJson(brList);
 		return json;
 	}
@@ -98,15 +100,21 @@ public class SalesController {
 	public String stkManage_del(StkVo vo) throws Exception{
 		System.out.println("del");
 		
-		String result = ssi.sm_stkManage_del(vo);
+		int result = salesMapper.sm_stkManage_del(vo);
+		String result2 = "";
+		if(result > 0) {
+			result2="ok";
+		}else {
+			result2="fail";
+		}
 		
-		return result;
+		return result2;
 	}
 	
 	@RequestMapping("/sales/modal_devc")
 	public String modal_devc(StkVo vo, Model model) throws Exception {
 		Gson gson = new Gson();
-		List<Map<String, Object>> modalList = ssi.modal_devc(vo);
+		List<Map<String, Object>> modalList = salesMapper.modal_devc(vo);
 		
 		String json = gson.toJson(modalList);
 		return json;
@@ -116,7 +124,7 @@ public class SalesController {
 	@RequestMapping("/sales/modal_gt")
 	public String modal_gt() throws Exception {
 		Gson gson = new Gson();
-		List<Map<String, Object>> modalList = ssi.modal_gt();
+		List<Map<String, Object>> modalList = salesMapper.modal_gt();
 		
 		String json = gson.toJson(modalList);
 		return json;
@@ -126,7 +134,7 @@ public class SalesController {
 	@RequestMapping("/sales/modal_gnm")
 	public String modal_gnm(StkVo vo, Model model) throws Exception {
 		Gson gson = new Gson();
-		List<Map<String, Object>> modalList = ssi.modal_gnm(vo);
+		List<Map<String, Object>> modalList = salesMapper.modal_gnm(vo);
 		
 		String json = gson.toJson(modalList);
 		return json;
@@ -136,23 +144,39 @@ public class SalesController {
 	@RequestMapping("/sales/modal_insert")
 	public String modal_insert(StkVo vo) throws Exception{
 		
-		String result = ssi.sm_stkManage_insert(vo);
+		int result = salesMapper.modal_insert(vo);
 		
-		return result;
+		String result2 = "";
+		
+		if(result > 0) {
+			result2="ok";
+		}else {
+			result2="fail";
+		}
+		
+		return result2;
 	}
 	
 	@RequestMapping("/sales/modal_update")
 	public String modal_update(StkVo vo) throws Exception{
 		
-		String result = ssi.sm_stkManage_update(vo);
+		int result = salesMapper.modal_update(vo);
 		
-		return result;
+		String result2 = "";
+		
+		if(result > 0) {
+			result2="ok";
+		}else {
+			result2="fail";
+		}
+		
+		return result2;
 	}
 	
 	@RequestMapping("/dash/cal")
 	public String dashCal(SalesVo vo) throws Exception{
 		Gson gson = new Gson();
-		List<Map<String, Object>> modalList = ssi.dash_cal(vo);
+		List<Map<String, Object>> modalList = salesMapper.dash_cal(vo);
 		
 		String json = gson.toJson(modalList);
 		return json;
